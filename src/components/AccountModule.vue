@@ -5,6 +5,8 @@
     <div v-if="action === 'all'">
         Toutes les actions
     </div>
+
+    <p>{{ action }}</p>
   </div>
 </template>
 
