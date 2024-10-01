@@ -4,6 +4,8 @@
 
 # Authors
     - Maxime Chamont
+    - Grégoire Alperovitch
+    - Nicolas Flandin
 
 ## Build Setup
 
