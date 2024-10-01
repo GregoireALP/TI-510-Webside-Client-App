@@ -1,0 +1,52 @@
+[
+    {
+        "loan_id": 1,
+        "loan_amount": 10000,
+        "loan_label": "School loan",
+        "loan_to_refund": 7600,
+        "loan_interest": 0.15,
+        "loan_start_date": "2025-07-29",
+        "loan_end_date": "2025-09-29",
+        "loan_client_id": 1
+    },
+    {
+        "loan_id": 2,
+        "loan_amount": 25000,
+        "loan_label": "Consumption loan",
+        "loan_to_refund": 1000,
+        "loan_interest": 0.2,
+        "loan_start_date": "2025-07-29",
+        "loan_end_date": "2025-02-26",
+        "loan_client_id": 6
+    },
+    {
+        "loan_id": 3,
+        "loan_amount": 3000,
+        "loan_label": "Flat loan",
+        "loan_to_refund": 500,
+        "loan_interest": 0.35,
+        "loan_start_date": "2025-07-29",
+        "loan_end_date": "2025-03-29",
+        "loan_client_id": 6
+    },
+    {
+        "loan_id": 4,
+        "loan_amount": 6500,
+        "loan_label": "House loan",
+        "loan_to_refund": 3200,
+        "loan_interest": 0.45,
+        "loan_start_date": "2025-07-29",
+        "loan_end_date": "2025-09-29",
+        "loan_client_id": 9
+    },
+    {
+        "loan_id": 5,
+        "loan_amount": 3000,
+        "loan_label": "Rental loan",
+        "loan_to_refund": 250,
+        "loan_interest": 0.24,
+        "loan_start_date": "2025-07-29",
+        "loan_end_date": "2025-03-29",
+        "loan_client_id": 3
+    }
+]
