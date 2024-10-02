@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import AccountModule from '@/components/AccountModule'
+import PayementModule from '../components/PayementModule'
+import ClientModule from '../components/ClientModule'
 
 Vue.use(Router)
 
@@ -31,6 +33,7 @@ export default new Router({
     {
       path: '/client/:action/:id',
       name: 'Client',
+      component: ClientModule,
       props: true
     },    {
       path: '/advisor/:action/:id',
@@ -43,6 +46,7 @@ export default new Router({
     },    {
       path: '/payement/:action/:id',
       name: 'Payement',
+      component: PayementModule,
       props: true
     }
   ]
