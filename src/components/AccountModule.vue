@@ -42,18 +42,9 @@ export default {
       accounts: []
     }
   },
-  methods: {
-    async getAllAccounts() {
-      this.accounts = accounts_json
-    },
-
-    async getCar() {
-
-    }
-  },
 
   created() {
-    this.getAllAccounts()
+    this.accounts = accounts_json
   }
 }
 </script>
