@@ -6,12 +6,11 @@
       <div class="card mb-2 flex-grow-1 bank-card" v-for="a of accounts" v-bind:key="a.account_id">
 
         <div class="card-header">
-          <i class="bi bi-bank"></i> {{ a.account_iban }}
+          <i class="bi bi-bank"></i> {{ a.account_iban }} <br>
+          <span class="badge rounded-pill text-bg-success">Active</span>
         </div>
 
         <div class="card-body">
-          <h5 class="card-title"> </h5>
-
           <ul>
             <li><i class="bi bi-file-person"></i> <b>Account ID:</b> {{ a.account_id }}</li>
             <li><i class="bi bi-currency-exchange"></i> <b>Balance:</b> {{ a.account_balance }}$</li>
@@ -19,11 +18,13 @@
             <li><i class="bi bi-speedometer2"></i> <b>Interest:</b> {{ a.account_interest }}%</li>
             <li><i class="bi bi-sign-stop"></i> <b>Max-amount:</b> {{ a.account_max_amount }}$</li>
           </ul>
+
+          <p class="text-center"><a href="#" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Payements details</a></p>
+
         </div>
 
         <div class="card-footer">
-          <span class="card-text"><i class="bi bi-calendar-date"></i> Creation date: {{ a.account_creation_date
-            }}</span>
+          <span class="card-text"><i class="bi bi-calendar-date"></i> Creation date: {{ a.account_creation_date }}</span>
         </div>
 
       </div>
