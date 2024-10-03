@@ -2,8 +2,8 @@
   <div>
     <h2 class="title">Bank Account</h2>
 
-    <div class="container d-flex flex-row flex-wrap justify-content-betwen">
-      <div class="card text-bg-success mb-3" style="max-width: 18rem;" v-for="a of accounts" v-bind:key="a.account_id">
+    <div class="d-flex justify-content-around flex-wrap" id="card-carousel">
+      <div class="card mb-2 flex-grow-1 bank-card" v-for="a of accounts" v-bind:key="a.account_id">
 
         <div class="card-header">
           <i class="bi bi-bank"></i> {{ a.account_iban }}
@@ -12,11 +12,12 @@
         <div class="card-body">
           <h5 class="card-title"> </h5>
 
-          <ul style="list-style: none;">
+          <ul>
+            <li><i class="bi bi-file-person"></i> <b>Account ID:</b> {{ a.account_id }}</li>
             <li><i class="bi bi-currency-exchange"></i> <b>Balance:</b> {{ a.account_balance }}$</li>
             <li><i class="bi bi-textarea-t"></i> <b>Label:</b> {{ a.account_label }}</li>
             <li><i class="bi bi-speedometer2"></i> <b>Interest:</b> {{ a.account_interest }}%</li>
-            <li><i class="bi bi-sign-stop"></i> <b>Max-amount:</b> {{ a.account_max_amount }}</li>
+            <li><i class="bi bi-sign-stop"></i> <b>Max-amount:</b> {{ a.account_max_amount }}$</li>
           </ul>
         </div>
 
@@ -44,15 +45,55 @@ export default {
     }
   },
 
+  methods: {
+
+    getAccounts () {
+      if (this.id === 'all') {
+        this.accounts = accountsJson
+      } else {
+        const account = accountsJson.find(account => account.account_id.toString() === this.id)
+        this.accounts = account ? [account] : []
+      }
+    }
+  },
+
+  watch: {
+    id: function (pre, post) {
+      this.getAccounts()
+    }
+  },
+
   created () {
-    this.accounts = accountsJson
+    this.getAccounts()
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 p {
   font-family: sans-serif;
+}
+
+.bank-card {
+  -webkit-box-shadow: 29px 47px 55px -40px rgba(0, 0, 0, 0.44);
+  -moz-box-shadow: 29px 47px 55px -40px rgba(0, 0, 0, 0.44);
+  box-shadow: 29px 47px 55px -40px rgba(0, 0, 0, 0.44);
+  min-width: 18rem;
+  max-width: 18rem;
+  height: 100%;
+  background-color: #212529;
+  color: whitesmoke;
+}
+
+.card-header {
+  border-bottom: 1px solid whitesmoke;
+}
+
+.card-footer {
+  border-top: 1px solid whitesmoke;
+}
+
+.bank-card ul {
+  list-style: none;
 }
 </style>

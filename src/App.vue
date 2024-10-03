@@ -16,10 +16,10 @@ body {
   padding: 0;
   margin: 0;
 
+  background-color: rgb(227, 226, 226);
 }
 
 .title {
-
   text-align: center;
 }
 </style>

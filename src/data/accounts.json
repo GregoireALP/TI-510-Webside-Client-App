@@ -42,7 +42,7 @@
     {
         "account_id": 5,
         "account_label": "Current",
-        "account_iban": "PL80824281187224283107244114",
+        "account_iban": "PL80824281187224283244114",
         "account_balance": 7156,
         "account_interest": 1,
         "account_creation_date": "2025-06-15",
@@ -92,7 +92,7 @@
     {
         "account_id": 10,
         "account_label": "Current",
-        "account_iban": "CY64013998348885483137472754",
+        "account_iban": "CY640139983488854837472754",
         "account_balance": 3914,
         "account_interest": 1,
         "account_creation_date": "2025-07-29",
