@@ -7,15 +7,8 @@
 <script>
 
 export default {
-    name: 'ClientModule',
-    props: ['action', 'id'],
-    data() {
-        return {
-        }
-    },
-
-    created() {
-    }
+  name: 'ClientModule',
+  props: ['action', 'id']
 }
 </script>
 

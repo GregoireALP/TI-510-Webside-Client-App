@@ -11,16 +11,20 @@ export default new Router({
     {
       path: '/account',
       redirect: '/account/list/all'
-    },    {
+    },
+    {
       path: '/client',
       redirect: '/client/list/all'
-    },    {
+    },
+    {
       path: '/laon',
       redirect: '/loan/list/all'
-    },    {
+    },
+    {
       path: '/advisor',
       redirect: '/advisor/list/all'
-    },    {
+    },
+    {
       path: '/payement',
       redirect: '/payement/list/all'
     },
@@ -35,15 +39,17 @@ export default new Router({
       name: 'Client',
       component: ClientModule,
       props: true
-    },    {
+    },
+    {
       path: '/advisor/:action/:id',
       name: 'Advisor',
       props: true
-    },    {
+    },
+    {
       path: '/loan/:action/:id',
       name: 'Loan',
       props: true
-    },    {
+    }, {
       path: '/payement/:action/:id',
       name: 'Payement',
       component: PayementModule,

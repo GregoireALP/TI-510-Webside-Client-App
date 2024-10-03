@@ -4,16 +4,8 @@
 
 <script>
 export default {
-
-    name: 'PayementModule',
-    props: ['action', 'id'],
-    data() {
-        return {
-        }
-    },
-
-    created() {
-    }
+  name: 'PayementModule',
+  props: ['action', 'id']
 }
 </script>
 

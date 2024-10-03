@@ -33,19 +33,19 @@
 
 <script>
 
-import accounts_json from "../data/accounts.json"
+import accountsJson from '../data/accounts.json'
 
 export default {
   name: 'AccountModule',
   props: ['action', 'id'],
-  data() {
+  data () {
     return {
       accounts: []
     }
   },
 
-  created() {
-    this.accounts = accounts_json
+  created () {
+    this.accounts = accountsJson
   }
 }
 </script>
