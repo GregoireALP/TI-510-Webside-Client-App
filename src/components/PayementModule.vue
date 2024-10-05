@@ -11,7 +11,6 @@
         <div>
           <ul class="card-body">
             <li>Payment ID : {{ payment.payement_id }}</li>
-            <li>Currency : {{ payment.payement_currency }}</li>
             <li>Issue date : {{ payment.payement_start_date }}</li>
             <li>Date of Receipt : {{ payment.payement_end_date }}</li>
             <li>Account Sender ID : {{ payment.payement_account_sender_id }}</li>
