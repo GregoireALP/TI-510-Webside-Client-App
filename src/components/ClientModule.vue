@@ -2,12 +2,12 @@
   <div>
     <h2 class="title">Clients</h2>
 
-    <ul v-if="clients.length > 0" class="list-unstyled"> <!-- list-unstyled == Removing bullets from the list -->
-      <li v-for="client in clients" :key="client.id" class="client-card mb-4 p-3 shadow-sm"> <!-- mb-4 == margin bottom to add a space between each client // p-3 add space between bord and text -->
+    <ul v-if="clients.length > 0" class="list-unstyled">
+      <li v-for="client in clients" :key="client.id" class="client-card mb-4 p-3 shadow-sm">
         <h5 class="text-primary">
-          <i class="bi bi-person"></i><span class="ms-2">{{ client.client_lastname.toUpperCase() }} {{ client.client_firstname }} </span> <!-- ms-2 to add a space between icon and attributes-->
+          <i class="bi bi-person"></i><span class="ms-2">{{ client.client_lastname.toUpperCase() }} {{ client.client_firstname }} </span>
         </h5>
-        <hr class="client-divider"> <!-- separation-->
+        <hr class="client-divider">
         <p class="mb-1">
           <i class="bi bi-hash text-secondary"></i><span class="ms-2">{{ client.client_id }}</span>
         </p>
@@ -20,6 +20,9 @@
         <p class="mb-1">
           <i class="bi bi-geo-alt text-danger"></i><span class="ms-2">{{ client.client_address }}</span>
         </p>
+        <p class="mb-1">
+          <i class="bi bi-currency-dollar"></i><span class="ms-2">{{ getClientFirstAccountBalance(client.client_id) }}</span>
+        </p>
       </li>
     </ul>
     <p v-else>Aucun client trouvé.</p>
@@ -28,24 +31,28 @@
 
 <script>
 import clientsJson from '../data/clients.json'
+import accountsJson from '../data/accounts.json'
 
 export default {
   name: 'ClientModule',
   props: ['action', 'id'],
-  data() {
+  data () {
     return {
-      clients: clientsJson
+      clients: clientsJson,
+      accounts: accountsJson
+    }
+  },
+
+  methods: {
+    getClientFirstAccountBalance (clientId) {
+      const account = this.accounts.find(a => a.account_client_id === clientId)
+      return account ? account.account_balance : 0
     }
   }
-  
-
-
 }
 </script>
 
-<!-- "scoped" to limit CSS to this component only -->
 <style scoped>
-/****************************************CSS******************************/
 
 .title {
   text-align: center;
@@ -53,20 +60,19 @@ export default {
 }
 
 .client-card {
-  border-radius: 10px; 
-  background-color: black; 
-  border: 2px solid red; 
+  border-radius: 10px;
+  background-color: black;
+  border: 2px solid red;
   color: white;
   width: 350px;
-  
 }
 
 .client-card h5 i {
-  color: #0d6efd; 
+  color: #0d6efd;
 }
 
 .client-card p i {
-  color: #6c757d; 
+  color: #6c757d;
 }
 
 .bi-phone {
@@ -74,30 +80,32 @@ export default {
 }
 
 .bi-envelope {
-  color: #ffc107; 
+  color: #ffc107;
 }
 
 .bi-geo-alt {
-  color: #dc3545; 
+  color: #dc3545;
 }
 
 .bi-hash {
-  color: #6c757d; 
+  color: #6c757d;
+}
+
+.client-card .bi-currency-dollar{
+  color: #28a745;
 }
 
 .client-divider {
-  border: none; 
-  border-top: 2px solid red; 
-  margin: 10px 0; /* Espace autour de la ligne */
+  border: none;
+  border-top: 2px solid red;
+  margin: 10px 0;
 }
 
 ul {
-  padding-left: 0; /* !! Remove default padding from ul !! */
+  padding-left: 0;
 }
 
 .list-unstyled {
-  list-style-type: none; /* !! Remove bullet points !! */
+  list-style-type: none;
 }
 </style>
-
-
