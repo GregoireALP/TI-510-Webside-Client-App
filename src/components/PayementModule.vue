@@ -6,7 +6,7 @@
       <div class="card-grille">
         <div class="card-border" v-for="payment in payement" :key="payment.payement_id">
           <div class="card-title">
-            <p><b>{{ payment.payement_label }} :</b> -{{ payment.payement_amount }} $</p>
+            <p><b>{{ payment.payement_label }} :</b> -{{ payment.payement_amount }} <span v-if="payment.payement_currency === 'Dollar'">$</span><span v-else-if="payment.payement_currency === 'Euro'">€</span><span v-else>{{ payment.payement_currency }}</span></p>
           </div>
         <div>
           <ul class="card-body">
