@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h2 class="title">Clients</h2>
-
+    <h2 class="title"><u>Clients</u></h2>
     <ul v-if="clients.length > 0" class="list-unstyled">
       <li v-for="client in clients" :key="client.id" class="client-card mb-4 p-3 shadow-sm">
         <h5 class="text-primary">
@@ -57,6 +56,7 @@ export default {
 .title {
   text-align: center;
   margin-bottom: 60px;
+
 }
 
 .client-card {
@@ -65,6 +65,10 @@ export default {
   border: 2px solid red;
   color: white;
   width: 350px;
+}
+
+.client-card:hover{
+  transform: scale(1.05);
 }
 
 .client-card h5 i {
@@ -106,6 +110,10 @@ ul {
 }
 
 .list-unstyled {
-  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap : 20px;
+  justify-content: center;
 }
+
 </style>

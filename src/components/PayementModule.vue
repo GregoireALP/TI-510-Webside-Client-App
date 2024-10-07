@@ -1,6 +1,6 @@
 <template>
     <section >
-      <div>
+      <div class="title">
         <h2><b>Payement</b></h2>
       </div>
       <div class="card-grille">
@@ -59,9 +59,12 @@ export default {
   }
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.title{
+  text-align:center;
+}
 
 .card-grille{
   display: grid;
@@ -111,8 +114,7 @@ export default {
 
 @media (max-width: 600px) {
   .card-grille {
-    grid-template-columns: 1fr; /* Une seule colonne sur petit écran */
+    grid-template-columns: 1fr;
   }
 }
-
 </style>
