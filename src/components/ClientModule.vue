@@ -32,7 +32,7 @@ import clientsJson from '../data/clients.json'
 export default {
   name: 'ClientModule',
   props: ['action', 'id'],
-  data() {
+  data () {
     return {
       clients: clientsJson
     }
