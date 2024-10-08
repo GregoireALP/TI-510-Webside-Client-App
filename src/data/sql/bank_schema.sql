@@ -4,6 +4,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
+
 -- -----------------------------------------------------
 -- Schema bank_project
 -- -----------------------------------------------------
@@ -23,9 +24,9 @@ CREATE TABLE IF NOT EXISTS `bank_project`.`advisor` (
   `advisor_firstname` VARCHAR(45) NULL,
   `advisor_lastname` VARCHAR(45) NULL,
   `advisor_email` VARCHAR(45) NULL,
-  `advisor_birthday` DATE NULL,
   `advisor_phone` VARCHAR(45) NULL,
   `advisor_address` VARCHAR(45) NULL,
+  `advisor_birthday` VARCHAR(45) NULL,
   PRIMARY KEY (`advisor_id`))
 ENGINE = InnoDB;
 
@@ -39,9 +40,10 @@ CREATE TABLE IF NOT EXISTS `bank_project`.`client` (
   `client_firstname` VARCHAR(45) NULL,
   `client_lastname` VARCHAR(45) NULL,
   `client_email` VARCHAR(45) NULL,
+  `client_password` VARCHAR(45) NULL,
   `client_phone` VARCHAR(45) NULL,
-  `client_birthday` DATE NULL,
-  `cleint_address` VARCHAR(45) NULL,
+  `client_birthday` DATE,
+  `client_address` VARCHAR(45) NULL,
   `client_advisor_id` INT NOT NULL,
   PRIMARY KEY (`client_id`),
   INDEX `fk_client_advisor1_idx` (`client_advisor_id` ASC) VISIBLE,
@@ -105,8 +107,7 @@ CREATE TABLE IF NOT EXISTS `bank_project`.`payement` (
   `payement_amount` FLOAT NULL,
   `payement_label` VARCHAR(45) NULL,
   `payement_currency` VARCHAR(45) NULL,
-  `payement_start_date` DATE NULL,
-  `payement_end_date` DATE NULL,
+  `payement_date` DATE NOT NULL,
   `payement_account_sender_id` INT NOT NULL,
   `payement_account_reciever_id` INT NOT NULL,
   PRIMARY KEY (`payement_id`),
