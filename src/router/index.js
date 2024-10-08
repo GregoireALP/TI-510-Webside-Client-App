@@ -3,11 +3,16 @@ import Router from 'vue-router'
 import AccountModule from '@/components/AccountModule'
 import PayementModule from '../components/PayementModule'
 import ClientModule from '../components/ClientModule'
+import HomeModule from '../components/HomeModule.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/',
+      component: HomeModule
+    },
     {
       path: '/account',
       redirect: '/account/list/all'
