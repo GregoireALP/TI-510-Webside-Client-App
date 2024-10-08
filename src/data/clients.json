@@ -6,6 +6,7 @@
         "client_lastname": "Workman",
         "client_email": "purus.sapien@yahoo.ca",
         "client_phone": "01 41 76 81 46",
+        "client_password": "",
         "client_birthday": "1990-08-27",
         "client_address": "5826 Commodo St.",
         "client_advisor_id": 5
@@ -17,6 +18,7 @@
         "client_lastname": "Ayers",
         "client_email": "ipsum.sodales.purus@outlook.net",
         "client_phone": "07 58 21 37 24",
+        "client_password": "",
         "client_birthday": "2008-12-12",
         "client_address": "Ap #114-7423 At, Rd.",
         "client_advisor_id": 3
@@ -28,6 +30,7 @@
         "client_lastname": "Higgins",
         "client_email": "lacinia@icloud.ca",
         "client_phone": "03 42 34 70 22",
+        "client_password": "",
         "client_birthday": "1997-06-11",
         "client_address": "Ap #586-661 Imperdiet St.",
         "client_advisor_id": 7
@@ -39,6 +42,7 @@
         "client_lastname": "Horton",
         "client_email": "morbi.quis@yahoo.net",
         "client_phone": "08 26 26 35 57",
+        "client_password": "",
         "client_birthday": "2006-02-24",
         "client_address": "241-3601 Leo St.",
         "client_advisor_id": 6
@@ -50,6 +54,7 @@
         "client_lastname": "Pratt",
         "client_email": "non.lobortis@yahoo.org",
         "client_phone": "05 31 68 51 68",
+        "client_password": "",
         "client_birthday": "2018-07-08",
         "client_address": "Ap #235-6316 Ornare Road",
         "client_advisor_id": 3
@@ -61,6 +66,7 @@
         "client_lastname": "Gutierrez",
         "client_email": "urna.ut@google.org",
         "client_phone": "05 84 13 78 69",
+        "client_password": "",
         "client_birthday": "2000-02-25",
         "client_address": "561-8580 Eget, Street",
         "client_advisor_id": 2
@@ -72,6 +78,7 @@
         "client_lastname": "Howell",
         "client_email": "eros.nam@google.com",
         "client_phone": "07 16 94 44 23",
+        "client_password": "",
         "client_birthday": "2008-12-10",
         "client_address": "Ap #301-6393 Est. Ave",
         "client_advisor_id": 10
@@ -83,6 +90,7 @@
         "client_lastname": "Johns",
         "client_email": "egestas@aol.edu",
         "client_phone": "02 16 15 17 24",
+        "client_password": "",
         "client_birthday": "1989-06-04",
         "client_address": "8104 Vestibulum, Ave",
         "client_advisor_id": 6
@@ -94,6 +102,7 @@
         "client_lastname": "Snow",
         "client_email": "eu.euismod.ac@aol.net",
         "client_phone": "03 45 96 69 20",
+        "client_password": "",
         "client_birthday": "1979-04-30",
         "client_address": "950-9063 Nibh. Road",
         "client_advisor_id": 5
@@ -105,6 +114,7 @@
         "client_lastname": "Roberts",
         "client_email": "amet.risus@aol.org",
         "client_phone": "01 45 54 46 85",
+        "client_password": "",
         "client_birthday": "2017-05-20",
         "client_address": "P.O. Box 657, 7091 Nibh St.",
         "client_advisor_id": 8
