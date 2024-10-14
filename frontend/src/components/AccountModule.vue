@@ -1,5 +1,6 @@
 <template>
   <div>
+    <a class = "menu" href = '/#/'> Menu </a>
     <h2 class="title">Bank Account</h2>
 
     <div class="d-flex justify-content-around flex-wrap" id="card-carousel">
@@ -97,4 +98,11 @@ p {
 .bank-card ul {
   list-style: none;
 }
+
+a{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 </style>
