@@ -1,5 +1,6 @@
 <template>
     <section >
+      <a class = "menu" href = '/#/'> Menu </a>
       <div class="title">
         <h2><b>Payement</b></h2>
       </div>
@@ -109,6 +110,12 @@ export default {
   li {
   margin: 5px 0;
   }
+}
+
+a{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 @media (max-width: 600px) {

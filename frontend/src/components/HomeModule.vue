@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <h1> BABA BANK </h1>
+    <div class="background-container">
         <div class = "menu">
             <div class = "client_link">
                 <a href = '/#/client/list/all'> Client </a>
@@ -22,11 +21,25 @@ export default {
 </script>
 
 <style scoped>
-.menu{
+.background-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url('../assets/logo.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu {
     display: flex;
     flex-wrap: wrap;
-    gap : 100px;
+    gap: 100px;
     justify-content: center;
+    margin-top: 190px;
 }
 
 h1 {
@@ -35,24 +48,22 @@ h1 {
     font-size: 2rem;
     font-family: sans-serif;
     text-align: center;
-    size: 20 px;
     padding-bottom: 20px;
     padding-top: 20px;
 }
 
-.client_link a{
-    color : rgb(19, 149, 160);
+.client_link a,
+.account_link a,
+.payement_link a {
+    color: rgb(19, 149, 160);
     font-size: 1.3rem;
+    text-decoration: none;
 }
 
-.account_link a{
-    color : rgb(19, 149, 160);
-    font-size: 1.3rem;
-}
-
-.payement_link a{
-    color : rgb(19, 149, 160);
-    font-size: 1.3rem;
+.client_link a:hover,
+.account_link a:hover,
+.payement_link a:hover {
+    color: rgb(10, 80, 90);
 }
 
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <a class = "menu" href = '/#/'> Menu </a>
     <h2 class="title"><u>Clients</u></h2>
     <ul v-if="clients.length > 0" class="list-unstyled">
       <li v-for="client in clients" :key="client.id" class="client-card mb-4 p-3 shadow-sm">
@@ -19,9 +20,6 @@
         <p class="mb-1">
           <i class="bi bi-geo-alt text-danger"></i><span class="ms-2">{{ client.client_address }}</span>
         </p>
-        <p class="mb-1">
-          <i class="bi bi-currency-dollar"></i><span class="ms-2">{{ getClientFirstAccountBalance(client.client_id) }}</span>
-        </p>
       </li>
     </ul>
     <p v-else>Aucun client trouvé.</p>
@@ -37,16 +35,30 @@ export default {
   props: ['action', 'id'],
   data () {
     return {
-      clients: clientsJson,
+      clients: [],
       accounts: accountsJson
     }
   },
 
   methods: {
-    getClientFirstAccountBalance (clientId) {
-      const account = this.accounts.find(a => a.account_client_id === clientId)
-      return account ? account.account_balance : 0
+    getClients () {
+      if (this.id === 'all') {
+        this.clients = clientsJson
+      } else {
+        const client = clientsJson.find(client => client.client_id.toString() === this.id)
+        this.clients = client ? [client] : []
+      }
     }
+  },
+
+  watch: {
+    id: function (pre, post) {
+      this.getClients()
+    }
+  },
+
+  created () {
+    this.getClients()
   }
 }
 </script>
@@ -95,10 +107,6 @@ export default {
   color: #6c757d;
 }
 
-.client-card .bi-currency-dollar{
-  color: #28a745;
-}
-
 .client-divider {
   border: none;
   border-top: 2px solid red;
@@ -113,6 +121,12 @@ ul {
   display: flex;
   flex-wrap: wrap;
   gap : 20px;
+  justify-content: center;
+}
+
+a{
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
