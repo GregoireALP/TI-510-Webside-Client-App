@@ -38,7 +38,7 @@
 
 <script>
 import payementJson from '../data/payements.json'
-import FooterComponent from './FooterComponent.vue';
+import FooterComponent from './FooterComponent.vue'
 import NavbarModule from './NavbarModule.vue'
 
 export default {

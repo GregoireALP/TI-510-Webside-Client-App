@@ -4,9 +4,7 @@
 
         <p>About Us</p>
 
-
         <a href="https://github.com/GregoireALP/TI-510-Webside-Client-App">Github Repo</a>
-
 
         <p>Login</p>
 

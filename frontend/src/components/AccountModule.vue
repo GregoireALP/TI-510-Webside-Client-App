@@ -39,7 +39,7 @@
 <script>
 import NavbarModule from './NavbarModule.vue'
 import accountsJson from '../data/accounts.json'
-import FooterComponent from './FooterComponent.vue';
+import FooterComponent from './FooterComponent.vue'
 
 export default {
   name: 'AccountModule',
