@@ -31,18 +31,22 @@
       </div>
     </div>
 
+    <FooterComponent/>
+
   </div>
 </template>
 
 <script>
 import NavbarModule from './NavbarModule.vue'
 import accountsJson from '../data/accounts.json'
+import FooterComponent from './FooterComponent.vue';
 
 export default {
   name: 'AccountModule',
   props: ['action', 'id'],
   components: {
-    NavbarModule
+    NavbarModule,
+    FooterComponent
   },
   data () {
     return {
