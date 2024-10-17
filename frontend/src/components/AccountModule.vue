@@ -1,14 +1,14 @@
 <template>
   <div>
-    <a class = "menu" href = '/#/'> Menu </a>
-    <h2 class="title">Bank Account</h2>
+    <NavbarModule />
+
+    <h1 class="title">Your accounts</h1>
 
     <div class="d-flex justify-content-around flex-wrap" id="card-carousel">
       <div class="card mb-2 flex-grow-1 bank-card" v-for="a of accounts" v-bind:key="a.account_id">
 
         <div class="card-header">
           <i class="bi bi-bank"></i> {{ a.account_iban }} <br>
-          <span class="badge rounded-pill text-bg-success">Active</span>
         </div>
 
         <div class="card-body">
@@ -20,7 +20,7 @@
             <li><i class="bi bi-sign-stop"></i> <b>Max-amount:</b> {{ a.account_max_amount }}$</li>
           </ul>
 
-          <p class="text-center"><a href="#" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Payements details</a></p>
+          <p class="text-center"><a href="#" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Payements history</a></p>
 
         </div>
 
@@ -35,12 +35,15 @@
 </template>
 
 <script>
-
+import NavbarModule from './NavbarModule.vue'
 import accountsJson from '../data/accounts.json'
 
 export default {
   name: 'AccountModule',
   props: ['action', 'id'],
+  components: {
+    NavbarModule
+  },
   data () {
     return {
       accounts: []
@@ -77,22 +80,19 @@ p {
 }
 
 .bank-card {
-  -webkit-box-shadow: 29px 47px 55px -40px rgba(0, 0, 0, 0.44);
-  -moz-box-shadow: 29px 47px 55px -40px rgba(0, 0, 0, 0.44);
-  box-shadow: 29px 47px 55px -40px rgba(0, 0, 0, 0.44);
   min-width: 18rem;
   max-width: 18rem;
   height: 100%;
-  background-color: #212529;
+  background-color: #383c3f;
   color: whitesmoke;
 }
 
 .card-header {
-  border-bottom: 1px solid whitesmoke;
+  border-bottom: 1px solid gold;
 }
 
 .card-footer {
-  border-top: 1px solid whitesmoke;
+  border-top: 1px solid gold;
 }
 
 .bank-card ul {

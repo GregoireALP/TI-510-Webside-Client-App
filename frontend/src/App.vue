@@ -16,10 +16,13 @@ body {
   padding: 0;
   margin: 0;
 
-  background-color: rgb(227, 226, 226);
+  background-color: #191b1f;
 }
 
-.title {
+h1 {
   text-align: center;
+  font-family: "Space Grotesk", sans-serif;
+  color: #cecece;
+  margin: 10px 0 10px 0;
 }
 </style>

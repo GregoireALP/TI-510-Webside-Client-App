@@ -1,69 +1,64 @@
 <template>
-    <div class="background-container">
-        <div class = "menu">
-            <div class = "client_link">
-                <a href = '/#/client/list/all'> Client </a>
+  <div>
+    <NavbarModule />
+
+    <main>
+
+      <div class="container d-flex justify-content-center mt-5">
+
+        <div class="card">
+
+          <div class="top-container">
+
+            <img src="https://ui-avatars.com/api/?name=Nicolas+Fl" class="img-fluid profile-image" width="70">
+
+            <div class="ml-3">
+              <h5 class="name">Clarke Jeffery</h5>
+              <p class="mail">clark@zmail.com</p>
             </div>
-            <div class = "account_link">
-                <a href = '/#/account/list/all'> Account </a>
+          </div>
+
+          <div class="middle-container d-flex justify-content-evenly align-items-center mt-3 p-2">
+            <div class="dollar-div px-3">
+
+              <div class="round-div"><i class="bi bi-currency-dollar"></i></div>
+
             </div>
-            <div class = "payement_link">
-                <a href = '/#/payement/list/all'> Payement </a>
+            <div class="d-flex flex-column text-right mr-2">
+              <span class="current-balance">Total Balance</span>
+              <span class="amount"><span class="dollar-sign">$</span>1476</span>
             </div>
+
+          </div>
+
+          <div class="options-list mt-4">
+            <span class="option-list-item"><i class="bi bi-bank"></i> Manage my accounts</span>
+          </div>
+          <div class="options-list pt-2">
+            <span class="option-list-item"><i class="bi bi-paperclip"></i> Consult my loans</span>
+          </div>
+          <div class="options-list pt-2">
+            <span class="option-list-item"><i class="bi bi-person-fill-gear"></i> Contact my advisor</span>
+          </div>
+
         </div>
-    </div>
+
+      </div>
+    </main>
+  </div>
 </template>
 
 <script>
+import NavbarModule from './NavbarModule.vue'
+
 export default {
-  name: 'HomeModule'
+  name: 'HomeModule',
+  components: {
+    NavbarModule
+  }
 }
 </script>
 
 <style scoped>
-.background-container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background-image: url('../assets/logo.png');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.menu {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 100px;
-    justify-content: center;
-    margin-top: 190px;
-}
-
-h1 {
-    text-decoration: underline;
-    color: rgb(15, 1, 1);
-    font-size: 2rem;
-    font-family: sans-serif;
-    text-align: center;
-    padding-bottom: 20px;
-    padding-top: 20px;
-}
-
-.client_link a,
-.account_link a,
-.payement_link a {
-    color: rgb(19, 149, 160);
-    font-size: 1.3rem;
-    text-decoration: none;
-}
-
-.client_link a:hover,
-.account_link a:hover,
-.payement_link a:hover {
-    color: rgb(10, 80, 90);
-}
 
 </style>

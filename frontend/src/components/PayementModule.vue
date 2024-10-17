@@ -1,5 +1,6 @@
 <template>
-    <section >
+    <section>
+      <NavbarModule />
       <a class = "menu" href = '/#/'> Menu </a>
       <div class="title">
         <h2><b>Payement</b></h2>
@@ -26,10 +27,14 @@
 
 <script>
 import payementJson from '../data/payements.json'
+import NavbarModule from './NavbarModule.vue'
 
 export default {
   name: 'PayementModule',
   props: ['action', 'id'],
+  components: {
+    NavbarModule
+  },
   data () {
     return {
       payement: payementJson

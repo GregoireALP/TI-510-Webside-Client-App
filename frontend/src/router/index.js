@@ -14,6 +14,10 @@ export default new Router({
       component: HomeModule
     },
     {
+      path: '/login',
+      component: HomeModule
+    },
+    {
       path: '/account',
       redirect: '/account/list/all'
     },
