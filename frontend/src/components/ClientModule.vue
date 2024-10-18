@@ -2,8 +2,8 @@
   <div>
     <NavbarModule />
     <h1 class="title">Clients</h1>
-    <div class="container d-flex justify-content-center mt-5" v-for="c in clients" v-bind:key="c.client_id">
-      <div class="card">
+    <div class="container d-flex flex-row flex-wrap justify-content-evenly mt-5">
+      <div class="card" v-for="c in clients" v-bind:key="c.client_id">
 
         <div class="top-container">
 
@@ -100,6 +100,7 @@ export default {
 </script>
 
 <style scoped>
+
 .card {
   background-color: #191b1f;
   border: solid 1px gold;
@@ -108,6 +109,7 @@ export default {
   border-radius: 33px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 2rem !important;
+  margin-bottom: 50px;
 }
 
 .top-container {
@@ -138,8 +140,6 @@ export default {
   background-color: #eee;
   border-radius: 12px;
   width: 75%;
-  margin: auto;
-
 }
 
 .dollar-div {

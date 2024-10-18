@@ -24,9 +24,6 @@ export default {
 
 .footer {
 
-    position: relative;
-    bottom: 0;
-
     margin-top: 50px;
 
     border-top: solid 1px gold;

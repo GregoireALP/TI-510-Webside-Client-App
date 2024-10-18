@@ -8,7 +8,7 @@
 
         <div id="navbar-items-right">
             <button id="login-button">
-                Join us
+                <a href="/#/login" id="join-us">Join us</a>
             </button>
         </div>
     </nav>
@@ -31,7 +31,14 @@ nav {
     justify-content: space-around;
     align-items: center;
 
+    margin-bottom: 50px;
+
     font-family: "Space Grotesk", sans-serif;
+}
+
+#join-us {
+    text-decoration: none;
+    color: #191b1f;
 }
 
 #brand-logo {

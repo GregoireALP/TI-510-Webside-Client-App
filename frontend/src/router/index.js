@@ -4,6 +4,7 @@ import AccountModule from '@/components/AccountModule'
 import PayementModule from '../components/PayementModule'
 import ClientModule from '../components/ClientModule'
 import HomeModule from '../components/HomeModule.vue'
+import LoginModule from '../components/LoginModule.vue'
 
 Vue.use(Router)
 
@@ -15,7 +16,7 @@ export default new Router({
     },
     {
       path: '/login',
-      component: HomeModule
+      component: LoginModule
     },
     {
       path: '/account',
