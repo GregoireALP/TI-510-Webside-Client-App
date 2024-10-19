@@ -5,6 +5,10 @@ import PayementModule from '../components/PayementModule'
 import ClientModule from '../components/ClientModule'
 import HomeModule from '../components/HomeModule.vue'
 import LoginModule from '../components/LoginModule.vue'
+import SendPayementModule from '../components/SendPayementModule.vue'
+import AboutUsModule from '../components/AboutUs.vue'
+import LoanModule from '../components/LoanModule.vue'
+import AdvisorModule from '../components/AdvisorModule.vue'
 
 Vue.use(Router)
 
@@ -12,31 +16,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: HomeModule
+      name: 'Home',
+      component: HomeModule,
+      props: false
     },
     {
       path: '/login',
-      component: LoginModule
-    },
-    {
-      path: '/account',
-      redirect: '/account/list/all'
-    },
-    {
-      path: '/client',
-      redirect: '/client/list/all'
-    },
-    {
-      path: '/laon',
-      redirect: '/loan/list/all'
-    },
-    {
-      path: '/advisor',
-      redirect: '/advisor/list/all'
-    },
-    {
-      path: '/payement',
-      redirect: '/payement/list/all'
+      name: 'Login',
+      component: LoginModule,
+      props: false
     },
     {
       path: '/account/:action/:id',
@@ -53,17 +41,32 @@ export default new Router({
     {
       path: '/advisor/:action/:id',
       name: 'Advisor',
+      component: AdvisorModule,
       props: true
     },
     {
       path: '/loan/:action/:id',
       name: 'Loan',
+      component: LoanModule,
       props: true
-    }, {
+    },
+    {
       path: '/payement/:action/:id',
       name: 'Payement',
       component: PayementModule,
       props: true
+    },
+    {
+      path: '/send-payement/:id',
+      name: 'SendPayement',
+      component: SendPayementModule,
+      props: true
+    },
+    {
+      path: '/about-us',
+      name: 'AboutUs',
+      component: AboutUsModule,
+      props: false
     }
   ]
 })
