@@ -36,7 +36,7 @@
 import NavbarModule from './NavbarModule.vue'
 import accountsJson from '../data/accounts.json'
 import FooterComponent from './FooterComponent.vue'
-import PayementModule from './PayementModule.vue';
+import PayementModule from './PayementModule.vue'
 
 export default {
   name: 'AccountModule',

@@ -14,8 +14,8 @@
 
 <script>
 
-import FooterComponent from './FooterComponent.vue';
-import NavbarModule from './NavbarModule.vue';
+import FooterComponent from './FooterComponent.vue'
+import NavbarModule from './NavbarModule.vue'
 
 export default {
   name: 'LoanModule',
@@ -23,7 +23,7 @@ export default {
   components: {
     NavbarModule,
     FooterComponent
-  },
+  }
 }
 
 </script>

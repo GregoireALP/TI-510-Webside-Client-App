@@ -63,7 +63,7 @@ export default {
   },
   mounted () {
     this.getPayements()
-  },  
+  },
   watch: {
     accountId: function (pre, post) {
       this.getPayements()

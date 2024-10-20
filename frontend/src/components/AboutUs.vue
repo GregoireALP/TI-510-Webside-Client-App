@@ -1,5 +1,8 @@
 <template>
   <section class="py-3 py-md-5 py-xl-8">
+    <div class="text-center mb-4">
+      <a href="../components/HomeModule.vue" class="btn btn-primary">Menu</a>
+    </div>
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
@@ -137,6 +140,19 @@ export default {
   max-width: 100% !important;
   background: linear-gradient(90deg, rgba(210,179,36,1) 0%, rgba(255,237,26,1) 50%, rgba(214,185,13,1) 100%) !important;
   border-radius: 10px !important;
+}
+
+.btn {
+  background-color: gold;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: darkgoldenrod;
 }
 
 </style>

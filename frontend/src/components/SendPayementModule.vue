@@ -13,8 +13,8 @@
 </template>
 <script>
 
-import FooterComponent from './FooterComponent.vue';
-import NavbarModule from './NavbarModule.vue';
+import FooterComponent from './FooterComponent.vue'
+import NavbarModule from './NavbarModule.vue'
 
 export default {
   name: 'SendPayementModule',
@@ -22,7 +22,7 @@ export default {
   components: {
     NavbarModule,
     FooterComponent
-  },
+  }
 }
 
 </script>

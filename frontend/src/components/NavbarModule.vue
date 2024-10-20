@@ -1,7 +1,7 @@
 <template>
     <nav>
         <div id="navbar-items-left">
-            <a href="#" class="navbar-item">About us</a>
+            <a href="/#/about-us" class="navbar-item">About us</a>
         </div>
 
         <img src="../assets/logo.png" alt="Bab Bank Logo" id="brand-logo"/>
