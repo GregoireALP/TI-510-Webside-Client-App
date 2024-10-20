@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import AccountModule from '@/components/AccountModule'
-import PayementModule from '../components/PayementModule'
 import ClientModule from '../components/ClientModule'
 import HomeModule from '../components/HomeModule.vue'
 import LoginModule from '../components/LoginModule.vue'
@@ -48,12 +47,6 @@ export default new Router({
       path: '/loan/:action/:id',
       name: 'Loan',
       component: LoanModule,
-      props: true
-    },
-    {
-      path: '/payement/:action/:id',
-      name: 'Payement',
-      component: PayementModule,
       props: true
     },
     {

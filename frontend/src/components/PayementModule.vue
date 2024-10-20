@@ -1,6 +1,5 @@
 <template>
   <section>
-    <NavbarModule />
     <h1 class="title">Payament history</h1>
     <section>
       <table id="payement-table">
@@ -17,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="p in payement" v-bind:key="p.payement_id">
+          <tr v-for="p in payements" v-bind:key="p.payement_id">
             <td>{{ p.payement_id }}</td>
             <td>{{ p.payement_account_sender_id }}</td>
             <td>{{ p.payement_account_reciever_id }}</td>
@@ -30,8 +29,6 @@
         </tbody>
       </table>
     </section>
-
-    <FooterComponent/>
   </section>
 
 </template>
@@ -43,37 +40,34 @@ import NavbarModule from './NavbarModule.vue'
 
 export default {
   name: 'PayementModule',
-  props: ['action', 'id'],
   components: {
     NavbarModule,
     FooterComponent
   },
+  props: {
+    accountId: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
-      payement: payementJson
+      payements: []
     }
   },
-
-  methods:
-  {
-    getAccounts () {
-      if (this.id === 'all') {
-        this.payement = payementJson
-      } else {
-        const payement = payementJson.find(payement => payement.payement_id.toString() === this.id)
-        this.payement = payement ? [payement] : []
-      }
+  methods: {
+    getPayements () {
+      const payement = payementJson.find(payement => payement.payement_account_sender_id.toString() === this.accountId)
+      this.payements = payement ? [payement] : []
     }
   },
-
+  mounted () {
+    this.getPayements()
+  },  
   watch: {
-    id: function (pre, post) {
-      this.getAccounts()
+    accountId: function (pre, post) {
+      this.getPayements()
     }
-  },
-
-  created () {
-    this.getAccounts()
   }
 }
 </script>

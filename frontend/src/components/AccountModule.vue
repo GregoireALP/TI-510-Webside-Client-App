@@ -2,36 +2,32 @@
   <div>
     <NavbarModule />
 
-    <h1 class="title">Your accounts</h1>
+    <main>
 
-    <div class="d-flex justify-content-around flex-wrap" id="card-carousel">
-      <div class="card mb-2 flex-grow-1 bank-card" v-for="a of accounts" v-bind:key="a.account_id">
+      <div class="bank-account-container">
 
-        <div class="card-header">
-          <i class="bi bi-bank"></i> {{ a.account_iban }} <br>
-        </div>
+        <div class="bank-account-header">
 
-        <div class="card-body">
-          <ul>
-            <li><i class="bi bi-file-person"></i> <b>Account ID:</b> {{ a.account_id }}</li>
-            <li><i class="bi bi-currency-exchange"></i> <b>Balance:</b> {{ a.account_balance }}$</li>
-            <li><i class="bi bi-textarea-t"></i> <b>Label:</b> {{ a.account_label }}</li>
-            <li><i class="bi bi-speedometer2"></i> <b>Interest:</b> {{ a.account_interest }}%</li>
-            <li><i class="bi bi-sign-stop"></i> <b>Max-amount:</b> {{ a.account_max_amount }}$</li>
-          </ul>
-
-          <p class="text-center"><a href="#" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Payements history</a></p>
+          <h2 class="account-title">Compte courrant</h2>
+          <p class="iban"></p>
 
         </div>
 
-        <div class="card-footer">
-          <span class="card-text"><i class="bi bi-calendar-date"></i> Creation date: {{ a.account_creation_date }}</span>
+        <div class="bank-account-body">
+
+          <PayementModule :accountId="this.id" />
+
+        </div>
+
+        <div class="bank-account-footer">
+
         </div>
 
       </div>
-    </div>
 
-    <FooterComponent/>
+    </main>
+
+    <FooterComponent />
 
   </div>
 </template>
@@ -40,13 +36,15 @@
 import NavbarModule from './NavbarModule.vue'
 import accountsJson from '../data/accounts.json'
 import FooterComponent from './FooterComponent.vue'
+import PayementModule from './PayementModule.vue';
 
 export default {
   name: 'AccountModule',
   props: ['action', 'id'],
   components: {
     NavbarModule,
-    FooterComponent
+    FooterComponent,
+    PayementModule
   },
   data () {
     return {
@@ -79,34 +77,45 @@ export default {
 </script>
 
 <style scoped>
-p {
-  font-family: sans-serif;
+.bank-account-container {
+  width: 75%;
+  margin: auto;
+  border-radius: 50px;
+
 }
 
-.bank-card {
-  min-width: 18rem;
-  max-width: 18rem;
-  height: 100%;
-  background-color: #383c3f;
-  color: whitesmoke;
+.account-title {
+  font-family: "Space Grotesk", sans-serif;
+  color: #292c33;
+
 }
 
-.card-header {
-  border-bottom: 1px solid gold;
-}
+.bank-account-header {
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  padding: 10px;
 
-.card-footer {
-  border-top: 1px solid gold;
-}
-
-.bank-card ul {
-  list-style: none;
-}
-
-a{
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
+
+  background: rgb(210,179,36);
+  background: linear-gradient(84deg, rgba(210,179,36,1) 0%, rgba(255,237,26,1) 34%, rgba(25,27,31,0.70640756302521) 100%);
+
 }
 
+.bank-account-body {
+  padding: 10px;
+  text-align: center;
+  border: solid 1px gold;
+}
+
+.bank-account-footer {
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border: solid 1px gold;
+  padding: 10px;
+  text-align: center;
+}
 </style>
