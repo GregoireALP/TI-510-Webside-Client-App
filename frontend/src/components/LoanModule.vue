@@ -5,6 +5,7 @@
 
     <main>
       <h1>Loan Module</h1>
+      <h2>Restez branché</h2>
     </main>
 
     <FooterComponent />
@@ -27,3 +28,14 @@ export default {
 }
 
 </script>
+
+<style>
+
+h2 {
+  text-align: center;
+  font-family: "Space Grotesk", sans-serif;
+  color: #cecece;
+  margin: 10px 0 10px 0;
+}
+
+</style>
