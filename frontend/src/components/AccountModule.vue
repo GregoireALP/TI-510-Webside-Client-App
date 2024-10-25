@@ -86,23 +86,21 @@ export default {
 
 .account-title {
   font-family: "Space Grotesk", sans-serif;
-  color: #292c33;
+  color: #CECECE;
 
 }
 
 .bank-account-header {
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
-  padding: 10px;
+  padding: 50px;
 
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
 
-  background: rgb(210,179,36);
-  background: linear-gradient(84deg, rgba(210,179,36,1) 0%, rgba(255,237,26,1) 34%, rgba(25,27,31,0.70640756302521) 100%);
-
+  border: solid 1px gold;
 }
 
 .bank-account-body {

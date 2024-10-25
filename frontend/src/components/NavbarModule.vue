@@ -4,7 +4,7 @@
             <a href="/#/about-us" class="navbar-item">About us</a>
         </div>
 
-        <img src="../assets/logo.png" alt="Bab Bank Logo" id="brand-logo"/>
+        <a href="/"><img src="../assets/logo.png" alt="Bab Bank Logo" id="brand-logo"/></a>
 
         <div id="navbar-items-right">
             <button id="login-button">

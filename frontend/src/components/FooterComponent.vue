@@ -2,7 +2,7 @@
 
     <div class="footer">
 
-        <p>About Us</p>
+        <a href="/#/about-us">About Us</a>
 
         <a href="https://github.com/GregoireALP/TI-510-Webside-Client-App">Github Repo</a>
 
