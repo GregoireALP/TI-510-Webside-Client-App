@@ -7,9 +7,8 @@
       <div class="bank-account-container">
 
         <div class="bank-account-header">
-
-          <h2 class="account-title">Compte courrant</h2>
-          <p class="iban"></p>
+          <h2 class="account-title">Account: <b>{{ account.account_label }}</b> <span class="badge text-bg-success">{{ account.account_balance }}<i class="bi bi-currency-euro"></i></span></h2>
+          <p class="iban">{{ account.account_iban }}</p>
 
         </div>
 
@@ -20,6 +19,10 @@
         </div>
 
         <div class="bank-account-footer">
+
+          <p class="account-creation-date"><i class="bi bi-calendar-date"></i> Created on {{ account.account_creation_date }}</p>
+          <p class="account-max-amount"><i class="bi bi-sign-stop"></i>  Max <b>{{ account.account_max_amount }} $</b></p>
+          <p class="account-interest"><i class="bi bi-calculator"></i> Interest <b>{{ account.account_interest }} %</b></p>
 
         </div>
 
@@ -48,7 +51,7 @@ export default {
   },
   data () {
     return {
-      accounts: []
+      account: null
     }
   },
 
@@ -59,7 +62,7 @@ export default {
         this.accounts = accountsJson
       } else {
         const account = accountsJson.find(account => account.account_id.toString() === this.id)
-        this.accounts = account ? [account] : []
+        this.account = account
       }
     }
   },
@@ -84,19 +87,33 @@ export default {
 
 }
 
+.bank-account-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  color: whitesmoke;
+  font-family: "Space Grotesk", sans-serif;
+}
+
 .account-title {
   font-family: "Space Grotesk", sans-serif;
   color: #CECECE;
+}
 
+.iban {
+  color: grey;
 }
 
 .bank-account-header {
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
-  padding: 50px;
+  padding-left: 50px;
+  padding-top: 25px;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: left;
   align-items: center;
 
@@ -104,7 +121,7 @@ export default {
 }
 
 .bank-account-body {
-  padding: 10px;
+  padding: 20px;
   text-align: center;
   border: solid 1px gold;
 }

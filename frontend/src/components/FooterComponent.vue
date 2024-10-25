@@ -6,7 +6,7 @@
 
         <a href="https://github.com/GregoireALP/TI-510-Webside-Client-App">Github Repo</a>
 
-        <p>Login</p>
+        <a href="/#/login">Login</a>
 
     </div>
 
