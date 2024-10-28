@@ -84,6 +84,15 @@
             <li>Mr. ALPEROVITCH Grégoire</li>
             <li>Mr. FLANDIN Nicolas</li>
           </ul>
+
+          <br><br>
+
+          <h3 class="mb-4 display-5 text-center" style="color: gold">Find us</h3>
+          <iframe class="embed"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3292.4412338929124!2d19.0573744869572!3d47.4883600085659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741dc502488be69%3A0xc5b7e757fb438129!2sUniversit%C3%A9%20Corvinus%20de%20Budapest!5e1!3m2!1sfr!2shu!4v1730137404106!5m2!1sfr!2shu"
+            width="600" height="450" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+
         </div>
       </section>
     </main>
@@ -111,6 +120,13 @@ export default {
 .container h3 {
   color: gold;
   padding-bottom: 5px;
+}
+
+.embed {
+  width: 50%;
+  height: 450px;
+  margin: 2em;
+  border: none;
 }
 
 .text-secondary {
