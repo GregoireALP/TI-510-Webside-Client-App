@@ -107,14 +107,12 @@ section {
 
 form{
   flex: 1;
-    max-width: 50%; /* Ajuste la largeur du formulaire */
+    max-width: 50%;
     padding: 10px;
   label{
     color:white;
   }
 }
-
-
 
 #button_submit_loan{
     font-weight: 400;
@@ -139,14 +137,14 @@ form{
 }
 
 .loan_info {
-    max-width: 50%; /* Ajuste la largeur de la section d'information */
+    max-width: 50%;
     padding: 20px;
     margin-top: 15px;
-    color: #f8f9fa; /* Couleur du texte */
+    color: #f8f9fa;
 }
 
 .loan_info h3 {
-    color: #f8d720; /* Couleur du titre */
+    color: #f8d720;
     margin-bottom: 10px;
 }
 </style>
