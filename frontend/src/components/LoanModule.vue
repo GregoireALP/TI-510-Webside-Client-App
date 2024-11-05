@@ -58,7 +58,7 @@
     <p>Aimed at those looking to buy or renovate a home. Offers long-term repayment options and competitive interest rates, helping you achieve homeownership.</p>
 
     <h4>Other</h4>
-    <p>If your needs don’t fit into the above categories, choose "Other" and describe your specific requirements in the message box. We’ll work to find a tailored solution for you.</p>
+    <p>If your needs don't fit into the above categories, choose "Other" and describe your specific requirements in the message box. We’ll work to find a tailored solution for you.</p>
 
     <p>Make sure to agree to the terms and conditions before submitting your request.</p>
 </div>

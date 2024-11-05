@@ -50,10 +50,10 @@ export default new Router({
       props: true
     },
     {
-      path: '/send-payement/:id',
+      path: '/send-payement/',
       name: 'SendPayement',
       component: SendPayementModule,
-      props: true
+      props: false
     },
     {
       path: '/about-us',
