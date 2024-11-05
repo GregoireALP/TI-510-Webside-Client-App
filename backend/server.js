@@ -19,6 +19,9 @@ APP.use(CORS());
 // *** ROUTES/CONTROLLERS ***
 APP.use('/static', EXPRESS.static(__dirname + '/static'));
 APP.use('/api/advisors', require('./controllers/advisors.route'));
+APP.use('/api/loans', require('./controllers/loans.route'));
+APP.use('/api/clients', require('./controllers/clients.route'));
+APP.use('/api/payements', require('./controllers/payements.route'));
 
 APP.listen(process.env.WEB_PORT, () => {
     console.log(`Server is running on port ${process.env.WEB_PORT}`);

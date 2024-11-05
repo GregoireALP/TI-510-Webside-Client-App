@@ -66,14 +66,14 @@
 </section>
     </main>
 
-    <FooterComponent />
+    <FooterModule />
   </div>
 
 </template>
 
 <script>
 
-import FooterComponent from './FooterComponent.vue'
+import FooterModule from './FooterModule.vue'
 import NavbarModule from './NavbarModule.vue'
 
 export default {
@@ -81,7 +81,7 @@ export default {
   props: ['id', 'action'],
   components: {
     NavbarModule,
-    FooterComponent
+    FooterModule
   }
 }
 

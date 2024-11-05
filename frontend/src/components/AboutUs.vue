@@ -97,20 +97,20 @@
       </section>
     </main>
 
-    <FooterComponent />
+    <FooterModule />
   </div>
 </template>
 
 <script>
 
-import FooterComponent from './FooterComponent.vue'
+import FooterModule from './FooterModule.vue'
 import NavbarModule from './NavbarModule.vue'
 
 export default {
   name: 'AboutUsModule',
   components: {
     NavbarModule,
-    FooterComponent
+    FooterModule
   }
 }
 

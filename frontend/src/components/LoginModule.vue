@@ -16,7 +16,7 @@
             </div>
         </main>
 
-        <FooterComponent />
+        <FooterModule />
 
     </div>
 
@@ -24,14 +24,14 @@
 
 <script>
 
-import FooterComponent from './FooterComponent.vue'
+import FooterModule from './FooterModule.vue'
 import NavbarModule from './NavbarModule.vue'
 
 export default {
   name: 'LoginModule',
   components: {
     NavbarModule,
-    FooterComponent
+    FooterModule
   }
 }
 

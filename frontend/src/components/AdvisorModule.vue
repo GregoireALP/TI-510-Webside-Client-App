@@ -29,20 +29,20 @@
         </div>
       </div>
     </main>
-    <FooterComponent/>
+    <FooterModule/>
   </div>
 </template>
 
 <script>
 import NavbarModule from './NavbarModule.vue'
-import FooterComponent from './FooterComponent.vue'
+import FooterModule from './FooterModule.vue'
 
 export default {
   name: 'AdvisorModule',
   props: ['id', 'action'],
   components: {
     NavbarModule,
-    FooterComponent
+    FooterModule
   },
   data () {
     return {

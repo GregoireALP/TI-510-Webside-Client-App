@@ -55,13 +55,13 @@
       </div>
     </main>
 
-    <FooterComponent />
+    <FooterModule />
   </div>
 
 </template>
 <script>
 
-import FooterComponent from './FooterComponent.vue'
+import FooterModule from './FooterModule.vue'
 import NavbarModule from './NavbarModule.vue'
 
 import accountJson from '../data/accounts.json'
@@ -71,7 +71,7 @@ export default {
   name: 'SendPayementModule',
   components: {
     NavbarModule,
-    FooterComponent
+    FooterModule
   },
   data () {
     return {

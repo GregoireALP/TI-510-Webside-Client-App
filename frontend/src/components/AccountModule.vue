@@ -30,7 +30,7 @@
 
     </main>
 
-    <FooterComponent />
+    <FooterModule />
 
   </div>
 </template>
@@ -38,7 +38,7 @@
 <script>
 import NavbarModule from './NavbarModule.vue'
 import accountsJson from '../data/accounts.json'
-import FooterComponent from './FooterComponent.vue'
+import FooterModule from './FooterModule.vue'
 import PayementModule from './PayementModule.vue'
 
 export default {
@@ -46,7 +46,7 @@ export default {
   props: ['action', 'id'],
   components: {
     NavbarModule,
-    FooterComponent,
+    FooterModule,
     PayementModule
   },
   data () {

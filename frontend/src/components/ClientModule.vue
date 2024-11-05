@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <FooterComponent/>
+    <FooterModule/>
   </div>
 </template>
 
@@ -49,14 +49,14 @@
 import clientsJson from '../data/clients.json'
 import accountsJson from '../data/accounts.json'
 import NavbarModule from './NavbarModule.vue'
-import FooterComponent from './FooterComponent.vue'
+import FooterModule from './FooterModule.vue'
 
 export default {
   name: 'ClientModule',
   props: ['action', 'id'],
   components: {
     NavbarModule,
-    FooterComponent
+    FooterModule
   },
   data () {
     return {

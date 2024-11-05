@@ -35,14 +35,14 @@
 
 <script>
 import payementJson from '../data/payements.json'
-import FooterComponent from './FooterComponent.vue'
+import FooterModule from './FooterModule.vue'
 import NavbarModule from './NavbarModule.vue'
 
 export default {
   name: 'PayementModule',
   components: {
     NavbarModule,
-    FooterComponent
+    FooterModule
   },
   props: {
     accountId: {

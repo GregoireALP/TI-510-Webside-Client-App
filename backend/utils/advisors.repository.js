@@ -16,7 +16,7 @@ module.exports = {
         }
     },
 
-    async getAllAdvisors() {
+    async getAllAdvisorsController() {
 
         try {
 
