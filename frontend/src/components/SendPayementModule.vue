@@ -73,13 +73,13 @@ export default {
     NavbarModule,
     FooterComponent
   },
-  data() {
+  data () {
     return {
       options: []
     }
   },
   methods: {
-    getOptions() {
+    getOptions () {
       const addedClientIds = new Set()
       for (let i = 0; i < accountJson.length; i++) {
         accountJson.find(account => {
@@ -97,7 +97,7 @@ export default {
       }
     }
   },
-  created() {
+  created () {
     this.getOptions()
   }
 

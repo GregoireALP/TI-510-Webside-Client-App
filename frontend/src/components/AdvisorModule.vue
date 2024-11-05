@@ -36,7 +36,6 @@
 <script>
 import NavbarModule from './NavbarModule.vue'
 import FooterComponent from './FooterComponent.vue'
-import advisorsJson from '../data/advisors.json'
 
 export default {
   name: 'AdvisorModule',
@@ -47,8 +46,20 @@ export default {
   },
   data () {
     return {
-      advisors: advisorsJson
+      advisors: []
     }
+  },
+  methods: {
+    async getAllAdvisors () {
+      await fetch('http://localhost:4000/api/advisors/list')
+        .then((res) => res.json())
+        .then(function (data) {
+          this.advisors = data
+        }.bind(this))
+    }
+  },
+  created () {
+    this.getAllAdvisors()
   }
 }
 </script>

@@ -1,12 +1,25 @@
 const EXPRESS = require('express');
 const APP = EXPRESS();
 
-const PORT = 4000;
+const DOTENV = require('dotenv');
+DOTENV.config();
 
-APP.get('/', (req, res) => {
-    res.send('Hello World');
-});
+APP.set("view engine", "ejs");
+APP.set("views", "views");
 
-APP.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+const BODYPARSER = require("body-parser");
+APP.use(BODYPARSER.json(), BODYPARSER.urlencoded({ extended: true }));
+
+const SESSION = require("express-session");
+// TODO : configure session
+
+const CORS = require('cors');
+APP.use(CORS());
+
+// *** ROUTES/CONTROLLERS ***
+APP.use('/static', EXPRESS.static(__dirname + '/static'));
+APP.use('/api/advisors', require('./controllers/advisors.route'));
+
+APP.listen(process.env.WEB_PORT, () => {
+    console.log(`Server is running on port ${process.env.WEB_PORT}`);
 });
