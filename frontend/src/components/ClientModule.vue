@@ -22,14 +22,13 @@
 
           </div>
           <div class="d-flex flex-column text-right mr-2">
-            <span class="current-balance">Total Balance</span>
-            <span class="amount"><span class="dollar-sign">$</span>{{ getTotalBalance(c.client_id) }}</span>
+            <span class="current-balance">{{ c.client_id }}</span>
           </div>
 
         </div>
 
         <div class="options-list mt-4">
-          <span class="option-list-item"><i class="bi bi-bank"></i> Manage my accounts</span>
+          <span class="option-list-item"><i class="bi bi-bank"></i> <a @click="redirectToAccount(c.client_id)">Manage my accounts</a></span>
         </div>
         <div class="options-list pt-2">
           <span class="option-list-item"><i class="bi bi-paperclip"></i> Consult my loans</span>
@@ -46,8 +45,6 @@
 </template>
 
 <script>
-import clientsJson from '../data/clients.json'
-import accountsJson from '../data/accounts.json'
 import NavbarModule from './NavbarModule.vue'
 import FooterModule from './FooterModule.vue'
 
@@ -60,30 +57,33 @@ export default {
   },
   data () {
     return {
-      clients: [],
-      accounts: accountsJson
+      clients: []
     }
   },
 
   methods: {
-    getClients () {
+    async getClients () {
       if (this.id === 'all') {
-        this.clients = clientsJson
+        await fetch('http://localhost:4000/api/clients/get/all')
+          .then(res => res.json())
+          .then(function (data) {
+            this.clients = data
+          }.bind(this))
       } else {
-        const client = clientsJson.find(client => client.client_id.toString() === this.id)
-        this.clients = client ? [client] : []
+        await fetch('http://localhost:4000/api/clients/get/' + this.id)
+          .then(res => res.json())
+          .then(function (data) {
+            this.clients = data
+          }.bind(this))
       }
     },
 
-    getTotalBalance (userId) {
-      let total = 0
-      for (let i = 0; i < accountsJson.length; i++) {
-        if (accountsJson[i].account_client_id === userId) {
-          total = total + accountsJson[i].account_balance
-        }
-      }
-
-      return total
+    async redirectToAccount (id) {
+      await fetch('http://localhost:4000/api/accounts/get/client/' + id)
+        .then(res => res.json())
+        .then(function (data) {
+          window.location.replace('http://localhost:8080/#/account/list/' + data[0].account_client_id)
+        })
     }
   },
 

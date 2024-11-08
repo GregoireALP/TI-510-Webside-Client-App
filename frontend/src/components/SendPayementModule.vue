@@ -10,7 +10,7 @@
             <div class="card-body p-md-5">
               <div>
                 <h4>Send a payement</h4>
-                <p class="text-muted pb-2">
+                <p class="pb-2">
                   You can send a payement to any of your beneficiaries using your bank  account.
                 </p>
               </div>
@@ -21,8 +21,8 @@
                   <div class="d-flex flex-column ms-4">
                     <span class="h5 mb-1">Beneficiary</span>
                     <select>
-                    <option disabled selected>Choose reciever</option>
-                      <option v-for="option in options" :key="option.id" :value="option.id">{{ option.name + " " + option.iban }}</option>
+                      <option disabled selected>Choose reciever</option>
+                      <option v-for="option in options" :key="option.account_id" :value="option.account_id">{{ option.account_iban }}</option>
                     </select>
                   </div>
                 </div>
@@ -37,10 +37,10 @@
               <div class="mt-4 d-flex justify-content-between align-items-center">
                 <div class="d-flex flex-row align-items-center">
                   <i class="bi bi-bank" style="font-size: 50px;"></i>
-                  <div class="d-flex flex-column ms-3">
-                    <span class="h5 mb-1">Current account</span>
-                    <span class="small text-muted">FR76 XXXX XXXX XXXX XXXX XXXX 2570</span>
-                  </div>
+                  <select class="iban-selector">
+                    <option disabled selected>Choose an account</option>
+                    <option v-for="a in accounts" :key="a.account_id" :value="a.account_id">{{ a.account_iban }}</option>
+                  </select>
                 </div>
               </div>
 
@@ -64,40 +64,38 @@
 import FooterModule from './FooterModule.vue'
 import NavbarModule from './NavbarModule.vue'
 
-import accountJson from '../data/accounts.json'
-import clientJson from '../data/clients.json'
-
 export default {
   name: 'SendPayementModule',
+  props: ['id'],
   components: {
     NavbarModule,
     FooterModule
   },
   data () {
     return {
-      options: []
+      options: [],
+      accounts: []
     }
   },
   methods: {
-    getOptions () {
-      const addedClientIds = new Set()
-      for (let i = 0; i < accountJson.length; i++) {
-        accountJson.find(account => {
-          for (let j = 0; j < clientJson.length; j++) {
-            if (account.account_client_id === clientJson[j].client_id && !addedClientIds.has(clientJson[j].client_id)) {
-              this.options.push({
-                id: account.account_id,
-                iban: account.account_iban,
-                name: clientJson[j].client_firstname + ' ' + clientJson[j].client_lastname
-              })
-              addedClientIds.add(clientJson[j].client_id)
-            }
-          }
-        })
-      }
+    async getOptions () {
+      await fetch('http://localhost:4000/api/accounts/list')
+        .then(res => res.json())
+        .then(function (data) {
+          this.options = data
+        }.bind(this))
+    },
+    async getAccountsInfos () {
+      await fetch('http://localhost:4000/api/accounts/get/client/' + this.id)
+        .then(res => res.json())
+        .then(function (data) {
+          this.accounts = data
+        }.bind(this))
     }
   },
+
   created () {
+    this.getAccountsInfos()
     this.getOptions()
   }
 
@@ -111,6 +109,11 @@ export default {
   border-radius: 25px;
 
   background-color: #191B1F;
-  color: whitesmoke;
+  color: whitesmoke
 }
+
+.iban-selector {
+  margin-left: 10px;
+}
+
 </style>

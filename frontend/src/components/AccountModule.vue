@@ -4,30 +4,32 @@
 
     <main>
 
-      <div class="bank-account-container">
+      <div class="bank-account-container" v-for="account in this.accounts" v-bind:key="account.account_id">
 
         <div class="bank-account-header">
-          <h2 class="account-title">Account: <b>{{ account.account_label }}</b> <span class="badge text-bg-success">{{ account.account_balance }}<i class="bi bi-currency-euro"></i></span></h2>
+          <h2 class="account-title">Account: <b>{{ account.account_label }}</b> <span class="badge text-bg-success">{{
+            account.account_balance }}<i class="bi bi-currency-euro"></i></span></h2>
           <p class="iban">{{ account.account_iban }}</p>
 
         </div>
 
         <div class="bank-account-body">
 
-          <PayementModule :accountId="this.id" />
+          <PayementModule :accountId="account.account_id.toString()" />
 
         </div>
 
         <div class="bank-account-footer">
 
           <p class="account-creation-date"><i class="bi bi-calendar-date"></i> Created on {{ account.account_creation_date }}</p>
-          <p class="account-max-amount"><i class="bi bi-sign-stop"></i>  Max <b>{{ account.account_max_amount }} $</b></p>
-          <p class="account-interest"><i class="bi bi-calculator"></i> Interest <b>{{ account.account_interest }} %</b></p>
+          <p class="account-max-amount"><i class="bi bi-sign-stop"></i> Max <b>{{ account.account_max_amount }} $</b>
+          </p>
+          <p class="account-interest"><i class="bi bi-calculator"></i> Interest <b>{{ account.account_interest }} %</b>
+          </p>
 
         </div>
 
       </div>
-
     </main>
 
     <FooterModule />
@@ -37,7 +39,6 @@
 
 <script>
 import NavbarModule from './NavbarModule.vue'
-import accountsJson from '../data/accounts.json'
 import FooterModule from './FooterModule.vue'
 import PayementModule from './PayementModule.vue'
 
@@ -51,18 +52,25 @@ export default {
   },
   data () {
     return {
-      account: null
+      accounts: []
     }
   },
 
   methods: {
 
-    getAccounts () {
+    async getAccounts () {
       if (this.id === 'all') {
-        this.accounts = accountsJson
+        await fetch('http://localhost:4000/api/accounts/list')
+          .then(res => res.json())
+          .then(function (data) {
+            this.accounts = data
+          }.bind(this))
       } else {
-        const account = accountsJson.find(account => account.account_id.toString() === this.id)
-        this.account = account
+        await fetch('http://localhost:4000/api/accounts/get/' + this.id)
+          .then(res => res.json())
+          .then(function (data) {
+            this.accounts = [data]
+          }.bind(this))
       }
     }
   },

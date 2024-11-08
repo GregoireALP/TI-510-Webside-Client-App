@@ -6,7 +6,7 @@ ROUTER.get('/list', listAdvisorRoute);
 
 async function listAdvisorRoute(req, res) {
     let advisors = await ADVISORS.getAllAdvisorsController();
-    res.json(advisors);
+    res.status(200).json(advisors);
 }
 
 module.exports = ROUTER;

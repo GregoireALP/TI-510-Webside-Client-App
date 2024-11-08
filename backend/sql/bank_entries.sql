@@ -1,6 +1,6 @@
 
 -- ADVISORS --
-/*
+
 INSERT INTO advisor (`advisor_id`,`advisor_gender`,`advisor_firstname`,`advisor_lastname`,`advisor_phone`,`advisor_email`,`advisor_address`,`advisor_birthday`)
 VALUES
   (1, 2, "Anastasia", "Boyd", "09 38 68 85 02", "magnis.dis@yahoo.com", "152-4982 Primis St.", "2014-04-04"),
@@ -13,7 +13,7 @@ VALUES
   (8, 1, "Asher", "Fleming", "01 03 87 41 73", "ac.eleifend@yahoo.couk", "7902 Pede. Ave", "1988-10-13"),
   (9, 2, "Moses", "Morales", "05 31 30 37 11", "malesuada.integer@outlook.couk", "Ap #555-5861 Luctus, St.", "1997-11-08"),
   (10, 2, "Jin", "Jensen", "08 88 61 73 83", "mauris.ut@google.net", "3803 Erat Rd.", "1976-06-10");
-*/
+
 
 
   
@@ -21,7 +21,7 @@ VALUES
 
 -- CLIENTS --
 
-/*
+
 INSERT INTO client (`client_id`,`client_gender`,`client_firstname`,`client_lastname`,`client_email`,`client_password`,`client_phone`,`client_birthday`,`client_address`,`client_advisor_id`)
 VALUES
   (1, 1, "Yetta", "Workman", "purus.sapien@yahoo.ca", "YetWork90", "01 41 76 81 46", "1990-08-27", "5826 Commodo St.", 5),
@@ -34,7 +34,7 @@ VALUES
   (8, 1, "Shellie", "Johns", "egestas@aol.edu", "SheJo89", "02 16 15 17 24", "1989-06-04", "8104 Vestibulum, Ave", 6),
   (9, 2, "Garrett", "Snow", "eu.euismod.ac@aol.net", "GarSno79", "03 45 96 69 20", "1979-04-30", "950-9063 Nibh. Road", 5),
   (10, 1, "Ayanna", "Roberts", "amet.risus@aol.org", "AyaRob", "01 45 54 46 85", "2017-05-20", "P.O. Box 657, 7091 Nibh St.", 8);
-*/
+
 
   
 
@@ -42,7 +42,7 @@ VALUES
   
   
   -- ACCOUNTS --
-/*
+
   INSERT INTO account (`account_id`, `account_label`, `account_balance`, `account_interest`, `account_creation_date`, `account_max_amount`, `account_client_id`, `account_iban`)
 VALUES
   (1, "Current", 3694, 1, "2025-06-24", 15000, 6, "PK2783590808654194798377"),
@@ -55,14 +55,14 @@ VALUES
   (8, "Current", 9933, 1, "2025-06-22", 15000, 1, "BH76726084925344281122"),
   (9, "Current", 3615, 1, "2023-09-22", 15000, 4, "NO9073425268576"),
   (10, "Current", 3914, 1, "2025-07-29", 15000, 1, "CY64013998348885483137472754");
-*/
+
   
 
 
   
   
   -- PAYEMENTS --
-/*
+
   INSERT INTO payement (`payement_id`,`payement_amount`, `payement_label`, `payement_date`, `payement_currency`, `payement_account_sender_id`, `payement_account_reciever_id`)
   VALUES
   (1, 109, "Rent", "2024-02-12", "Euro", 1, 5),
@@ -75,14 +75,12 @@ VALUES
   (8, 108, "Plane", "2018-07-15", "Euro", 7, 3),
   (9, 68, "Museum", "2022-09-04", "Euro", 4, 8),
   (10, 98, "Concert", "2024-09-20", "Dollar", 9, 3);
-*/
+
   
   
  
   
   -- LOAN --
-
-/*
 INSERT INTO loan (`loan_id`, `loan_amount`, `loan_label`, `loan_interest`, `loan_start_date`, `loan_to_refund`, `loan_end_date`, `loan_client_id`)
 VALUES 
   (1, 10000, "School loan", 0.15, "2025-07-29", 7600, "2025-09-29", 1),
@@ -90,4 +88,4 @@ VALUES
   (3, 3000, "Flat loan", 0.35, "2025-07-29", 500, "2025-03-29", 6),
   (4, 6500, "House loan", 0.45, "2025-07-29", 3200, "2025-09-29", 9),
   (5, 3000, "Rental loan", 0.24, "2025-07-29", 250, "2025-03-29", 3);
-*/
+

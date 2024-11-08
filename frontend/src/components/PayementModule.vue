@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import payementJson from '../data/payements.json'
 import FooterModule from './FooterModule.vue'
 import NavbarModule from './NavbarModule.vue'
 
@@ -56,9 +55,12 @@ export default {
     }
   },
   methods: {
-    getPayements () {
-      const payement = payementJson.find(payement => payement.payement_account_sender_id.toString() === this.accountId)
-      this.payements = payement ? [payement] : []
+    async getPayements () {
+      await fetch('http://localhost:4000/api/payements/get/sender/' + this.accountId)
+        .then(res => res.json())
+        .then(function (data) {
+          this.payements = data
+        }.bind(this))
     }
   },
   mounted () {
