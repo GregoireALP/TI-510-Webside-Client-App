@@ -44,7 +44,7 @@ export default {
     FooterModule
   },
   props: {
-    accountId: {
+    account_id: {
       type: String,
       required: true
     }
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     async getPayements () {
-      await fetch('http://localhost:4000/api/payements/get/sender/' + this.accountId)
+      await fetch('http://localhost:4000/api/payements/get/sender/' + this.account_id)
         .then(res => res.json())
         .then(function (data) {
           this.payements = data
@@ -67,7 +67,7 @@ export default {
     this.getPayements()
   },
   watch: {
-    accountId: function (pre, post) {
+    account_id: function (pre, post) {
       this.getPayements()
     }
   }

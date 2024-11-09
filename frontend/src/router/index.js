@@ -6,8 +6,9 @@ import HomeModule from '../components/HomeModule.vue'
 import LoginModule from '../components/LoginModule.vue'
 import SendPayementModule from '../components/SendPayementModule.vue'
 import AboutUsModule from '../components/AboutUs.vue'
-import LoanModule from '../components/LoanModule.vue'
 import AdvisorModule from '../components/AdvisorModule.vue'
+import LoanApply from '../components/LoanApplyModule.vue'
+import LoanManageModule from '../components/LoanManageModule.vue'
 
 Vue.use(Router)
 
@@ -26,31 +27,37 @@ export default new Router({
       props: false
     },
     {
-      path: '/account/:action/:id',
+      path: '/account/:client_id',
       name: 'Account',
       component: AccountModule,
       props: true
     },
     {
-      path: '/client/:action/:id',
+      path: '/client/:client_id',
       name: 'Client',
       component: ClientModule,
       props: true
     },
     {
-      path: '/advisor/:action/:id',
+      path: '/advisor/:client_id',
       name: 'Advisor',
       component: AdvisorModule,
       props: true
     },
     {
-      path: '/loan/:action/:id',
-      name: 'Loan',
-      component: LoanModule,
+      path: '/loan/apply',
+      name: 'LoanApply',
+      component: LoanApply,
+      props: false
+    },
+    {
+      path: '/loan/manage/:client_id',
+      name: 'LoanManage',
+      components: LoanManageModule,
       props: true
     },
     {
-      path: '/send-payement/:id',
+      path: '/send-payement/:client_id',
       name: 'SendPayement',
       component: SendPayementModule,
       props: true

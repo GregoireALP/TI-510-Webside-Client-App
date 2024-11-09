@@ -93,6 +93,12 @@ export default {
         }.bind(this))
     }
   },
+  watch: {
+    id: function (pre, post) {
+      this.getAccountsInfos()
+      this.getOptions()
+    }
+  },
 
   created () {
     this.getAccountsInfos()

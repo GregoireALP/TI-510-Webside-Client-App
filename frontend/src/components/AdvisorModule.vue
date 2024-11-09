@@ -4,27 +4,27 @@
     <main>
       <h1 class="title">Contact Advisor</h1>
       <div class="class_grid">
-        <div v-for="advisor in advisors" :key="advisor.advisor_id" class="card">
+        <div class="card">
           <img src="../assets/profil_pics.png" class="card_img" alt="Advisor image">
           <div class="card-body" style="margin">
-            <h5 class="card-title">{{ advisor.advisor_firstname }} {{ advisor.advisor_lastname }}</h5>
+            <h5 class="card-title">{{ this.advisor.advisor_firstname }} {{ this.advisor.advisor_lastname }}</h5>
             <div class="card-text">
               <div class="mail">
                 <i class="bi bi-envelope-fill"></i>
-                <strong> : </strong> {{ advisor.advisor_email }}<br>
+                <strong> : </strong> {{ this.advisor.advisor_email }}<br>
               </div>
               <div class="phone">
                 <i class="bi bi-telephone-fill"></i>
-                <strong> : </strong> {{ advisor.advisor_phone }}<br>
+                <strong> : </strong> {{ this.advisor.advisor_phone }}<br>
               </div>
               <div class="bank">
                 <i class="bi bi-bank2"></i>
-                <strong> : </strong> {{ advisor.advisor_address }}<br>
+                <strong> : </strong> {{ this.advisor.advisor_address }}<br>
               </div>
             </div>
           </div>
           <div class="contact">
-            <a :href="'mailto:' + advisor.advisor_email" class="btn btn-primary">Contact</a>
+            <a :href="'mailto:' + this.advisor.advisor_email" class="btn btn-primary">Contact</a>
           </div>
         </div>
       </div>
@@ -39,27 +39,36 @@ import FooterModule from './FooterModule.vue'
 
 export default {
   name: 'AdvisorModule',
-  props: ['id', 'action'],
+  props: ['client_id'],
   components: {
     NavbarModule,
     FooterModule
   },
   data () {
     return {
-      advisors: []
+      advisor: null
     }
   },
   methods: {
-    async getAllAdvisors () {
-      await fetch('http://localhost:4000/api/advisors/list')
-        .then((res) => res.json())
-        .then(function (data) {
-          this.advisors = data
-        }.bind(this))
+    async getAdvisor () {
+      try {
+        await fetch('http://localhost:4000/api/advisors/get/client/' + this.client_id)
+          .then(res => res.json())
+          .then(function (data) {
+            this.advisor = data
+          }.bind(this))
+      } catch (error) {
+        console.error(error)
+      }
     }
   },
   created () {
-    this.getAllAdvisors()
+    this.getAdvisor()
+  },
+  watch: {
+    client_id: function (pre, post) {
+      this.getAdvisor()
+    }
   }
 }
 </script>

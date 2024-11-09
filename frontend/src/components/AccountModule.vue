@@ -15,7 +15,7 @@
 
         <div class="bank-account-body">
 
-          <PayementModule :accountId="account.account_id.toString()" />
+          <PayementModule :account_id="account.account_id.toString()" />
 
         </div>
 
@@ -44,7 +44,7 @@ import PayementModule from './PayementModule.vue'
 
 export default {
   name: 'AccountModule',
-  props: ['action', 'id'],
+  props: ['client_id'],
   components: {
     NavbarModule,
     FooterModule,
@@ -59,14 +59,14 @@ export default {
   methods: {
 
     async getAccounts () {
-      if (this.id === 'all') {
+      if (this.client_id === 'all') {
         await fetch('http://localhost:4000/api/accounts/list')
           .then(res => res.json())
           .then(function (data) {
             this.accounts = data
           }.bind(this))
       } else {
-        await fetch('http://localhost:4000/api/accounts/get/' + this.id)
+        await fetch('http://localhost:4000/api/accounts/get/' + this.client_id)
           .then(res => res.json())
           .then(function (data) {
             this.accounts = [data]
@@ -76,7 +76,7 @@ export default {
   },
 
   watch: {
-    id: function (pre, post) {
+    client_id: function (pre, post) {
       this.getAccounts()
     }
   },

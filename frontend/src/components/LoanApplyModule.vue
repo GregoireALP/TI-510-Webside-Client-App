@@ -77,8 +77,8 @@ import FooterModule from './FooterModule.vue'
 import NavbarModule from './NavbarModule.vue'
 
 export default {
-  name: 'LoanModule',
-  props: ['id', 'action'],
+  name: 'LoanApplyModule',
+  props: ['client_id'],
   components: {
     NavbarModule,
     FooterModule

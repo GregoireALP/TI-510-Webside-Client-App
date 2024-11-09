@@ -50,7 +50,7 @@ import FooterModule from './FooterModule.vue'
 
 export default {
   name: 'ClientModule',
-  props: ['action', 'id'],
+  props: ['client_id'],
   components: {
     NavbarModule,
     FooterModule
@@ -63,14 +63,14 @@ export default {
 
   methods: {
     async getClients () {
-      if (this.id === 'all') {
+      if (this.client_id === 'all') {
         await fetch('http://localhost:4000/api/clients/get/all')
           .then(res => res.json())
           .then(function (data) {
             this.clients = data
           }.bind(this))
       } else {
-        await fetch('http://localhost:4000/api/clients/get/' + this.id)
+        await fetch('http://localhost:4000/api/clients/get/' + this.client_id)
           .then(res => res.json())
           .then(function (data) {
             this.clients = data
@@ -79,7 +79,7 @@ export default {
     },
 
     async redirectToAccount (id) {
-      await fetch('http://localhost:4000/api/accounts/get/client/' + id)
+      await fetch('http://localhost:4000/api/accounts/get/client/' + client_id)
         .then(res => res.json())
         .then(function (data) {
           window.location.replace('http://localhost:8080/#/account/list/' + data[0].account_client_id)
@@ -88,7 +88,7 @@ export default {
   },
 
   watch: {
-    id: function (pre, post) {
+    client_id: function (pre, post) {
       this.getClients()
     }
   },

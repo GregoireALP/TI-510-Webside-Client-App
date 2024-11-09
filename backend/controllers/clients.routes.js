@@ -3,8 +3,8 @@ const ROUTER = EXPRESS.Router();
 const CLIENT = require('../utils/clients.repository');
 
 ROUTER.get('/list', listClientRoute);
-ROUTER.get('/get/:id', getClientRoute);
-ROUTER.get('/balance/:id', getTotalBalanceFromClient);
+ROUTER.get('/get/:client_id', getClientRoute);
+ROUTER.get('/balance/:client_id', getTotalBalanceFromClient);
 
 async function listClientRoute(req, res) {
     let accounts = await CLIENT.getAllClientsController();
@@ -12,7 +12,7 @@ async function listClientRoute(req, res) {
 }
 
 async function getClientRoute(req, res) {
-    let id = req.params.id;
+    let id = req.params.client_id;
 
     if(id === "all") {
         let accounts = await CLIENT.getAllClientsController();
@@ -25,7 +25,7 @@ async function getClientRoute(req, res) {
 }
 
 async function getTotalBalanceFromClient(req, res) {
-    let id = req.params.id;
+    let id = req.params.client_id;
     let balance = await CLIENT.getTotalBalanceFromClientController(id);
     res.status(200).json(balance);
 }

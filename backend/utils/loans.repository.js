@@ -27,5 +27,27 @@ module.exports = {
             console.log(error);
             return "Something went wrong";
         }
+    },
+
+    async getLoanController(loan_id) {
+        try {
+            let sql = "SELECT * FROM loan WHERE loan_id = ?";
+            const [rows, fields] = await pool.query(sql, [loan_id]);
+            return rows;
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
+    },
+
+    async getLoanByClientController(client_id) {
+        try {
+            let sql = "SELECT * FROM loan WHERE loan_client_id = ?";
+            const [rows, fields] = await pool.query(sql, [client_id]);
+            return rows;
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
     }
 }
