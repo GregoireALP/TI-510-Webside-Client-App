@@ -31,7 +31,7 @@
           <span class="option-list-item"><i class="bi bi-bank"></i> <a :href='"/#/account/" + c.client_id'>Manage my accounts</a></span>
         </div>
         <div class="options-list pt-2">
-          <span class="option-list-item"><i class="bi bi-paperclip"></i> Consult my loans</span>
+          <span class="option-list-item"><i class="bi bi-paperclip"></i> <a :href="'/#/manage-loan/' + c.client_id">Consult my loans</a></span>
         </div>
         <div class="options-list pt-2">
           <span class="option-list-item"><i class="bi bi-person-fill-gear"></i><a :href='"/#/advisor/" + c.client_id'> Contact my advisor</a></span>

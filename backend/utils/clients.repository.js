@@ -57,6 +57,19 @@ module.exports = {
             console.log(error);
             return "Something went wrong";
         }
-    }
+    },
+
+    async getClientByAdvisorController(id) {
+
+        try {
+
+            let sql = "SELECT * FROM client WHERE client_advisor_id = ?";
+            const [rows, fields] = await pool.query(sql, [id]);
+            return rows;
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
+    },
 
 }
