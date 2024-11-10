@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="contact">
-            <a :href="'mailto:' + this.advisor.advisor_email" class="btn btn-primary">Contact</a>
+            <a :href="'/#/loan/apply/'" class="btn btn-primary">Contact</a>
           </div>
         </div>
       </div>

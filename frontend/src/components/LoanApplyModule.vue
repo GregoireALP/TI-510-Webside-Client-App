@@ -4,7 +4,7 @@
     <NavbarModule />
 
     <main>
-      <h1>Loan Module</h1>
+      <h1>Apply for a loan</h1>
       <section class="form-container">
     <form class="form-section">
         <div class="form-row">

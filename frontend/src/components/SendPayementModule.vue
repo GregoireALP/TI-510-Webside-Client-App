@@ -27,7 +27,7 @@
                   </div>
                 </div>
                 <div class="d-flex flex-row align-items-center">
-                  <input type="number" class="h4 mx-1 mb-0" style="text-align: right;" placeholder="Amount..."/>
+                  <input type="number" class="h4 mx-1 mb-0" style="text-align: right; color: black;" placeholder="Amount..."/>
                   <i class="bi bi-currency-euro"></i>
                 </div>
               </div>
@@ -66,7 +66,7 @@ import NavbarModule from './NavbarModule.vue'
 
 export default {
   name: 'SendPayementModule',
-  props: ['id'],
+  props: ['client_id'],
   components: {
     NavbarModule,
     FooterModule
@@ -86,7 +86,7 @@ export default {
         }.bind(this))
     },
     async getAccountsInfos () {
-      await fetch('http://localhost:4000/api/accounts/get/client/' + this.id)
+      await fetch('http://localhost:4000/api/accounts/get/client/' + this.client_id)
         .then(res => res.json())
         .then(function (data) {
           this.accounts = data
@@ -94,7 +94,7 @@ export default {
     }
   },
   watch: {
-    id: function (pre, post) {
+    client_id: function (pre, post) {
       this.getAccountsInfos()
       this.getOptions()
     }
