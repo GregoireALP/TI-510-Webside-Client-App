@@ -1,4 +1,4 @@
-const pool = require(__dirname + "\\db.include.js");
+const pool = require(__dirname + "//db.include.js");
 
 
 module.exports = {
