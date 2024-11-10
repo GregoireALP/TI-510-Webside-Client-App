@@ -11,7 +11,7 @@
                     <p> Please enter your login and password</p>
                     <input type="text" name="" placeholder="Username">
                     <input type="password" name="" placeholder="Password">
-                    <input type="submit" name="" value="Login" href="#">
+                    <input type="submit" name="" value="Login" href="/#/client/all">
                 </form>
             </div>
         </main>

@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h1 class="title">Payament history</h1>
     <section>
       <table id="payement-table">
         <thead>
@@ -47,6 +46,10 @@ export default {
     account_id: {
       type: String,
       required: true
+    },
+    action: {
+      type: String,
+      required: true
     }
   },
   data () {
@@ -55,20 +58,35 @@ export default {
     }
   },
   methods: {
-    async getPayements () {
+    async getPayementsSended () {
       await fetch('http://localhost:4000/api/payements/get/sender/' + this.account_id)
+        .then(res => res.json())
+        .then(function (data) {
+          this.payements = data
+        }.bind(this))
+    },
+    async getPayementsRecieved () {
+      await fetch('http://localhost:4000/api/payements/get/receiver/' + this.account_id)
         .then(res => res.json())
         .then(function (data) {
           this.payements = data
         }.bind(this))
     }
   },
-  mounted () {
-    this.getPayements()
+  created () {
+    if (this.action === 'sended') {
+      this.getPayementsSended()
+    } else if (this.action === 'received') {
+      this.getPayementsRecieved()
+    }
   },
   watch: {
     account_id: function (pre, post) {
-      this.getPayements()
+      if (this.action === 'sended') {
+        this.getPayementsSended()
+      } else if (this.action === 'received') {
+        this.getPayementsRecieved()
+      }
     }
   }
 }

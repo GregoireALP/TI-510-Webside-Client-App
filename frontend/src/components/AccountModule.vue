@@ -15,7 +15,13 @@
 
         <div class="bank-account-body">
 
-          <PayementModule :account_id="account.account_id.toString()" />
+          <h1 class="title">Sended Payements History</h1>
+          <PayementModule :account_id="account.account_id.toString()" :action="'sended'" />
+
+          <br>
+
+          <h1 class="title">Received Payements History</h1>
+          <PayementModule :account_id="account.account_id.toString()" :action="'received'"/>
 
         </div>
 

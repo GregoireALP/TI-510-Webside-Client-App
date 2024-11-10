@@ -28,13 +28,13 @@
         </div>
 
         <div class="options-list mt-4">
-          <span class="option-list-item"><i class="bi bi-bank"></i> <a @click="redirectToAccount(c.client_id)">Manage my accounts</a></span>
+          <span class="option-list-item"><i class="bi bi-bank"></i> <a :href='"/#/account/" + c.client_id'>Manage my accounts</a></span>
         </div>
         <div class="options-list pt-2">
           <span class="option-list-item"><i class="bi bi-paperclip"></i> Consult my loans</span>
         </div>
         <div class="options-list pt-2">
-          <span class="option-list-item"><i class="bi bi-person-fill-gear"></i> Contact my advisor</span>
+          <span class="option-list-item"><i class="bi bi-person-fill-gear"></i><a :href='"/#/advisor/" + c.client_id'> Contact my advisor</a></span>
         </div>
 
       </div>
@@ -73,17 +73,9 @@ export default {
         await fetch('http://localhost:4000/api/clients/get/' + this.client_id)
           .then(res => res.json())
           .then(function (data) {
-            this.clients = data
+            this.clients = [data]
           }.bind(this))
       }
-    },
-
-    async redirectToAccount (id) {
-      await fetch('http://localhost:4000/api/accounts/get/client/' + client_id)
-        .then(res => res.json())
-        .then(function (data) {
-          window.location.replace('http://localhost:8080/#/account/list/' + data[0].account_client_id)
-        })
     }
   },
 

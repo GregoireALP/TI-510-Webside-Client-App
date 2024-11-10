@@ -24,7 +24,7 @@
               <div class="row justify-content-lg-end justify-content-xxl-around">
                 <div class="col-12 col-lg-11 col-xxl-10">
                   <div class="card mb-4">
-                    <div class="card-body p-0">
+                    <div class="p-0">
                       <h4 class="card-title mb-3">Our Services</h4>
                       <ul class="list-unstyled m-0 p-0 d-sm-flex flex-sm-wrap">
                         <li class="py-1 d-flex align-items-center gap-2 col-sm-6">

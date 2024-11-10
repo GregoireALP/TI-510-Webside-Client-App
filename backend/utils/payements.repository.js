@@ -29,15 +29,28 @@ module.exports = {
     },
 
     async getPayementsBySenderId(sender_id) {
-            
-            try {
-    
-                let sql = "SELECT * FROM payement WHERE payement_account_sender_id = ?";
-                const [rows, fields] = await pool.query(sql, [sender_id]);
-                return rows;
-            } catch (error) {
-                console.log(error);
-                return "Something went wrong";
-            }
+
+        try {
+
+            let sql = "SELECT * FROM payement WHERE payement_account_sender_id = ?";
+            const [rows, fields] = await pool.query(sql, [sender_id]);
+            return rows;
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
         }
+    },
+
+    async getPayementsByReceiverId(receiver_id) {
+
+        try {
+
+            let sql = "SELECT * FROM payement WHERE payement_account_reciever_id = ?";
+            const [rows, fields] = await pool.query(sql, [receiver_id]);
+            return rows;
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
+    },
 }

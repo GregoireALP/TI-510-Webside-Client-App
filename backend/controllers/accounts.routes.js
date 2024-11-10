@@ -4,7 +4,7 @@ const ACCOUNTS = require('../utils/accounts.repository');
 
 ROUTER.get('/list', listAccountRoute);
 ROUTER.get('/get/:account_id', getAccountRoute);
-ROUTER.get('/get/client/:client_idid', getAccountsByClientIdRoute);
+ROUTER.get('/get/client/:client_id', getAccountsByClientIdRoute);
 
 async function listAccountRoute(req, res) {
     let accounts = await ACCOUNTS.getAllAccountsController();
