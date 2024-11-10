@@ -4,6 +4,7 @@ const CLIENT = require('../utils/clients.repository');
 
 ROUTER.get('/list', listClientRoute);
 ROUTER.get('/get/:client_id', getClientRoute);
+ROUTER.get('/get/advisor/:advisor_id', getClientByAdvisorRoute);
 ROUTER.get('/balance/:client_id', getTotalBalanceFromClient);
 
 async function listClientRoute(req, res) {
@@ -28,6 +29,12 @@ async function getTotalBalanceFromClient(req, res) {
     let id = req.params.client_id;
     let balance = await CLIENT.getTotalBalanceFromClientController(id);
     res.status(200).json(balance);
+}
+
+async function getClientByAdvisorRoute(req, res) {
+    let id = req.params.advisor_id;
+    let account = await CLIENT.getClientByAdvisorController(id);
+    res.status(200).json(account);
 }
 
 module.exports = ROUTER;

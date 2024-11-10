@@ -10,7 +10,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li><a class="dropdown-item" href="/#/account/all">Manage my account</a></li>
                     <li><a class="dropdown-item" href="/#/send-payement/2">Transfer money</a></li>
-                    <li><a class="dropdown-item" href="/advisor/all">Contact my advisor</a></li>
+                    <li><a class="dropdown-item" href="/#/advisor/2">Contact my advisor</a></li>
                     <li><a class="dropdown-item" href="/#/">Logout</a></li>
                 </ul>
             </div>

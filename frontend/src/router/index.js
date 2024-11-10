@@ -9,6 +9,7 @@ import AboutUsModule from '../components/AboutUs.vue'
 import AdvisorModule from '../components/AdvisorModule.vue'
 import LoanApply from '../components/LoanApplyModule.vue'
 import LoanManageModule from '../components/LoanManageModule.vue'
+import AdvisorDashboard from '../components/AdvisorDashboard.vue'
 
 Vue.use(Router)
 
@@ -45,16 +46,16 @@ export default new Router({
       props: true
     },
     {
+      path: '/manage-loan/:client_id',
+      name: 'LoanManage',
+      component: LoanManageModule,
+      props: true
+    },
+    {
       path: '/loan/apply',
       name: 'LoanApply',
       component: LoanApply,
       props: false
-    },
-    {
-      path: '/loan/manage/:client_id',
-      name: 'LoanManage',
-      components: LoanManageModule,
-      props: true
     },
     {
       path: '/send-payement/:client_id',
@@ -67,6 +68,12 @@ export default new Router({
       name: 'AboutUs',
       component: AboutUsModule,
       props: false
+    },
+    {
+      path: '/advisor-dashboard/:advisor_id',
+      name: 'AdvisorDashboard',
+      component: AdvisorDashboard,
+      props: true
     }
   ]
 })
