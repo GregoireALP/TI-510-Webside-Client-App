@@ -103,7 +103,6 @@ export default {
   border-radius: 10px !important;
 }
 
-
 .card {
   background-color: #191b1f;
   border: solid 1px gold;
