@@ -15,19 +15,17 @@
           </div>
         </div>
 
-        <div class="middle-container d-flex justify-content-evenly align-items-center mt-3 p-2">
-          <div class="dollar-div px-3">
+        <br>
+        <ul class="info-list">
+          <li class="info-list-item"><i class="bi bi-house"></i> <b>Address</b>: {{ c.client_address  }}</li>
+          <li class="info-list-item"><i class="bi bi-telephone"></i> <b>Phone</b>: {{ c.client_phone  }}</li>
+          <li class="info-list-item"><i class="bi bi-calendar-date"></i> <b>Birthday</b>: {{ c.client_birthday  }}</li>
+          <li class="info-list-item"><i class="bi bi-gender-ambiguous"></i> <b>Gender</b>: {{ c.client_gender }}</li>
+        </ul>
 
-            <div class="round-div"><i class="bi bi-currency-dollar"></i></div>
+        <hr class="golden-divider mx-auto">
 
-          </div>
-          <div class="d-flex flex-column text-right mr-2">
-            <span class="current-balance">{{ c.client_id }}</span>
-          </div>
-
-        </div>
-
-        <div class="options-list mt-4">
+        <div class="options-list">
           <a :href='"/#/account/" + c.client_id' style="text-decoration: none;"><span class="option-list-item"><i class="bi bi-bank"></i> Manage my accounts</span></a>
         </div>
         <div class="options-list pt-2">
@@ -85,6 +83,27 @@ export default {
 
 <style scoped>
 
+.info-list {
+  margin: 0%;
+  padding: 0%;
+  background-color: #191b1f !important;
+  list-style: none !important;
+}
+
+.info-list-item {
+  color: whitesmoke !important;
+}
+
+.golden-divider {
+  border: none !important;
+  height: 4px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  background: linear-gradient(90deg, rgba(210, 179, 36, 1) 0%, rgba(255, 237, 26, 1) 50%, rgba(214, 185, 13, 1) 100%) !important;
+  border-radius: 10px !important;
+}
+
+
 .card {
   background-color: #191b1f;
   border: solid 1px gold;
@@ -121,7 +140,6 @@ export default {
 }
 
 .middle-container {
-  background-color: #eee;
   border-radius: 12px;
   width: 75%;
 }

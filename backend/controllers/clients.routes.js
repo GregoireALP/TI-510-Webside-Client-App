@@ -4,6 +4,7 @@ const CLIENT = require('../utils/clients.repository');
 
 ROUTER.get('/get/:client_id', getClientRoute);
 ROUTER.get('/get/advisor/:advisor_id', getClientByAdvisorRoute);
+
 async function getClientRoute(req, res) {
     let client_id = req.params.client_id;
 
