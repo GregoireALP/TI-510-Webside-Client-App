@@ -66,7 +66,7 @@ export default {
       await fetch('http://localhost:4000/api/clients/get/' + this.client_id)
         .then(res => res.json())
         .then(function (data) {
-          this.clients = [data]
+          this.clients = data
         }.bind(this))
     }
   },

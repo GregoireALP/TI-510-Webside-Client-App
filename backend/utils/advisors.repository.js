@@ -33,7 +33,7 @@ module.exports = {
         try {
             let sql = "SELECT * FROM advisor WHERE advisor_id = (SELECT client_advisor_id FROM client WHERE client_id = ?)";
             const [rows, fields] = await pool.query(sql, [client_id]);
-            return rows[0];
+            return rows;
         } catch (error) {
             console.log(error);
             return "Something went wrong";
