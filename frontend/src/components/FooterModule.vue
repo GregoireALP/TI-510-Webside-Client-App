@@ -37,4 +37,15 @@ export default {
     color: rgb(185, 185, 185);
 }
 
+.footer a {
+    text-decoration: none;
+    color: rgb(185, 185, 185);
+   font-family: "Space Grotesk", sans-serif !important;
+}
+
+.footer a:hover {
+    color: whitesmoke;
+    text-decoration: underline;
+}
+
 </style>

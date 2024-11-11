@@ -19,6 +19,7 @@
         <a href="/"><img src="../assets/logo.png" alt="Bab Bank Logo" id="brand-logo" /></a>
 
         <div id="navbar-items-right">
+            <a href="/#/client/all" class="navbar-item">My Profile</a>
             <a href="/#/login"><button type="button" class="btn btn-warning">Join Us</button></a>
         </div>
     </nav>

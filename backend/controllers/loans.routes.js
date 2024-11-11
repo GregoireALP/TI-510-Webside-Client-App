@@ -5,6 +5,7 @@ const LOAN = require('../utils/loans.repository');
 ROUTER.get('/list', listLoanRoute);
 ROUTER.get('/get/:loan_id', getLoanRoute);
 ROUTER.get('/get/client/:client_id', getLoanByClientRoute);
+ROUTER.get('/get/advisor/:advisor_id', getLoanByAdvisorRoute);
 
 async function listLoanRoute(req, res) {
     let loans = await LOAN.getAllLoansController();
@@ -20,6 +21,12 @@ async function getLoanRoute(req, res) {
 async function getLoanByClientRoute(req, res) {
     let client_id = req.params.client_id;
     let loan = await LOAN.getLoanByClientController(client_id);
+    res.status(200).json(loan);
+}
+
+async function getLoanByAdvisorRoute(req, res) {
+    let advisor_id = req.params.advisor_id;
+    let loan = await LOAN.getLoanByAdvisorController(advisor_id);
     res.status(200).json(loan);
 }
 

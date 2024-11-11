@@ -28,13 +28,13 @@
         </div>
 
         <div class="options-list mt-4">
-          <span class="option-list-item"><i class="bi bi-bank"></i> <a :href='"/#/account/" + c.client_id'>Manage my accounts</a></span>
+          <a :href='"/#/account/" + c.client_id' style="text-decoration: none;"><span class="option-list-item"><i class="bi bi-bank"></i> Manage my accounts</span></a>
         </div>
         <div class="options-list pt-2">
-          <span class="option-list-item"><i class="bi bi-paperclip"></i> <a :href="'/#/manage-loan/' + c.client_id">Consult my loans</a></span>
+          <a :href="'/#/manage-loan/' + c.client_id" style="text-decoration: none;"><span class="option-list-item"><i class="bi bi-paperclip"></i> Consult my loans</span></a>
         </div>
         <div class="options-list pt-2">
-          <span class="option-list-item"><i class="bi bi-person-fill-gear"></i><a :href='"/#/advisor/" + c.client_id'> Contact my advisor</a></span>
+          <a :href='"/#/advisor/" + c.client_id' style="text-decoration: none;"><span class="option-list-item"><i class="bi bi-person-fill-gear"></i> Contact my advisor</span></a>
         </div>
 
       </div>
@@ -178,6 +178,7 @@ export default {
 .option-list-item {
   font-size: 16px;
   font-weight: 700;
+  color: #dee2e6 !important;
 }
 
 .option-list-item:hover {

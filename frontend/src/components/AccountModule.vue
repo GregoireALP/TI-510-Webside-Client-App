@@ -7,10 +7,12 @@
       <div class="bank-account-container" v-for="account in this.accounts" v-bind:key="account.account_id">
 
         <div class="bank-account-header">
-          <h2 class="account-title">Account: <b>{{ account.account_label }}</b> <span class="badge text-bg-success">{{
-            account.account_balance }}<i class="bi bi-currency-euro"></i></span></h2>
+          <h2 class="account-title">Account:
+            <b>{{ account.account_label }}</b>
+            <span v-if="account.account_balance > 0" class="badge text-bg-success">{{ account.account_balance }}<i class="bi bi-currency-euro"></i></span>
+            <span v-else class="badge text-bg-danger">{{ account.account_balance }}<i class="bi bi-currency-euro"></i></span>
+          </h2>
           <p class="iban">{{ account.account_iban }}</p>
-
         </div>
 
         <div class="bank-account-body">
@@ -98,6 +100,7 @@ export default {
   width: 75%;
   margin: auto;
   border-radius: 50px;
+  margin-bottom: 100px;
 
 }
 
@@ -135,7 +138,7 @@ export default {
 }
 
 .bank-account-body {
-  padding: 20px;
+  padding: 25px;
   text-align: center;
   border: solid 1px gold;
 }

@@ -81,11 +81,11 @@ VALUES
  
   
   -- LOAN --
-INSERT INTO loan (`loan_id`, `loan_amount`, `loan_label`, `loan_interest`, `loan_start_date`, `loan_to_refund`, `loan_end_date`, `loan_client_id`)
+INSERT INTO loan (`loan_id`, `loan_status`,`loan_amount`, `loan_label`, `loan_interest`, `loan_start_date`, `loan_to_refund`, `loan_end_date`, `loan_client_id`)
 VALUES 
-  (1, 10000, "School loan", 0.15, "2025-07-29", 7600, "2025-09-29", 1),
-  (2, 25000, "Consumption loan", 0.2, "2025-07-29", 1000, "2025-02-26", 6),
-  (3, 3000, "Flat loan", 0.35, "2025-07-29", 500, "2025-03-29", 6),
-  (4, 6500, "House loan", 0.45, "2025-07-29", 3200, "2025-09-29", 9),
-  (5, 3000, "Rental loan", 0.24, "2025-07-29", 250, "2025-03-29", 3);
+  (1, 0, 10000, "School loan", 0.15, "2025-07-29", 7600, "2025-09-29", 1),
+  (2, 1, 25000, "Consumption loan", 0.2, "2025-07-29", 1000, "2025-02-26", 6),
+  (3, 2, 3000, "Flat loan", 0.35, "2025-07-29", 0, "2025-03-29", 6),
+  (4, 2, 6500, "House loan", 0.45, "2025-07-29", 0, "2025-09-29", 9),
+  (5, 3, 3000, "Rental loan", 0.24, "2025-07-29", 0, "2025-03-29", 3);
 

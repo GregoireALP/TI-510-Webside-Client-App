@@ -11,6 +11,10 @@
                     <p> Please enter your login and password</p>
                     <input type="text" name="" placeholder="Username">
                     <input type="password" name="" placeholder="Password">
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <input type="checkbox" name="advisor">
+                        <label for="advisor" style="font-size: 12px; margin-bottom: 2px; margin-left: 5px;">Login as an advisor</label>
+                    </div>
                     <input type="submit" name="" value="Login" href="/#/client/all">
                 </form>
             </div>
