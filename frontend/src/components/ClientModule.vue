@@ -63,19 +63,11 @@ export default {
 
   methods: {
     async getClients () {
-      if (this.client_id === 'all') {
-        await fetch('http://localhost:4000/api/clients/get/all')
-          .then(res => res.json())
-          .then(function (data) {
-            this.clients = data
-          }.bind(this))
-      } else {
-        await fetch('http://localhost:4000/api/clients/get/' + this.client_id)
-          .then(res => res.json())
-          .then(function (data) {
-            this.clients = [data]
-          }.bind(this))
-      }
+      await fetch('http://localhost:4000/api/clients/get/' + this.client_id)
+        .then(res => res.json())
+        .then(function (data) {
+          this.clients = [data]
+        }.bind(this))
     }
   },
 

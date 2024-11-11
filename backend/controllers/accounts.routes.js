@@ -2,19 +2,20 @@ const EXPRESS = require('express');
 const ROUTER = EXPRESS.Router();
 const ACCOUNTS = require('../utils/accounts.repository');
 
-ROUTER.get('/list', listAccountRoute);
 ROUTER.get('/get/:account_id', getAccountRoute);
 ROUTER.get('/get/client/:client_id', getAccountsByClientIdRoute);
 
-async function listAccountRoute(req, res) {
-    let accounts = await ACCOUNTS.getAllAccountsController();
-    res.status(200).json(accounts);
-}
 
 async function getAccountRoute(req, res) {
-    let id = req.params.account_id;
-    let account = await ACCOUNTS.getAccountController(id);
-    res.status(200).json(account);
+    let account_id = req.params.account_id;
+
+    if(account_id === "all") {
+        let accounts = await ACCOUNTS.getAllAccountsController();
+        res.status(200).json(accounts);
+    } else {
+        let account = await ACCOUNTS.getAccountController(account_id);
+        res.status(200).json(account);
+    }
 }
 
 async function getAccountsByClientIdRoute(req, res) {

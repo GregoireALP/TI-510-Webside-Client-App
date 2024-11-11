@@ -35,7 +35,7 @@ module.exports = {
 
             let sql = "SELECT * FROM account WHERE account_id = ?";
             const [rows, fields] = await pool.query(sql, [id]);
-            return rows[0];
+            return rows;
         } catch (error) {
             console.log(error);
             return "Something went wrong";

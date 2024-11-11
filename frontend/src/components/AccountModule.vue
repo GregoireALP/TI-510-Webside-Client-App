@@ -68,16 +68,16 @@ export default {
 
     async getAccounts () {
       if (this.client_id === 'all') {
-        await fetch('http://localhost:4000/api/accounts/list')
+        await fetch('http://localhost:4000/api/accounts/get/all')
           .then(res => res.json())
           .then(function (data) {
             this.accounts = data
           }.bind(this))
       } else {
-        await fetch('http://localhost:4000/api/accounts/get/' + this.client_id)
+        await fetch('http://localhost:4000/api/accounts/get/client' + this.client_id)
           .then(res => res.json())
           .then(function (data) {
-            this.accounts = [data]
+            this.accounts = data
           }.bind(this))
       }
     }

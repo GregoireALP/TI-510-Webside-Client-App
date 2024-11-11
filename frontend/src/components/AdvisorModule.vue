@@ -62,7 +62,7 @@ export default {
           await fetch('http://localhost:4000/api/advisors/get/client/' + this.client_id)
             .then(res => res.json())
             .then(function (data) {
-              this.advisor = [data] // cast []
+              this.advisor = data
             }.bind(this))
         }
       } catch (error) {

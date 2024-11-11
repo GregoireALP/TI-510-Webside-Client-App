@@ -15,7 +15,7 @@ module.exports = {
         }
     },
 
-    async getAllPayementsController() {
+    async getAllPayements() {
 
         try {
 
@@ -27,6 +27,20 @@ module.exports = {
             return "Something went wrong";
         }
     },
+
+    async getPayement(payement_id) {
+
+        try {
+
+            let sql = "SELECT * FROM payement WHERE payement_id = ?";
+            const [rows, fields] = await pool.query(sql, [payement_id]);
+            return rows;
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
+    },
+
 
     async getPayementsBySenderId(sender_id) {
 
