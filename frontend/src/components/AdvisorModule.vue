@@ -53,7 +53,7 @@ export default {
     async getAdvisor () {
       try {
         if (this.client_id === 'all') {
-          await fetch('http://localhost:4000/api/advisors/list')
+          await fetch('http://localhost:4000/api/advisors/get/all')
             .then(res => res.json())
             .then(function (data) {
               this.advisor = data
