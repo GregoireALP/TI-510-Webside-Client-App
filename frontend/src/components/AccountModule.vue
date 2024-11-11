@@ -7,8 +7,8 @@
       <div class="bank-account-container" v-for="account in this.accounts" v-bind:key="account.account_id">
 
         <div class="bank-account-header">
-          <h2 class="account-title">Account: 
-            <b>{{ account.account_label }}</b> 
+          <h2 class="account-title">Account:
+            <b>{{ account.account_label }}</b>
             <span v-if="account.account_balance > 0" class="badge text-bg-success">{{ account.account_balance }}<i class="bi bi-currency-euro"></i></span>
             <span v-else class="badge text-bg-danger">{{ account.account_balance }}<i class="bi bi-currency-euro"></i></span>
           </h2>
