@@ -76,24 +76,15 @@ export default {
         .then(function (data) {
           this.clients = data
         }.bind(this))
-    },
-    async getLoans () {
-      await fetch('http://localhost:4000/api/loans/get/advisor/' + this.advisor_id)
-        .then(res => res.json())
-        .then(function (data) {
-          this.loans = data
-        }.bind(this))
     }
   },
   watch: {
     advisor_id: function (pre, post) {
       this.getClients()
-      this.getLoans()
     }
   },
   created () {
     this.getClients()
-    this.getLoans()
   }
 }
 </script>
