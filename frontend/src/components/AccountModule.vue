@@ -74,7 +74,7 @@ export default {
             this.accounts = data
           }.bind(this))
       } else {
-        await fetch('http://localhost:4000/api/accounts/get/client' + this.client_id)
+        await fetch('http://localhost:4000/api/accounts/get/client/' + this.client_id)
           .then(res => res.json())
           .then(function (data) {
             this.accounts = data
@@ -103,7 +103,6 @@ export default {
   margin-bottom: 100px;
 
 }
-
 .bank-account-footer {
   display: flex;
   flex-direction: row;
