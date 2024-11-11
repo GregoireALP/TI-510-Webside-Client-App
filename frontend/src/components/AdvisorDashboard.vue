@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <h1 class="title">Your clients</h1>
-                <table id="client-table">
+                <table>
                     <thead>
                     <tr class="text-uppercase text-warning">
                         <th scope="col">#</th>
@@ -28,9 +28,23 @@
                         <td>{{ c.client_lastname }}</td>
                         <td>{{ c.client_email }}</td>
                         <td>{{ c.client_phone }}</td>
-                        <td><a class="btn btn-success" :href="'/#/account/' + c.client_id">Connect</a><button type="button" class="btn btn-warning">Loans</button></td>
+                        <td><a class="btn btn-success" :href="'/#/account/' + c.client_id">Connect</a></td>
                     </tr>
                     </tbody>
+                </table>
+
+                <h1>Loan requests</h1>
+                <table>
+                  <thead>
+                    <th>#</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                    <th>Loan ID</th>
+                    <th>Loan Amount</th>
+                    <th>Loan Label</th>
+                    <th>Actions</th>
+                  </thead>
                 </table>
             </div>
         </main>
@@ -51,7 +65,8 @@ export default {
   },
   data () {
     return {
-      clients: []
+      clients: [],
+      loans: []
     }
   },
   methods: {
@@ -61,21 +76,30 @@ export default {
         .then(function (data) {
           this.clients = data
         }.bind(this))
+    },
+    async getLoans () {
+      await fetch('http://localhost:4000/api/loans/get/advisor/' + this.advisor_id)
+        .then(res => res.json())
+        .then(function (data) {
+          this.loans = data
+        }.bind(this))
     }
   },
   watch: {
     advisor_id: function (pre, post) {
       this.getClients()
+      this.getLoans()
     }
   },
   created () {
     this.getClients()
+    this.getLoans()
   }
 }
 </script>
 
 <style>
-#client-table {
+table {
   width: 75%;
   margin: auto;
 
@@ -95,11 +119,11 @@ thead > tr {
   background-color: #191B1F !important;
 }
 
-#client-table tr:nth-child(even) {
+table tr:nth-child(even) {
   background-color: #191B1F;
 }
 
-#client-table tr:nth-child(odd) {
+table tr:nth-child(odd) {
   background-color: #22252b;
 }
 

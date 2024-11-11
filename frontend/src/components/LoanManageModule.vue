@@ -28,8 +28,11 @@
                                 <td>{{ l.loan_interest }} %</td>
                                 <td>{{ l.loan_start_date }}</td>
                                 <td>{{ l.loan_end_date }}</td>
-                                <td>Pending...</td>
-                                <td><button type="button" class="btn btn-success">Refund</button></td>
+                                <td v-if="l.loan_status === 0" class="loan-status-pending">Pending...</td>
+                                <td v-if="l.loan_status === 1" class="loan-status-accepted">Accepted</td>
+                                <td v-if="l.loan_status === 2" class="loan-status-declined">Declined</td>
+                                <td v-if="l.loan_status === 3" class="loan-status-finished">Finished</td>
+                                <td v-if="l.loan_status === 1"><button type="button" class="btn btn-success">Refund</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -151,5 +154,33 @@ td {
     max-width: 100% !important;
     background: linear-gradient(90deg, rgba(210, 179, 36, 1) 0%, rgba(255, 237, 26, 1) 50%, rgba(214, 185, 13, 1) 100%) !important;
     border-radius: 10px !important;
+}
+
+.loan-status-pending {
+    color: gold;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.loan-status-accepted {
+    color: #65ff65;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.loan-status-declined {
+    color: #ff6868;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.loan-status-finished {
+    color: #337eff;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
 }
 </style>

@@ -135,6 +135,7 @@ export default {
 
 .card-title {
   text-align: center;
+  font-family: "Space Grotesk", sans-serif !important;
 }
 
 .card {

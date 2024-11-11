@@ -49,5 +49,16 @@ module.exports = {
             console.log(error);
             return "Something went wrong";
         }
-    }
+    },
+
+    async getLoanByAdvisorController(advisor_id) {
+        try {
+            let sql = "SELECT * FROM loan AS l JOIN client AS c ON l.loan_client_id = c.client_id WHERE c.client_advisor_id = ?";
+            const [rows, fields] = await pool.query(sql, [advisor_id]);
+            return rows;
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
+    },
 }

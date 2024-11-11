@@ -82,6 +82,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_project`.`loan` (
   `loan_id` INT NOT NULL,
+  `loan_status` INT,
   `loan_amount` INT NULL,
   `loan_label` VARCHAR(45) NULL,
   `loan_to_refund` INT NULL,

@@ -91,7 +91,7 @@ export default {
 
 h2 {
   text-align: center;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Space Grotesk", sans-serif !important;
   color: #cecece;
   margin: 10px 0 10px 0;
 }
