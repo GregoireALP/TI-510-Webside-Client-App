@@ -4,22 +4,22 @@
     <main>
       <h1 class="title">Contact Advisor</h1>
       <div class="class_grid">
-        <div class="card">
+        <div class="card" v-for="a in advisor" v-bind:key="a.advisor_id">
           <img src="../assets/profil_pics.png" class="card_img" alt="Advisor image">
           <div class="card-body" style="margin">
-            <h5 class="card-title">{{ this.advisor.advisor_firstname }} {{ this.advisor.advisor_lastname }}</h5>
+            <h5 class="card-title">{{ a.advisor_firstname }} {{ a.advisor_lastname }}</h5>
             <div class="card-text">
               <div class="mail">
                 <i class="bi bi-envelope-fill"></i>
-                <strong> : </strong> {{ this.advisor.advisor_email }}<br>
+                <strong> : </strong> {{ a.advisor_email }}<br>
               </div>
               <div class="phone">
                 <i class="bi bi-telephone-fill"></i>
-                <strong> : </strong> {{ this.advisor.advisor_phone }}<br>
+                <strong> : </strong> {{ a.advisor_phone }}<br>
               </div>
               <div class="bank">
                 <i class="bi bi-bank2"></i>
-                <strong> : </strong> {{ this.advisor.advisor_address }}<br>
+                <strong> : </strong> {{ a.advisor_address }}<br>
               </div>
             </div>
           </div>
@@ -46,17 +46,25 @@ export default {
   },
   data () {
     return {
-      advisor: null
+      advisor: []
     }
   },
   methods: {
     async getAdvisor () {
       try {
-        await fetch('http://localhost:4000/api/advisors/get/client/' + this.client_id)
-          .then(res => res.json())
-          .then(function (data) {
-            this.advisor = data
-          }.bind(this))
+        if (this.client_id === 'all') {
+          await fetch('http://localhost:4000/api/advisors/list')
+            .then(res => res.json())
+            .then(function (data) {
+              this.advisor = data
+            }.bind(this))
+        } else {
+          await fetch('http://localhost:4000/api/advisors/get/client/' + this.client_id)
+            .then(res => res.json())
+            .then(function (data) {
+              this.advisor = [data] // cast []
+            }.bind(this))
+        }
       } catch (error) {
         console.error(error)
       }
