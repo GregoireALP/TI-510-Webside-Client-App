@@ -44,7 +44,26 @@
                     <th>Loan Amount</th>
                     <th>Loan Label</th>
                     <th>Actions</th>
+                    <th>Status</th>
                   </thead>
+                  <tr v-for="l in loans" v-bind:key="l.client_id">
+                    <td>{{ l.client_id }}</td>
+                    <td>{{ l.client_firstname }}</td>
+                    <td>{{ l.client_lastname }}</td>
+                    <td>{{ l.client_email }}</td>
+                    <td>{{ l.loan_id }} </td>
+                    <td>{{ l.loan_amount }} </td>
+                    <td>{{ l.loan_label }}</td>
+                    <td>
+                      <a v-if="l.loan_status === 0" class="btn btn-success" :href="'/#/account/' + l.client_id">Accepted</a>
+                      <a v-if="l.loan_status === 0" class="btn btn-danger" :href="'/#/account/' + l.client_id">Declined</a>
+                      <a v-if="l.loan_status === 1" class="btn btn-primary" :href="'/#/account/' + l.client_id">Finished</a>
+                    </td>
+                    <td v-if="l.loan_status === 0" class="loan-status-pending">Pending...</td>
+                    <td v-if="l.loan_status === 1" class="loan-status-accepted">Accepted</td>
+                    <td v-if="l.loan_status === 2" class="loan-status-declined">Declined</td>
+                    <td v-if="l.loan_status === 3" class="loan-status-finished">Finished</td>
+                  </tr>
                 </table>
             </div>
         </main>
@@ -76,20 +95,29 @@ export default {
         .then(function (data) {
           this.clients = data
         }.bind(this))
+    },
+    async getLoans () {
+      await fetch('http://localhost:4000/api/loans/get/advisor/' + this.advisor_id)
+        .then(res => res.json())
+        .then(function (data) {
+          this.loans = data
+        }.bind(this))
     }
   },
   watch: {
     advisor_id: function (pre, post) {
       this.getClients()
+      this.getLoans()
     }
   },
   created () {
     this.getClients()
+    this.getLoans()
   }
 }
 </script>
 
-<style>
+<style scoped>
 table {
   width: 75%;
   margin: auto;
@@ -120,5 +148,33 @@ table tr:nth-child(odd) {
 
 td {
   padding: 10px 0 10px 0;
+}
+
+.loan-status-pending {
+    color: gold;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.loan-status-accepted {
+    color: #65ff65;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.loan-status-declined {
+    color: #ff6868;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.loan-status-finished {
+    color: #337eff;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
 }
 </style>

@@ -32,7 +32,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 nav {
     border-bottom: solid 1px gold;
 

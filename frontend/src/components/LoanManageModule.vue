@@ -112,7 +112,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #loan-table {
     width: 75%;
     margin: auto;

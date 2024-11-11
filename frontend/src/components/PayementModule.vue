@@ -92,7 +92,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #payement-table {
   width: 75%;
   margin: auto;
