@@ -31,7 +31,7 @@ module.exports = {
 
     async getAdvisorByClientController(client_id) {
         try {
-            let sql = "SELECT * FROM advisor WHERE advisor_id = ?";
+            let sql = "SELECT * FROM advisor WHERE advisor_id = (SELECT client_advisor_id FROM client WHERE client_id = ?)";
             const [rows, fields] = await pool.query(sql, [client_id]);
             return rows[0];
         } catch (error) {
