@@ -61,4 +61,48 @@ module.exports = {
             return "Something went wrong";
         }
     },
+
+    async initiateLoanController(amount, label, client_id) {
+        try {
+            let sql = "INSERT INTO loan (loan_amount, loan_label, loan_to_refund, loan_start_date, loan_end_date, loan_client_id, loan_status, loan_interest) VALUES (?, ?, ?, NOW(), DATE_ADD(NOW(), INTERVAL 1 MONTH), ?, ?, ?)"
+            const [rows, fields] = await pool.query(sql, [amount, label, amount, client_id, 0, 0.5]);
+            return rows;
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
+    },
+
+    async approveLoanController(loan_id) {
+        try {
+            let sql = "UPDATE loan SET loan_status = 1 WHERE loan_id = ?";
+            const [rows, fields] = await pool.query(sql, [loan_id]);
+            return rows;
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
+    },
+
+    async rejectLoanController(loan_id) {
+        try {
+            let sql = "UPDATE loan SET loan_status = 2 WHERE loan_id = ?";
+            const [rows, fields] = await pool.query(sql, [loan_id]);
+            return rows;
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
+    },
+
+    async finishLoanController(loan_id) {
+        try {
+            let sql = "UPDATE loan SET loan_status = 3 WHERE loan_id = ?";
+            const [rows, fields] = await pool.query(sql, [loan_id]);
+            return rows;
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
+    }
 }

@@ -5,8 +5,8 @@
         <thead>
           <tr class="text-uppercase text-warning">
             <th scope="col">#</th>
-            <th scope="col">Sender ID</th>
-            <th scope="col">Reciever ID</th>
+            <th scope="col">Sender Account ID</th>
+            <th scope="col">Reciever Account ID</th>
             <th scope="col">Amount</th>
             <th scope="col">Currency</th>
             <th scope="col">Date</th>
@@ -23,7 +23,7 @@
             <td>{{ p.payement_currency }}</td>
             <td>{{ p.payement_date }}</td>
             <td>{{ p.payement_label }}</td>
-            <td><button type="button" class="btn btn-link">Details</button></td>
+            <td><a :href="'/#/payement/details/' + p.payement_id" class="btn btn-link">Details</a></td>
           </tr>
         </tbody>
       </table>
