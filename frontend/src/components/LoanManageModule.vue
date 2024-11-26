@@ -32,7 +32,8 @@
                                 <td v-if="l.loan_status === 1" class="loan-status-accepted">Accepted</td>
                                 <td v-if="l.loan_status === 2" class="loan-status-declined">Declined</td>
                                 <td v-if="l.loan_status === 3" class="loan-status-finished">Finished</td>
-                                <td v-if="l.loan_status === 1"><button type="button" @click="refundLaoan(l.loan_id)" class="btn btn-success">Refund</button></td>
+                                <td v-if="l.loan_status === 1"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Refund</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -71,6 +72,34 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black;">Refund loan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <div class="mb-3">
+                        <label for="">Loan to refund</label><br>
+                        <select id="loanToRefund">
+                            <option default disabled>Chose a loan</option>
+                            <option v-for="l in loans" :key="l.loan_id" :value="l.loan_id">{{ l.loan_label }}</option>
+                        </select><br>
+                        <label for="recipient-name" class="col-form-label">Money to refund:</label>
+                        <input type="number" class="form-control" id="moneyToRefund">
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" @click="refundLoan">Refund</button>
+                </div>
+                </div>
+            </div>
+            </div>
         </main>
         <FooterModule />
     </div>
@@ -79,6 +108,7 @@
 <script>
 import FooterModule from './FooterModule.vue'
 import NavbarModule from './NavbarModule.vue'
+import db from '../db.utils'
 
 export default {
   name: 'LoanManageModule',
@@ -99,6 +129,23 @@ export default {
         .then(function (data) {
           this.loans = data
         }.bind(this))
+    },
+    refundLoan () {
+      let loanId = document.getElementById('loanToRefund').value
+      let amount = document.getElementById('moneyToRefund').value
+      let data = {
+        loan_id: loanId,
+        amount: amount
+      }
+      db.post('http://localhost:4000/api/loans/refund', data)
+        .then(function (data) {
+          if (data === 'Success') {
+            alert('Loan refunded successfully.')
+            location.reload()
+          } else {
+            alert('Error while refunding your loan. Please try again later.')
+          }
+        })
     }
   },
   created () {

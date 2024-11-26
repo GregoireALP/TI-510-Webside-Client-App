@@ -10,6 +10,7 @@ ROUTER.post('/initiate/', initiateLoanRoute);
 ROUTER.post('/approve/:loan_id', approveLoanRoute);
 ROUTER.post('/reject/:loan_id', rejectLoanRoute);
 ROUTER.post('/finish/:loan_id', finishLoanRoute);
+ROUTER.post('/refund/', refundLoanRoute);
 
 async function getLoanRoute(req, res) {
     let loan_id = req.params.loan_id;
@@ -63,6 +64,14 @@ async function finishLoanRoute(req, res) {
     let loan_id = req.params.loan_id;
 
     let result = await LOAN.finishLoanController(loan_id);
+    res.status(200).json(result);
+}
+
+async function refundLoanRoute(req, res) {
+    let loan_id = req.body.loan_id;
+    let amount = req.body.amount;
+
+    let result = await LOAN.refundLoanController(loan_id, amount);
     res.status(200).json(result);
 }
 

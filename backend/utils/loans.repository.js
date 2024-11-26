@@ -115,5 +115,33 @@ module.exports = {
             console.log(error);
             return "Something went wrong";
         }
+    },
+
+    async refundLoanController(loan_id, amount) {
+        try {
+            let sql = "UPDATE loan SET loan_to_refund = loan_to_refund - ? WHERE loan_id = ?";
+            const [rows, fields] = await pool.query(sql, [amount, loan_id]);
+
+            // Remove the amount from the client account
+            let sql2 = "SELECT account_id FROM account WHERE account_client_id = (SELECT loan_client_id FROM loan WHERE loan_id = ?)";
+            const [rows2, fields2] = await pool.query(sql2, [loan_id]);
+
+            let sql3 = "UPDATE account SET account_balance = account_balance - ? WHERE account_id = ?";
+            const [rows3, fields3] = await pool.query(sql3, [amount, rows2[0].account_id]);
+
+            // if the loan is fully refunded, close it
+            let sql4 = "SELECT loan_to_refund FROM loan WHERE loan_id = ?";
+            const [rows4, fields4] = await pool.query(sql4, [loan_id]);
+
+            if(rows4[0].loan_to_refund <= 0) {
+                let sql5 = "UPDATE loan SET loan_status = 3 WHERE loan_id = ?";
+                const [rows5, fields5] = await pool.query(sql5, [loan_id]);
+            }
+
+            return "Success";
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
     }
 }
