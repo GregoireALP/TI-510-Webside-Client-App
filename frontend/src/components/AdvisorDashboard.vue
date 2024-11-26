@@ -28,7 +28,10 @@
                         <td>{{ c.client_lastname }}</td>
                         <td>{{ c.client_email }}</td>
                         <td>{{ c.client_phone }}</td>
-                        <td><a class="btn btn-success" :href="'/#/account/' + c.client_id">Connect</a></td>
+                        <td>
+                          <a class="btn btn-success" :href="'/#/account/' + c.client_id">Connect</a>
+                          <a class="btn btn-danger" @click="closeAccount(c.client_id)">Close Account</a>
+                        </td>
                     </tr>
                     <tr>
                       <td colspan="6"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add a client</button></td>
@@ -177,6 +180,30 @@ export default {
             location.reload()
           }
         })
+    },
+    async closeAccount (clientId) {
+      if (confirm('Are you sure you want to close this client\'s account?')) {
+        fetch('http://localhost:4000/api/accounts/delete/' + clientId, {
+          method: 'DELETE'
+        })
+          .then(function (response) {
+            return response.json()
+          })
+          .then(function (data) {
+            if (data.message === 'All accounts for client deleted successfully') {
+              alert('All accounts for the client closed successfully.')
+              location.reload() // Recharge la page après la suppression des comptes
+            } else {
+              alert('Error while closing the account. Please try again later.')
+              location.reload() // Recharge la page en cas d’erreur
+            }
+          })
+          .catch(function (error) {
+            console.error('Error:', error)
+            alert('Something went wrong. Please try again later.')
+            location.reload() // Recharge la page en cas d’erreur
+          })
+      }
     },
     async processCreateClient () {
       let firstname = document.getElementById('recipient-firstname').value

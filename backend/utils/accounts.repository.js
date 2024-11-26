@@ -74,5 +74,19 @@ module.exports = {
             console.log(error);
             return "Something went wrong";
         }
+    },
+
+    async deleteAccount(account_id) {
+
+        try {
+            
+            let sql = "DELETE FROM account WHERE account_id = ?";
+            const [rows, fields] = await pool.query(sql, [account_id]);
+            return rows; // Renvoie l'objet avec `affectedRows`
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
     }
+    
 }
