@@ -200,8 +200,23 @@ export default {
 
       await db.post('http://localhost:4000/api/clients/create', data)
         .then(function (data) {
-          if (data === 'Success') {
+          if (data !== 'Something went wrong') {
             alert('Client created successfully.')
+
+            let new_client_id = data
+            let new_account_data = {
+              client_id: new_client_id,
+            }
+
+            db.post('http://localhost:4000/api/accounts/create', new_account_data)
+              .then(function (data) {
+                if (data === 'Success') {
+                  alert('Account created successfully.')
+                } else {
+                  alert('Error while creating the account. Please try again later.')
+                }
+              })
+
             location.reload()
           } else {
             alert('Error while creating the client. Please try again later.')

@@ -32,7 +32,7 @@
                                 <td v-if="l.loan_status === 1" class="loan-status-accepted">Accepted</td>
                                 <td v-if="l.loan_status === 2" class="loan-status-declined">Declined</td>
                                 <td v-if="l.loan_status === 3" class="loan-status-finished">Finished</td>
-                                <td v-if="l.loan_status === 1"><button type="button" class="btn btn-success">Refund</button></td>
+                                <td v-if="l.loan_status === 1"><button type="button" @click="refundLaoan(l.loan_id)" class="btn btn-success">Refund</button></td>
                             </tr>
                         </tbody>
                     </table>
