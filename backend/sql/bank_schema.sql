@@ -19,7 +19,7 @@ USE `bank_project` ;
 -- Table `bank_project`.`advisor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_project`.`advisor` (
-  `advisor_id` INT NOT NULL,
+  `advisor_id` INT NOT NULL AUTO_INCREMENT,
   `advisor_gender` INT NULL,
   `advisor_firstname` VARCHAR(45) NULL,
   `advisor_lastname` VARCHAR(45) NULL,
@@ -35,7 +35,7 @@ ENGINE = InnoDB;
 -- Table `bank_project`.`client`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_project`.`client` (
-  `client_id` INT NOT NULL,
+  `client_id` INT NOT NULL AUTO_INCREMENT,
   `client_gender` INT NULL,
   `client_firstname` VARCHAR(45) NULL,
   `client_lastname` VARCHAR(45) NULL,
@@ -59,7 +59,7 @@ ENGINE = InnoDB;
 -- Table `bank_project`.`account`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_project`.`account` (
-  `account_id` INT NOT NULL,
+  `account_id` INT NOT NULL AUTO_INCREMENT,
   `account_label` VARCHAR(45) NULL,
   `account_iban` VARCHAR(45) NULL,
   `account_balance` FLOAT NULL,
@@ -81,7 +81,7 @@ ENGINE = InnoDB;
 -- Table `bank_project`.`loan`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_project`.`loan` (
-  `loan_id` INT NOT NULL,
+  `loan_id` INT NOT NULL AUTO_INCREMENT,
   `loan_status` INT,
   `loan_amount` INT NULL,
   `loan_label` VARCHAR(45) NULL,
@@ -104,7 +104,7 @@ ENGINE = InnoDB;
 -- Table `bank_project`.`payement`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_project`.`payement` (
-  `payement_id` INT NOT NULL,
+  `payement_id` INT NOT NULL AUTO_INCREMENT,
   `payement_amount` FLOAT NULL,
   `payement_label` VARCHAR(45) NULL,
   `payement_currency` VARCHAR(45) NULL,

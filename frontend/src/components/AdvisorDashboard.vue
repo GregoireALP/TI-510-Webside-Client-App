@@ -30,6 +30,9 @@
                         <td>{{ c.client_phone }}</td>
                         <td><a class="btn btn-success" :href="'/#/account/' + c.client_id">Connect</a></td>
                     </tr>
+                    <tr>
+                      <td colspan="6"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add a client</button></td>
+                    </tr>
                     </tbody>
                 </table>
 
@@ -65,6 +68,53 @@
                     <td v-if="l.loan_status === 3" class="loan-status-finished">Finished</td>
                   </tr>
                 </table>
+            </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" style="color: black;" id="exampleModalLabel">Add a client</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="mb-3">
+                        <label for="recipient-firstname" class="col-form-label">Firstname:</label>
+                        <input type="text" class="form-control" id="recipient-firstname">
+                      </div>
+                      <div class="mb-3">
+                        <label for="recipient-lastname" class="col-form-label">Lastname:</label>
+                        <input type="text" class="form-control" id="recipient-lastname">
+                      </div>
+                      <div class="mb-3">
+                        <label for="recipient-email" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control" id="recipient-email">
+                      </div>
+                      <div class="mb-3">
+                        <label for="recipient-phone" class="col-form-label">Phone:</label>
+                        <input type="text" class="form-control" id="recipient-phone">
+                      </div>
+                      <div>
+                        <label for="recipient-address" class="col-form-label">Address: </label>
+                        <input type="text" class="form-control" id="recipient-address">
+                      </div>
+                      <div class="mb-3">
+                        <label for="recipient-birthday" class="col-form-label">Birthday</label>
+                        <input type="date" class="form-control" id="recipient-birthday">
+                      </div>
+                      <div class="mb-3">
+                        <label for="recipient-password" class="col-form-label">Generate Password</label>
+                        <input type="text" class="form-control" id="recipient-password">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" @click="processCreateClient()">Create client</button>
+                  </div>
+                </div>
+              </div>
             </div>
         </main>
         <FooterModule />
@@ -124,6 +174,37 @@ export default {
             location.reload()
           } else {
             alert('Error while processing your loan request. Please try again later.')
+            location.reload()
+          }
+        })
+    },
+    async processCreateClient () {
+      let firstname = document.getElementById('recipient-firstname').value
+      let lastname = document.getElementById('recipient-lastname').value
+      let email = document.getElementById('recipient-email').value
+      let phone = document.getElementById('recipient-phone').value
+      let birthday = document.getElementById('recipient-birthday').value
+      let password = document.getElementById('recipient-password').value
+      let address = document.getElementById('recipient-address').value
+
+      let data = {
+        advisor_id: this.advisor_id,
+        client_firstname: firstname,
+        client_lastname: lastname,
+        client_email: email,
+        client_phone: phone,
+        client_address: address,
+        client_birthday: birthday,
+        client_password: password
+      }
+
+      await db.post('http://localhost:4000/api/clients/create', data)
+        .then(function (data) {
+          if (data === 'Success') {
+            alert('Client created successfully.')
+            location.reload()
+          } else {
+            alert('Error while creating the client. Please try again later.')
             location.reload()
           }
         })
