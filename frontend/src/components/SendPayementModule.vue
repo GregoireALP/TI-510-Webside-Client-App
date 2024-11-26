@@ -155,7 +155,7 @@ export default {
               bootstrapSuccessToast.show()
               // wait for 1 second before redirecting
               setTimeout(() => {
-                this.$router.push('/account/all')
+                this.$router.push('/#/account/all')
               }, 2000)
               break
             case 'Not enough money':

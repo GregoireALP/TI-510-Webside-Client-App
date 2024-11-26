@@ -53,10 +53,10 @@ export default new Router({
       props: true
     },
     {
-      path: '/loan/apply',
+      path: '/loan/apply/:client_id',
       name: 'LoanApply',
       component: LoanApply,
-      props: false
+      props: true
     },
     {
       path: '/send-payement/:client_id',

@@ -62,11 +62,11 @@ module.exports = {
         }
     },
 
-    async initiateLoanController(amount, label, client_id) {
+    async initiateLoanController(amount, label, client_id , interest) {
         try {
             let sql = "INSERT INTO loan (loan_amount, loan_label, loan_to_refund, loan_start_date, loan_end_date, loan_client_id, loan_status, loan_interest) VALUES (?, ?, ?, NOW(), DATE_ADD(NOW(), INTERVAL 1 MONTH), ?, ?, ?)"
-            const [rows, fields] = await pool.query(sql, [amount, label, amount, client_id, 0, 0.5]);
-            return rows;
+            const [rows, fields] = await pool.query(sql, [amount, label, amount, client_id, 0, interest]);
+            return "Success";
         } catch (error) {
             console.log(error);
             return "Something went wrong";
@@ -77,7 +77,18 @@ module.exports = {
         try {
             let sql = "UPDATE loan SET loan_status = 1 WHERE loan_id = ?";
             const [rows, fields] = await pool.query(sql, [loan_id]);
-            return rows;
+
+            // Add the amount to the client account
+            let sql2 = "SELECT loan_amount FROM loan WHERE loan_id = ?";
+            const [rows2, fields2] = await pool.query(sql2, [loan_id]);
+
+            let sql3 = "SELECT account_id FROM account WHERE account_client_id = (SELECT loan_client_id FROM loan WHERE loan_id = ?)";
+            const [rows3, fields3] = await pool.query(sql3, [loan_id]);
+
+            let sql4 = "UPDATE account SET account_balance = account_balance + ? WHERE account_id = ?";
+            const [rows4, fields4] = await pool.query(sql4, [rows2[0].loan_amount, rows3[0].account_id]);
+
+            return "Success";
         } catch (error) {
             console.log(error);
             return "Something went wrong";
@@ -88,7 +99,7 @@ module.exports = {
         try {
             let sql = "UPDATE loan SET loan_status = 2 WHERE loan_id = ?";
             const [rows, fields] = await pool.query(sql, [loan_id]);
-            return rows;
+            return "Success";
         } catch (error) {
             console.log(error);
             return "Something went wrong";

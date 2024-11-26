@@ -21,7 +21,7 @@
             <td>{{ p.payement_account_reciever_id }}</td>
             <td>{{ p.payement_amount }}</td>
             <td>{{ p.payement_currency }}</td>
-            <td>{{ p.payement_date }}</td>
+            <td>{{ new Date(p.payement_date).toDateString() }}</td>
             <td>{{ p.payement_label }}</td>
             <td><a :href="'/#/payement/details/' + p.payement_id" class="btn btn-link">Details</a></td>
           </tr>

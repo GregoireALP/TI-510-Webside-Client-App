@@ -9,6 +9,10 @@
           <div class="card-body" style="margin">
             <h5 class="card-title">{{ a.advisor_firstname }} {{ a.advisor_lastname }}</h5>
             <div class="card-text">
+              <div class="id">
+                <i class="bi bi-hash"></i>
+                <strong> : </strong> {{ a.advisor_id }}<br>
+              </div>
               <div class="mail">
                 <i class="bi bi-envelope-fill"></i>
                 <strong> : </strong> {{ a.advisor_email }}<br>
@@ -24,7 +28,7 @@
             </div>
           </div>
           <div class="contact">
-            <a :href="'/#/loan/apply/'" class="btn btn-primary">Contact</a>
+            <a :href="'/#/loan/apply/' + client_id" class="btn btn-primary">Contact</a>
           </div>
         </div>
       </div>

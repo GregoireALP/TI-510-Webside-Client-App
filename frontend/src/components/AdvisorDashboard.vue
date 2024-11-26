@@ -55,8 +55,8 @@
                     <td>{{ l.loan_amount }} </td>
                     <td>{{ l.loan_label }}</td>
                     <td>
-                      <a v-if="l.loan_status === 0" class="btn btn-success" :href="'/#/account/' + l.client_id">Accepted</a>
-                      <a v-if="l.loan_status === 0" class="btn btn-danger" :href="'/#/account/' + l.client_id">Declined</a>
+                      <a v-if="l.loan_status === 0" class="btn btn-success" @click="approveLoan(l.loan_id)">Accepted</a>
+                      <a v-if="l.loan_status === 0" class="btn btn-danger" @click="declineLoan(l.loan_id)">Declined</a>
                       <a v-if="l.loan_status === 1" class="btn btn-primary" :href="'/#/account/' + l.client_id">Finished</a>
                     </td>
                     <td v-if="l.loan_status === 0" class="loan-status-pending">Pending...</td>
@@ -74,6 +74,7 @@
 <script>
 import NavbarModule from './NavbarModule.vue'
 import FooterModule from './FooterModule.vue'
+import db from '../db.utils.js'
 
 export default {
   name: 'AdvisorDashboard',
@@ -102,6 +103,30 @@ export default {
         .then(function (data) {
           this.loans = data
         }.bind(this))
+    },
+    async approveLoan (loanId) {
+      db.post('http://localhost:4000/api/loans/approve/' + loanId)
+        .then(function (data) {
+          if (data === 'Success') {
+            alert('Loan request accepted successfully.')
+            location.reload()
+          } else {
+            alert('Error while processing your loan request. Please try again later.')
+            location.reload()
+          }
+        })
+    },
+    async declineLoan (loanId) {
+      db.post('http://localhost:4000/api/loans/reject/' + loanId)
+        .then(function (data) {
+          if (data === 'Success') {
+            alert('Loan request declined successfully.')
+            location.reload()
+          } else {
+            alert('Error while processing your loan request. Please try again later.')
+            location.reload()
+          }
+        })
     }
   },
   watch: {

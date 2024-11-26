@@ -26,8 +26,8 @@
                                 <td>{{ l.loan_label }}</td>
                                 <td>{{ l.loan_to_refund }} $</td>
                                 <td>{{ l.loan_interest }} %</td>
-                                <td>{{ l.loan_start_date }}</td>
-                                <td>{{ l.loan_end_date }}</td>
+                                <td>{{ new Date(l.loan_start_date).toDateString() }}</td>
+                                <td>{{ new Date(l.loan_end_date).toDateString() }}</td>
                                 <td v-if="l.loan_status === 0" class="loan-status-pending">Pending...</td>
                                 <td v-if="l.loan_status === 1" class="loan-status-accepted">Accepted</td>
                                 <td v-if="l.loan_status === 2" class="loan-status-declined">Declined</td>

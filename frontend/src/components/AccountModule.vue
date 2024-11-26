@@ -29,7 +29,7 @@
 
         <div class="bank-account-footer">
 
-          <p class="account-creation-date"><i class="bi bi-calendar-date"></i> Created on {{ account.account_creation_date }}</p>
+          <p class="account-creation-date"><i class="bi bi-calendar-date"></i> Created on {{ new Date(account.account_creation_date).toDateString() }}</p>
           <p class="account-max-amount"><i class="bi bi-sign-stop"></i> Max <b>{{ account.account_max_amount }} $</b>
           </p>
           <p class="account-interest"><i class="bi bi-calculator"></i> Interest <b>{{ account.account_interest }} %</b>

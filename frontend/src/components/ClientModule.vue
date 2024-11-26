@@ -17,9 +17,10 @@
 
         <br>
         <ul class="info-list">
+          <li class="info-list-item"><i class="bi bi-hash"></i> <b>ID</b>: {{ c.client_id  }}</li>
           <li class="info-list-item"><i class="bi bi-house"></i> <b>Address</b>: {{ c.client_address  }}</li>
           <li class="info-list-item"><i class="bi bi-telephone"></i> <b>Phone</b>: {{ c.client_phone  }}</li>
-          <li class="info-list-item"><i class="bi bi-calendar-date"></i> <b>Birthday</b>: {{ c.client_birthday  }}</li>
+          <li class="info-list-item"><i class="bi bi-calendar-date"></i> <b>Birthday</b>: {{ new Date(c.client_birthday).toDateString()  }}</li>
           <li class="info-list-item"><i class="bi bi-gender-ambiguous"></i> <b>Gender</b>: {{ c.client_gender }}</li>
         </ul>
 
