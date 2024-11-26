@@ -182,27 +182,33 @@ export default {
         })
     },
     async closeAccount (clientId) {
-      if (confirm('Are you sure you want to close this client\'s account?')) {
-        fetch('http://localhost:4000/api/accounts/delete/' + clientId, {
-          method: 'DELETE'
-        })
-          .then(function (response) {
-            return response.json()
-          })
-          .then(function (data) {
-            if (data.message === 'All accounts for client deleted successfully') {
-              alert('All accounts for the client closed successfully.')
-              location.reload() // Recharge la page après la suppression des comptes
-            } else {
-              alert('Error while closing the account. Please try again later.')
-              location.reload() // Recharge la page en cas d’erreur
+      try {
+        const res = await fetch('http://localhost:4000/api/accounts/get/' + clientId)
+        const accounts = await res.json()
+        if (accounts.length > 0) {
+          for (let account of accounts) {
+            try {
+              const response = await fetch('http://localhost:4000/api/accounts/delete/' + account.account_id, {
+                method: 'DELETE'
+              })
+              const data = await response.json()
+              if (data.message === 'Account deleted successfully') {
+                alert('Account closed successfully.')
+              } else {
+                alert('Error while closing the account. Please try again later.')
+              }
+            } catch (error) {
+              console.error('Error:', error)
+              alert('Something went wrong. Please try again later.')
             }
-          })
-          .catch(function (error) {
-            console.error('Error:', error)
-            alert('Something went wrong. Please try again later.')
-            location.reload() // Recharge la page en cas d’erreur
-          })
+          }
+          location.reload()
+        } else {
+          alert('No accounts found for this client.')
+        }
+      } catch (error) {
+        console.error('Error fetching accounts:', error)
+        alert('Error fetching accounts. Please try again later.')
       }
     },
     async processCreateClient () {

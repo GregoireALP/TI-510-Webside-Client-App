@@ -7,23 +7,22 @@ ROUTER.get('/get/client/:client_id', getAccountsByClientIdRoute);
 
 ROUTER.post('/open/:client_id', openAccountRoute);
 
-ROUTER.delete('/delete/:client_id', deleteAccountRoute);
+ROUTER.delete('/delete/:account_id', deleteAccountRoute);
 
 async function deleteAccountRoute(req, res) {
-    let client_id = req.params.client_id;
-
+    let account_id = req.params.account_id;
+    console.log(account_id);
     try {
-        let sql = "DELETE FROM account WHERE account_client_id = ?";
-        const [rows, fields] = await pool.query(sql, [client_id]);
+        const result = await ACCOUNTS.deleteAccount(account_id); 
 
         if (rows.affectedRows > 0) {
-            res.status(200).json({ message: 'All accounts for client deleted successfully' });
+            res.status(200).json({ message: 'Account deleted successfully' });
         } else {
-            res.status(404).json({ message: 'No accounts found for this client' });
+            res.status(404).json({ message: 'No account found with this ID' });
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Error deleting accounts' });
+        res.status(500).json({ message: 'Error deleting account' });
     }
 }
 
