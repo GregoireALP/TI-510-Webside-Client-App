@@ -219,6 +219,7 @@ export default {
       let birthday = document.getElementById('recipient-birthday').value
       let password = document.getElementById('recipient-password').value
       let address = document.getElementById('recipient-address').value
+      
 
       let data = {
         advisor_id: this.advisor_id,
