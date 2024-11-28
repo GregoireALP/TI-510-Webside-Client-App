@@ -30,7 +30,7 @@
                         <td>{{ c.client_phone }}</td>
                         <td>
                           <a class="btn btn-success" :href="'/#/account/' + c.client_id">Connect</a>
-                          <a class="btn btn-danger" @click="closeAccount(c.client_id)">Close Account</a>
+                          <button @click="selectedUser = c.client_id" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-whatever="@getbootstrap">Manage Accounts</button>
                         </td>
                     </tr>
                     <tr>
@@ -72,7 +72,8 @@
                   </tr>
                 </table>
             </div>
-
+          <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+          <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -119,6 +120,35 @@
                 </div>
               </div>
             </div>
+          <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+          <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="deleteModal" style="color: black;">Manage Accounts</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                        <div class="mb-3">
+                            <label for="">Delete an account</label><br>
+                            <select id="accountToClose">
+                                <option default disabled>Chose an account to close</option>
+                                <option v-for="a in accounts" :key="a.account_id" :value="a.account_id">{{ a.account_label + " - " + a.account_iban }}</option>
+                            </select><br>
+                        </div>
+                        </form>
+                    </div>
+                    <h1 class="title" style="color: black;">OR</h1>
+                    <button type="button" class="btn btn-success" style="margin: 2rem;" @click="processCreateAccount(selectedUser)">Create a new account</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" @click="processDeleteAccount">Execute</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
         </main>
         <FooterModule />
     </div>
@@ -139,7 +169,9 @@ export default {
   data () {
     return {
       clients: [],
-      loans: []
+      loans: [],
+      selectedUser: null,
+      accounts: []
     }
   },
   methods: {
@@ -181,35 +213,31 @@ export default {
           }
         })
     },
-    async closeAccount (clientId) {
-      try {
-        const res = await fetch('http://localhost:4000/api/accounts/get/' + clientId)
-        const accounts = await res.json()
-        if (accounts.length > 0) {
-          for (let account of accounts) {
-            try {
-              const response = await fetch('http://localhost:4000/api/accounts/delete/' + account.account_id, {
-                method: 'DELETE'
-              })
-              const data = await response.json()
-              if (data.message === 'Account deleted successfully') {
-                alert('Account closed successfully.')
-              } else {
-                alert('Error while closing the account. Please try again later.')
-              }
-            } catch (error) {
-              console.error('Error:', error)
-              alert('Something went wrong. Please try again later.')
-            }
+    async processCreateAccount (clientId) {
+      db.post('http://localhost:4000/api/accounts/open/' + clientId)
+        .then(function (data) {
+          if (data === 'Success') {
+            alert('Account created successfully')
+            location.reload()
+          } else {
+            alert('Error while processing your loan request. Please try again later.')
+            location.reload()
           }
-          location.reload()
-        } else {
-          alert('No accounts found for this client.')
-        }
-      } catch (error) {
-        console.error('Error fetching accounts:', error)
-        alert('Error fetching accounts. Please try again later.')
-      }
+        })
+    },
+    async processDeleteAccount () {
+      let accountId = document.getElementById('accountToClose').value
+
+      db.post('http://localhost:4000/api/accounts/delete/' + accountId)
+        .then(function (data) {
+          if (data === 'Success') {
+            alert('Account deleted successfully')
+            location.reload()
+          } else {
+            alert('Error while processing your loan request. Please try again later.')
+            location.reload()
+          }
+        })
     },
     async processCreateClient () {
       let firstname = document.getElementById('recipient-firstname').value
@@ -219,8 +247,6 @@ export default {
       let birthday = document.getElementById('recipient-birthday').value
       let password = document.getElementById('recipient-password').value
       let address = document.getElementById('recipient-address').value
-      
-
       let data = {
         advisor_id: this.advisor_id,
         client_firstname: firstname,
@@ -231,7 +257,6 @@ export default {
         client_birthday: birthday,
         client_password: password
       }
-
       await db.post('http://localhost:4000/api/clients/create', data)
         .then(function (data) {
           if (data !== 'Something went wrong') {
@@ -263,6 +288,13 @@ export default {
     advisor_id: function (pre, post) {
       this.getClients()
       this.getLoans()
+    },
+    selectedUser: async function (pre, post) {
+      await fetch('http://localhost:4000/api/accounts/get/client/' + this.selectedUser)
+        .then(res => res.json())
+        .then(function (data) {
+          this.accounts = data
+        }.bind(this))
     }
   },
   created () {

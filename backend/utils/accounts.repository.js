@@ -28,12 +28,12 @@ module.exports = {
         }
     },
 
-    async getAccountController(id) {
+    async getAccountController(client_id) {
 
         try {
 
             let sql = "SELECT * FROM account WHERE account_id = ?";
-            const [rows, fields] = await pool.query(sql, [id]);
+            const [rows, fields] = await pool.query(sql, [client_id]);
             return rows;
         } catch (error) {
             console.log(error);
@@ -69,20 +69,20 @@ module.exports = {
 
             let sql = "INSERT INTO account SET ?";
             const [rows, fields] = await pool.query(sql, account);
-            return rows;
+            return "Success";
         } catch (error) {
             console.log(error);
             return "Something went wrong";
         }
     },
 
-    async deleteAccount(account_id) {
+    async deleteAccountController(account_id) {
 
         try {
 
             let sql = "DELETE FROM account WHERE account_id = ?";
             const [rows, fields] = await pool.query(sql, [account_id]);
-            return rows; 
+            return rows;
         } catch (error) {
             console.log(error);
             return "Something went wrong";

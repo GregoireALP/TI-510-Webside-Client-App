@@ -137,7 +137,7 @@ module.exports = {
                 let sql5 = "UPDATE loan SET loan_status = 3 WHERE loan_id = ?";
                 const [rows5, fields5] = await pool.query(sql5, [loan_id]);
             }
-
+            
             return "Success";
         } catch (error) {
             console.log(error);

@@ -9,11 +9,5 @@ export default {
     })
       .catch(err => { throw new Error(err) })
     return response.json()
-  },
-  async delete (url) {
-    const response = await fetch(url, {
-      method: 'DELETE',
-    }).catch(err => { throw new Error(err) })
-    return response.json()
   }
 }

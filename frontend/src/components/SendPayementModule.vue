@@ -59,34 +59,6 @@
           </div>
         </div>
       </div>
-
-      <div aria-live="polite" aria-atomic="true" class="position-relative">
-        <div class="toast-container position-fixed top-0 end-0 p-3">
-              <div class="toast" id="success_toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                  <img src="../assets/logo.png" class="rounded me-2" alt="..." width="50px">
-                  <strong class="me-auto">Baba Bank Payement</strong>
-                  <small class="text-body-secondary">1 second ago</small>
-                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                  Your payement request has been sent successfully.
-                </div>
-            </div>
-            <div class="toast" id="error_toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                  <img src="../assets/logo.png" class="rounded me-2" alt="..." width="50px">
-                  <strong class="me-auto">!!!! Baba Bank Payement !!!!</strong>
-                  <small class="text-body-error">1 second ago</small>
-                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                  ERROR WHILE PROCESSING YOUR PAYEMENT REQUEST.
-                  CHECK YOUR ACCOUNT BALANCE AND TRY AGAIN.
-                </div>
-            </div>
-          </div>
-        </div>
     </main>
 
     <FooterModule />
@@ -142,24 +114,16 @@ export default {
 
       await db.post('http://localhost:4000/api/payements/send', data)
         .then(res => {
-          const successToast = document.getElementById('success_toast')
-          const bootstrapSuccessToast = new bootstrap.Toast(successToast)
-          const errorToast = document.getElementById('error_toast')
-          const bootstrapErrorToast = new bootstrap.Toast(errorToast)
-
           switch (res) {
             case 'Something went wrong':
-              bootstrapErrorToast.show()
+              alert('Something went wrong')
               break
             case 'Payement sent successfully':
-              bootstrapSuccessToast.show()
-              // wait for 1 second before redirecting
-              setTimeout(() => {
-                this.$router.push('/#/account/all')
-              }, 2000)
+              alert('Payement sent successfully')
+              this.$router.push('/#/account/all')
               break
             case 'Not enough money':
-              bootstrapErrorToast.show()
+              alert('Not enough money')
               break
           }
         })
