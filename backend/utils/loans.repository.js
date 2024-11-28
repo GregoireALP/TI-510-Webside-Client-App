@@ -110,7 +110,7 @@ module.exports = {
         try {
             let sql = "UPDATE loan SET loan_status = 3 WHERE loan_id = ?";
             const [rows, fields] = await pool.query(sql, [loan_id]);
-            return rows;
+            return "Success";
         } catch (error) {
             console.log(error);
             return "Something went wrong";

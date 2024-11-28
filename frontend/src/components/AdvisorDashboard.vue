@@ -48,6 +48,7 @@
                     <th>Email</th>
                     <th>Loan ID</th>
                     <th>Loan Amount</th>
+                    <th>Loan to Reunf</th>
                     <th>Loan Label</th>
                     <th>Actions</th>
                     <th>Status</th>
@@ -59,11 +60,12 @@
                     <td>{{ l.client_email }}</td>
                     <td>{{ l.loan_id }} </td>
                     <td>{{ l.loan_amount }} </td>
+                    <td>{{ l.loan_to_refund }} </td>
                     <td>{{ l.loan_label }}</td>
                     <td>
                       <a v-if="l.loan_status === 0" class="btn btn-success" @click="approveLoan(l.loan_id)">Accepted</a>
                       <a v-if="l.loan_status === 0" class="btn btn-danger" @click="declineLoan(l.loan_id)">Declined</a>
-                      <a v-if="l.loan_status === 1" class="btn btn-primary" :href="'/#/account/' + l.client_id">Finished</a>
+                      <a v-if="l.loan_status === 1" class="btn btn-primary" @click="finishLoan(l.loan_id, l.loan_to_refund)"">Finished</a>
                     </td>
                     <td v-if="l.loan_status === 0" class="loan-status-pending">Pending...</td>
                     <td v-if="l.loan_status === 1" class="loan-status-accepted">Accepted</td>
@@ -188,6 +190,21 @@ export default {
         .then(function (data) {
           this.loans = data
         }.bind(this))
+    },
+    async finishLoan (loanId, toRefund) {
+      let confirmation = confirm('Are you sure you want to finish this loan?')
+      if (confirmation) {
+        db.post('http://localhost:4000/api/loans/finish/' + loanId)
+          .then(function (data) {
+            if (data === 'Success') {
+              alert('Loan finished successfully.')
+              location.reload()
+            } else {
+              alert('Error while processing your loan request. Please try again later.')
+              location.reload()
+            }
+          })
+      }
     },
     async approveLoan (loanId) {
       db.post('http://localhost:4000/api/loans/approve/' + loanId)
