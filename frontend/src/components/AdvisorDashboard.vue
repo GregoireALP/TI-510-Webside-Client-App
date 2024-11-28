@@ -63,9 +63,9 @@
                     <td>{{ l.loan_to_refund }} </td>
                     <td>{{ l.loan_label }}</td>
                     <td>
-                      <a v-if="l.loan_status === 0" class="btn btn-success" @click="approveLoan(l.loan_id)">Accepted</a>
-                      <a v-if="l.loan_status === 0" class="btn btn-danger" @click="declineLoan(l.loan_id)">Declined</a>
-                      <a v-if="l.loan_status === 1" class="btn btn-primary" @click="finishLoan(l.loan_id, l.loan_to_refund)"">Finished</a>
+                      <a v-if="l.loan_status === 0" class="btn btn-success" @click='approveLoan(l.loan_id)'>Accepted</a>
+                      <a v-if="l.loan_status === 0" class="btn btn-danger" @click='declineLoan(l.loan_id)'>Declined</a>
+                      <a v-if="l.loan_status === 1" class="btn btn-primary" @click='finishLoan(l.loan_id, l.loan_to_refund)'>Finished</a>
                     </td>
                     <td v-if="l.loan_status === 0" class="loan-status-pending">Pending...</td>
                     <td v-if="l.loan_status === 1" class="loan-status-accepted">Accepted</td>

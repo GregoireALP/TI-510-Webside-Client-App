@@ -39,8 +39,8 @@ export default {
   },
   methods: {
     processLogin () {
-      let username = document.getElementById('username').value
-      let password = document.getElementById('password').value
+      // let username = document.getElementById('username').value
+      // let password = document.getElementById('password').value
       let loginAsAdvisor = document.getElementById('loginAsAdvisor').checked
       if (loginAsAdvisor) {
         this.$router.push('/advisor-dashboard/5')

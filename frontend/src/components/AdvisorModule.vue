@@ -5,7 +5,7 @@
       <h1 class="title">Contact Advisor</h1>
       <div class="class_grid">
         <div class="card" v-for="a in advisor" v-bind:key="a.advisor_id">
-          <img src="../assets/profil_pics.png" class="card_img" alt="Advisor image">
+          <img :src='"https://ui-avatars.com/api/" + a.advisor_firstname + "+" + a.advisor_lastname' class="card_img" alt="Advisor image">
           <div class="card-body" style="margin">
             <h5 class="card-title">{{ a.advisor_firstname }} {{ a.advisor_lastname }}</h5>
             <div class="card-text">
