@@ -59,4 +59,19 @@ module.exports = {
         }
     },
 
+    async createClientController(firstname, lastname, advisor, email, phone, address, password) {
+
+        try {
+
+            let sql = "INSERT INTO client (client_gender, client_firstname, client_lastname, client_advisor_id, client_email, client_phone, client_address, client_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            const [rows, fields] = await pool.query(sql, [1, firstname, lastname, advisor, email, phone, address, password]);
+            
+            let client_id = rows.insertId;
+            return client_id
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
+    },
+
 }

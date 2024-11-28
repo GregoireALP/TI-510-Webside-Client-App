@@ -10,6 +10,7 @@ import AdvisorModule from '../components/AdvisorModule.vue'
 import LoanApply from '../components/LoanApplyModule.vue'
 import LoanManageModule from '../components/LoanManageModule.vue'
 import AdvisorDashboard from '../components/AdvisorDashboard.vue'
+import PayemnentDetailsModule from '../components/PayemnentDetailsModule.vue'
 
 Vue.use(Router)
 
@@ -52,15 +53,21 @@ export default new Router({
       props: true
     },
     {
-      path: '/loan/apply',
+      path: '/loan/apply/:client_id',
       name: 'LoanApply',
       component: LoanApply,
-      props: false
+      props: true
     },
     {
       path: '/send-payement/:client_id',
       name: 'SendPayement',
       component: SendPayementModule,
+      props: true
+    },
+    {
+      path: '/payement/details/:payement_id',
+      name: 'PayementDetails',
+      component: PayemnentDetailsModule,
       props: true
     },
     {

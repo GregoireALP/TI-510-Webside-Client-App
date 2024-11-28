@@ -9,13 +9,13 @@
                 <form onsubmit="event.preventDefault()" class="box">
                     <h1>Login</h1>
                     <p> Please enter your login and password</p>
-                    <input type="text" name="" placeholder="Username">
-                    <input type="password" name="" placeholder="Password">
+                    <input type="text" name="" placeholder="Username" id="username">
+                    <input type="password" name="" placeholder="Password" id="password">
                     <div style="display: flex; justify-content: center; align-items: center;">
-                        <input type="checkbox" name="advisor">
+                        <input type="checkbox" name="advisor" id="loginAsAdvisor">
                         <label for="advisor" style="font-size: 12px; margin-bottom: 2px; margin-left: 5px;">Login as an advisor</label>
                     </div>
-                    <input type="submit" name="" value="Login" href="/#/client/all">
+                    <input type="submit" name="" value="Login" href="/#/client/all" @click="processLogin()">
                 </form>
             </div>
         </main>
@@ -36,6 +36,18 @@ export default {
   components: {
     NavbarModule,
     FooterModule
+  },
+  methods: {
+    processLogin () {
+      // let username = document.getElementById('username').value
+      // let password = document.getElementById('password').value
+      let loginAsAdvisor = document.getElementById('loginAsAdvisor').checked
+      if (loginAsAdvisor) {
+        this.$router.push('/advisor-dashboard/5')
+      } else {
+        this.$router.push('/client/5')
+      }
+    }
   }
 }
 
