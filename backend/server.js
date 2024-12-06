@@ -25,6 +25,7 @@ const auth = require('./utils/auth.includes');
 auth.initializeAuthentifications(APP);
 
 // *** ROUTES/CONTROLLERS ***
+APP.use('*', auth.authorizeRequest());
 APP.use('/static', EXPRESS.static(__dirname + '/static'));
 APP.use('/api/advisors', require('./controllers/advisors.routes'));
 APP.use('/api/loans', require('./controllers/loans.routes'));

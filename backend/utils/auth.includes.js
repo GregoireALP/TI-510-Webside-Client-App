@@ -12,23 +12,40 @@ module.exports = {
 
         passport.serializeUser((user,  done) => {
             console.log('serializeUser', user);
-            
+            console.log(user)
             done(null, user);
         })
 
-        passport.deserializeUser((user, done) => {
+        passport.deserializeUser(async (user, done) => {
             console.log('deserializeUser', user);
-            
-            done(null, user);
+
+            let userParsed = JSON.parse(user);
+            let deserializeUser = await this.getUserId(userParsed.email, userParsed.isAdvisor);
+            done(null, deserializeUser);
         })
     },
 
-    authorizeRequest(requiredRole) {
+    /**
+     * function {
+     * recupere l'url fetcher (advisor-dashboard/3)
+     * regarder si le user est connecté, est bien un advisor et bien le advisor 3
+     * 
+     * si oui, next() renvoyer
+     * sinon renvoyer vers la page de login
+     * }
+     */
+    authorizeRequest() {
         return function(req, res, next) {
-            if(req.isAuthenticated() && req.user.role === requiredRole) {
+            // Check if user is authenticated
+            if(req.isAuthenticated()) {
+                console.log('User is authenticated');
+                let role = req.user.role;
+                let id = req.user.id;
+                let path = req.originalUrl;
                 next();
             } else {
-                res.status(401).json({ message: 'Unauthorized' });
+                console.log('User is not authenticated');
+                next()
             }
         }
     },
