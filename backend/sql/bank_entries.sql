@@ -1,18 +1,18 @@
 
 -- ADVISORS --
 
-INSERT INTO advisor (`advisor_id`,`advisor_gender`,`advisor_firstname`,`advisor_lastname`,`advisor_phone`,`advisor_email`,`advisor_address`,`advisor_birthday`)
+INSERT INTO advisor (`advisor_id`,`advisor_gender`,`advisor_firstname`,`advisor_lastname`,`advisor_phone`,`advisor_email`,`advisor_address`,`advisor_birthday`, `advisor_password`)
 VALUES
-  (1, 2, "Anastasia", "Boyd", "09 38 68 85 02", "magnis.dis@yahoo.com", "152-4982 Primis St.", "2014-04-04"),
-  (2, 2, "Adrian", "Pruitt", "07 34 24 63 89", "mi@aol.ca", "3707 Amet Road", "2022-04-23"),
-  (3, 1, "Rahim", "Frost", "02 45 25 91 42", "tincidunt.aliquam@icloud.edu", "Ap #414-9273 In, Street", "1987-03-24"),
-  (4, 1, "Jolie", "Mcdonald", "08 22 87 24 33", "eget@icloud.org", "Ap #836-531 Sed Street", "1977-01-25"),
-  (5, 1, "Bo", "Glass", "06 48 80 99 36", "etiam.laoreet.libero@icloud.com", "P.O. Box 457, 3983 Massa. Street", "2014-05-01"),
-  (6, 1, "Martena", "Meyers", "07 63 15 85 05", "eu.odio@outlook.edu", "3712 Ullamcorper Ave", "1992-04-28"),
-  (7, 2, "Preston", "Reyes", "08 41 86 17 43", "phasellus.in.felis@protonmail.com", "Ap #847-5098 Aenean Ave", "2020-01-07"),
-  (8, 1, "Asher", "Fleming", "01 03 87 41 73", "ac.eleifend@yahoo.couk", "7902 Pede. Ave", "1988-10-13"),
-  (9, 2, "Moses", "Morales", "05 31 30 37 11", "malesuada.integer@outlook.couk", "Ap #555-5861 Luctus, St.", "1997-11-08"),
-  (10, 2, "Jin", "Jensen", "08 88 61 73 83", "mauris.ut@google.net", "3803 Erat Rd.", "1976-06-10");
+  (1, 2, "Anastasia", "Boyd", "09 38 68 85 02", "magnis.dis@yahoo.com", "152-4982 Primis St.", "2014-04-04", "test"),
+  (2, 2, "Adrian", "Pruitt", "07 34 24 63 89", "mi@aol.ca", "3707 Amet Road", "2022-04-23", "test"),
+  (3, 1, "Rahim", "Frost", "02 45 25 91 42", "tincidunt.aliquam@icloud.edu", "Ap #414-9273 In, Street", "1987-03-24", "test"),
+  (4, 1, "Jolie", "Mcdonald", "08 22 87 24 33", "eget@icloud.org", "Ap #836-531 Sed Street", "1977-01-25", "test"),
+  (5, 1, "Bo", "Glass", "06 48 80 99 36", "etiam.laoreet.libero@icloud.com", "P.O. Box 457, 3983 Massa. Street", "2014-05-01", "test"),
+  (6, 1, "Martena", "Meyers", "07 63 15 85 05", "eu.odio@outlook.edu", "3712 Ullamcorper Ave", "1992-04-28", "test"),
+  (7, 2, "Preston", "Reyes", "08 41 86 17 43", "phasellus.in.felis@protonmail.com", "Ap #847-5098 Aenean Ave", "2020-01-07", "test"),
+  (8, 1, "Asher", "Fleming", "01 03 87 41 73", "ac.eleifend@yahoo.couk", "7902 Pede. Ave", "1988-10-13", "test"),
+  (9, 2, "Moses", "Morales", "05 31 30 37 11", "malesuada.integer@outlook.couk", "Ap #555-5861 Luctus, St.", "1997-11-08", "test"),
+  (10, 2, "Jin", "Jensen", "08 88 61 73 83", "mauris.ut@google.net", "3803 Erat Rd.", "1976-06-10", "test");
 
 
 

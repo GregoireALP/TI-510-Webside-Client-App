@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `bank_project`.`advisor` (
   `advisor_firstname` VARCHAR(45) NULL,
   `advisor_lastname` VARCHAR(45) NULL,
   `advisor_email` VARCHAR(45) NULL,
+  `advisor_password` VARCHAR(45) NULL,
   `advisor_phone` VARCHAR(45) NULL,
   `advisor_address` VARCHAR(45) NULL,
   `advisor_birthday` VARCHAR(45) NULL,

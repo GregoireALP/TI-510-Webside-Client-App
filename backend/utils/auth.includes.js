@@ -11,17 +11,17 @@ module.exports = {
         
 
         passport.serializeUser((user,  done) => {
-            console.log('serializeUser', user);
-            console.log(user)
-            done(null, user);
+            process.nextTick(function() {
+                return done(null, user);
+            })
         })
 
         passport.deserializeUser(async (user, done) => {
             console.log('deserializeUser', user);
 
-            let userParsed = JSON.parse(user);
-            let deserializeUser = await this.getUserId(userParsed.email, userParsed.isAdvisor);
-            done(null, deserializeUser);
+            process.nextTick(async function() {
+                return done(null, user);
+            })
         })
     },
 
