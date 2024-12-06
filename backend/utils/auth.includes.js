@@ -7,11 +7,18 @@ module.exports = {
         app.use(passport.initialize());
         app.use(passport.authenticate('session'));
 
+        console.log('Authentification initialized');
+        
+
         passport.serializeUser((user,  done) => {
+            console.log('serializeUser', user);
+            
             done(null, user);
         })
 
         passport.deserializeUser((user, done) => {
+            console.log('deserializeUser', user);
+            
             done(null, user);
         })
     },
@@ -49,10 +56,8 @@ module.exports = {
 
         let sql = "";
         if (isAdvisor) {
-            console.log('Advisor');
             sql = 'SELECT advisor_id FROM advisor WHERE advisor_email = ?';
         } else {
-            console.log('No Advisor');
             sql = 'SELECT client_id FROM client WHERE client_email = ?';
         }
 

@@ -30,6 +30,7 @@
 
 import FooterModule from './FooterModule.vue'
 import NavbarModule from './NavbarModule.vue'
+import db from '../db.utils'
 
 export default {
   name: 'LoginModule',
@@ -38,15 +39,28 @@ export default {
     FooterModule
   },
   methods: {
-    processLogin () {
-      // let username = document.getElementById('username').value
-      // let password = document.getElementById('password').value
-      let loginAsAdvisor = document.getElementById('loginAsAdvisor').checked
-      if (loginAsAdvisor) {
-        this.$router.push('/advisor-dashboard/5')
-      } else {
-        this.$router.push('/client/5')
-      }
+    async processLogin () {
+      let username = document.getElementById('username').value
+      let password = document.getElementById('password').value
+      let isAdvisor = document.getElementById('loginAsAdvisor').checked
+
+      await db.post('http://localhost:4000/api/auth/login', {
+        email: username,
+        password: password,
+        isAdvisor: isAdvisor
+      })
+      .then(function (data) {
+        if(data.user) {
+            if(data.user.role === 'advisor') {
+                this.$router.push('/advisor-dashboard/' + data.user.id)
+            } else {
+                this.$router.push('/client/' + data.user.id)
+            }
+        } else {
+           // BAD
+          alert('Invalid login')
+        }
+      }.bind(this))
     }
   }
 }
