@@ -11,7 +11,6 @@ ROUTER.post('/create/', createClientRoute);
 
 async function getClientRoute(req, res) {
     let client_id = req.params.client_id;    
-    console.log(req.user);
     
     if(client_id === "all") {
         let accounts = await CLIENT.getAllClientsController();

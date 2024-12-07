@@ -30,42 +30,31 @@ APP.use(passport.session());
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
+    passReqToCallback: true,
     session: true
-}, async (email, password, done) => {
-    let isCredentialsValide = await authIncludes.isCredentialsValide(email, password);
-    console.log('isCredentialsValide:', isCredentialsValide);
+}, async (req, email, password, done) => {
+    
+    let isCredentialsValide = await authIncludes.isCredentialsValide(email, password, req.body.isAdvisor);
     
     if (isCredentialsValide) {
-        let user = await authIncludes.getUserObjectByClientEmail(email);
-        console.log('User returned:', user);
-        return done(null, user.id);
+        let user = await authIncludes.getUserObjectByEmailAndRole(email, req.body.isAdvisor);
+        return done(null, user);
     } else {
         return done(null, false, { message: 'Incorrect email or password' });
     }
 }));
 
 passport.serializeUser((user, done) => {
-    console.log('Serialize User:', user);
     done(null, user);
 
 });
 
-passport.deserializeUser((user, done) => {
+passport.deserializeUser(async (user, done) => {
     try {
-        const client = authIncludes.getUserObjectByClientId(user);
-        console.log('Deserialize User:', client);
-        done(null, user);
+        done(null, JSON.parse(JSON.stringify(user)));
     } catch (error) {
         done(error, null);
     }
-});
-
-APP.use((req, res, next) => {
-    console.log(('---------------------------------'));
-    console.log('Session ID:', req.sessionID); // Vérifie si la session existe
-    console.log('Session Content:', req.session); // Affiche les données dans la session
-    console.log('Authenticated User:', req.user); // Vérifie si un utilisateur est attaché
-    next();
 });
 
 // *** ROUTES/CONTROLLERS ***

@@ -4,53 +4,34 @@ const pool = require('./db.include')
 
 module.exports = {
 
-    async isCredentialsValide(email, password) {
-        console.log('isCredentialsValide:', email, password);
-        
-        let sql = `SELECT * FROM client WHERE client_email = ? AND client_password = ?`;
-        let [rows, field] = await pool.query(sql, [email, password]);
+    async isCredentialsValide(email, password, isAdvisor) {   
+        let query = `SELECT * FROM ${isAdvisor ? 'advisor' : 'client'} WHERE ${isAdvisor ? 'advisor_email' : 'client_email'} = ? AND ${isAdvisor ? 'advisor_password' : 'client_password'} = ?`;
+        let values = [email, password];
+        let [rows, field] = await pool.query(query, values);
 
-        if (rows.length > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return rows.length > 0;
     },
 
-    async getUserObjectByClientEmail(email) {
-        let query = `SELECT * FROM client WHERE client_email = ?`;
+    async getUserObjectByEmailAndRole(email, role) {
+        let query = `SELECT * FROM ${role ? 'advisor' : 'client'} WHERE ${role ? 'advisor_email' : 'client_email'} = ?`;
         let values = [email];
         let [rows, field] = await pool.query(query, values);
 
-        let client = {
-            id: rows[0].client_id,
-            email: rows[0].client_email,
-            role: 'client'
+        let user = {
+            id: rows[0][role ? 'advisor_id' : 'client_id'],
+            email: rows[0][role ? 'advisor_email' : 'client_email'],
+            role: role ? 'advisor' : 'client'
         }
 
-        return client;
-    },
-
-    async getUserObjectByClientId(client_id) {
-        let query = `SELECT * FROM client WHERE client_id = ?`;
-        let values = [client_id];
-        let [rows, field] = await pool.query(query, values);
-
-        let client = {
-            id: rows[0].client_id,
-            email: rows[0].client_email,
-            role: 'client'
-        }
-
-        return client;
+        return user;
     },
 
     verifyUserAuth(req, res, next) {
         if (req.isAuthenticated()) {
-            console.log('User is authenticated');
-            return next();
+            console.log('Connected as:', req.user);
+            
+            next()
         } else {
-            console.log('User is not authenticated');
             res.status(401).json({ message: 'Unauthorized' });
         }
     }

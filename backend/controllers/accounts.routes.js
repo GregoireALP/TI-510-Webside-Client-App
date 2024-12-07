@@ -34,7 +34,6 @@ async function getAccountsByClientIdRoute(req, res) {
 
 async function openAccountRoute(req, res) {
     let client_id = req.params.client_id;
-    console.log(client_id);
     let account = await ACCOUNTS.openAccountController(client_id);
     res.status(200).json(account);
 }

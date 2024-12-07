@@ -47,16 +47,16 @@ export default {
       let res = await this.$http.post('http://localhost:4000/api/auth/login', {
         email: username,
         password: password,
+        isAdvisor: isAdvisor
       }, 
       {
-        withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': 'http://localhost:4000/',
         }
       })
       if(res.data.message === 'Ok') {
-        alert('Login successful')
+        this.$router.push('/client/all')
       } else {
         alert('Invalid login')
       }

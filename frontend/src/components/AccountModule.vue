@@ -9,8 +9,10 @@
         <div class="bank-account-header">
           <h2 class="account-title">Account:
             <b>{{ account.account_label }}</b>
-            <span v-if="account.account_balance > 0" class="badge text-bg-success">{{ account.account_balance }}<i class="bi bi-currency-euro"></i></span>
-            <span v-else class="badge text-bg-danger">{{ account.account_balance }}<i class="bi bi-currency-euro"></i></span>
+            <span v-if="account.account_balance > 0" class="badge text-bg-success">{{ account.account_balance }}<i
+                class="bi bi-currency-euro"></i></span>
+            <span v-else class="badge text-bg-danger">{{ account.account_balance }}<i
+                class="bi bi-currency-euro"></i></span>
           </h2>
           <p class="iban">{{ account.account_iban }}</p>
         </div>
@@ -23,13 +25,14 @@
           <br>
 
           <h1 class="title">Received Payements History</h1>
-          <PayementModule :account_id="account.account_id.toString()" :action="'received'"/>
+          <PayementModule :account_id="account.account_id.toString()" :action="'received'" />
 
         </div>
 
         <div class="bank-account-footer">
 
-          <p class="account-creation-date"><i class="bi bi-calendar-date"></i> Created on {{ new Date(account.account_creation_date).toDateString() }}</p>
+          <p class="account-creation-date"><i class="bi bi-calendar-date"></i> Created on {{ new
+            Date(account.account_creation_date).toDateString() }}</p>
           <p class="account-max-amount"><i class="bi bi-sign-stop"></i> Max <b>{{ account.account_max_amount }} $</b>
           </p>
           <p class="account-interest"><i class="bi bi-calculator"></i> Interest <b>{{ account.account_interest }} %</b>
@@ -58,7 +61,7 @@ export default {
     FooterModule,
     PayementModule
   },
-  data () {
+  data() {
     return {
       accounts: []
     }
@@ -66,13 +69,16 @@ export default {
 
   methods: {
 
-    async getAccounts () {
+    async getAccounts() {
       if (this.client_id === 'all') {
-        await fetch('http://localhost:4000/api/accounts/get/all')
-          .then(res => res.json())
-          .then(function (data) {
-            this.accounts = data
-          }.bind(this))
+        this.$http.get('http://localhost:4000/api/accounts/get/all', {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:4000/',
+          }
+        })
+        this.accounts = res.data
       } else {
         await fetch('http://localhost:4000/api/accounts/get/client/' + this.client_id)
           .then(res => res.json())
@@ -89,7 +95,7 @@ export default {
     }
   },
 
-  created () {
+  created() {
     this.getAccounts()
   }
 }
@@ -103,6 +109,7 @@ export default {
   margin-bottom: 100px;
 
 }
+
 .bank-account-footer {
   display: flex;
   flex-direction: row;
