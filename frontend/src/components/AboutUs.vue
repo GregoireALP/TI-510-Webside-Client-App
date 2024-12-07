@@ -135,16 +135,16 @@
 </template>
 
 <script>
-import FooterModule from "./FooterModule.vue";
-import NavbarModule from "./NavbarModule.vue";
+import FooterModule from './FooterModule.vue'
+import NavbarModule from './NavbarModule.vue'
 
 export default {
-  name: "AboutUsModule",
+  name: 'AboutUsModule',
   components: {
     NavbarModule,
-    FooterModule,
-  },
-};
+    FooterModule
+  }
+}
 </script>
 
 <style scoped>

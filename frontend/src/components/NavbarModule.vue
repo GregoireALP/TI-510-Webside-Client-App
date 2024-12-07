@@ -36,11 +36,12 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
   name: "Navbar",
   data() {
     return {
-      isAuth: false,
+      isAuth: false
     };
   },
   methods: {

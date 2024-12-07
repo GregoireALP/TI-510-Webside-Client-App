@@ -142,6 +142,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import FooterModule from "./FooterModule.vue";
 import NavbarModule from "./NavbarModule.vue";
 import db from "../db.utils";

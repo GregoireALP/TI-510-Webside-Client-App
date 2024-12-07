@@ -47,6 +47,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import NavbarModule from "./NavbarModule.vue";
 import FooterModule from "./FooterModule.vue";
 

@@ -9,8 +9,8 @@ import axios from 'axios'
 Vue.config.productionTip = false
 
 /* Axios config */
-axios.defaults.withCredentials = true;
-Vue.prototype.$http = axios;
+axios.defaults.withCredentials = true
+Vue.prototype.$http = axios
 
 /* eslint-disable no-new */
 new Vue({

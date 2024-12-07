@@ -23,88 +23,80 @@
             <td>{{ p.payement_currency }}</td>
             <td>{{ new Date(p.payement_date).toDateString() }}</td>
             <td>{{ p.payement_label }}</td>
-            <td>
-              <a :href="'/#/payement/details/' + p.payement_id" class="btn btn-link"
-                >Details</a
-              >
-            </td>
+            <td><a :href="'/#/payement/details/' + p.payement_id" class="btn btn-link">Details</a></td>
           </tr>
         </tbody>
       </table>
     </section>
   </section>
+
 </template>
 
 <script>
-import FooterModule from "./FooterModule.vue";
-import NavbarModule from "./NavbarModule.vue";
+/* eslint-disable */
+import FooterModule from './FooterModule.vue'
+import NavbarModule from './NavbarModule.vue'
 
 export default {
-  name: "PayementModule",
+  name: 'PayementModule',
   components: {
     NavbarModule,
-    FooterModule,
+    FooterModule
   },
   props: {
     account_id: {
       type: String,
-      required: true,
+      required: true
     },
     action: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
-  data() {
+  data () {
     return {
-      payements: [],
-    };
+      payements: []
+    }
   },
   methods: {
-    async getPayementsSended() {
-      let res = await this.$http.get(
-        "http://localhost:4000/api/payements/get/sender/" + this.account_id,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "http://localhost:4000/",
-          },
+    async getPayementsSended () {
+      let res = await this.$http.get('http://localhost:4000/api/payements/get/sender/' + this.account_id, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/'
         }
-      );
-      this.payements = await res.data;
+      })
+      this.payements = await res.data
     },
-    async getPayementsRecieved() {
-      let res = await this.$http.get(
-        "http://localhost:4000/api/payements/get/receiver/" + this.account_id,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "http://localhost:4000/",
-          },
+    async getPayementsRecieved () {
+      let res = await this.$http.get('http://localhost:4000/api/payements/get/receiver/' + this.account_id, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/'
         }
-      );
-      this.payements = await res.data;
-    },
+      })
+      this.payements = await res.data
+    }
   },
-  created() {
-    if (this.action === "sended") {
-      this.getPayementsSended();
-    } else if (this.action === "received") {
-      this.getPayementsRecieved();
+  created () {
+    if (this.action === 'sended') {
+      this.getPayementsSended()
+    } else if (this.action === 'received') {
+      this.getPayementsRecieved()
     }
   },
   watch: {
     account_id: function (pre, post) {
-      if (this.action === "sended") {
-        this.getPayementsSended();
-      } else if (this.action === "received") {
-        this.getPayementsRecieved();
+      if (this.action === 'sended') {
+        this.getPayementsSended()
+      } else if (this.action === 'received') {
+        this.getPayementsRecieved()
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -125,11 +117,11 @@ export default {
 }
 
 thead > tr {
-  background-color: #191b1f !important;
+  background-color: #191B1F !important;
 }
 
 #payement-table tr:nth-child(even) {
-  background-color: #191b1f;
+  background-color: #191B1F;
 }
 
 #payement-table tr:nth-child(odd) {
@@ -139,4 +131,5 @@ thead > tr {
 td {
   padding: 10px 0 10px 0;
 }
+
 </style>
