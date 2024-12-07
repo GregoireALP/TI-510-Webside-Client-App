@@ -40,12 +40,14 @@ export default {
   },
   methods: {
     async getPaymentDetails () {
-      await fetch('http://localhost:4000/api/payements/get/' + this.payement_id)
-        .then(res => res.json())
-        .then(function (data) {
-          this.payement = data[0]
-        }.bind(this))
-    }
+      let res = await this.$http.get('http://localhost:4000/api/payements/get/' + this.payement_id, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/',
+        }
+      })
+      this.payement = res.data
   },
   created () {
     this.getPaymentDetails()
@@ -55,6 +57,7 @@ export default {
       this.getPaymentDetails()
     }
   }
+}
 }
 </script>
 <style scoped>

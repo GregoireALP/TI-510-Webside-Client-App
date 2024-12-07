@@ -59,18 +59,24 @@ export default {
   },
   methods: {
     async getPayementsSended () {
-      await fetch('http://localhost:4000/api/payements/get/sender/' + this.account_id)
-        .then(res => res.json())
-        .then(function (data) {
-          this.payements = data
-        }.bind(this))
+      let res = await this.$http.get('http://localhost:4000/api/payements/get/sender/' + this.account_id, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/',
+        }
+      });
+      this.payements = await res.data;
     },
     async getPayementsRecieved () {
-      await fetch('http://localhost:4000/api/payements/get/receiver/' + this.account_id)
-        .then(res => res.json())
-        .then(function (data) {
-          this.payements = data
-        }.bind(this))
+      let res = await this.$http.get('http://localhost:4000/api/payements/get/receiver/' + this.account_id, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/',
+        }
+      });
+      this.payements = await res.data;
     }
   },
   created () {
