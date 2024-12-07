@@ -1,26 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../utils/auth.includes');
+const passport = require('passport');
 
-router.post('/login', login)
+router.post('/login', loginRoute)
 
-async function login(req, res) {
+async function loginRoute(req, res) {
+    passport.authenticate('local', { session: true });
+    let isCredentialsValide = await auth.isCredentialsValide(req.body.username, req.body.password);
 
-    // TODO validCredentials
-    let isValidCred = await auth.getValidCredentialsAndUserType(req.body.email, req.body.password, req.body.isAdvisor);
-    
-    if(isValidCred) {
-        let user = await auth.getUserId(req.body.email, req.body.isAdvisor);
+    if(isCredentialsValide) {
+        let user = await auth.getUserObjectByClientEmail(req.body.username);
         req.login(user, function(err) {
-            if (err) {
-                return next(err); 
+            if(err) {
+                console.log(err);
+                res.json({message: 'Error when login'});
             }
         });
 
-        res.status(200).json({user: user});
+        res.json({message: 'Ok'});
     } else {
-        // TODO ERR NOT VALID
-        res.status(401).json({ message: 'Invalid credentials' });
+        res.json({message: 'Wrong credentials'});
     }
 }
 

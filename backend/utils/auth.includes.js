@@ -1,86 +1,56 @@
 const passport = require('passport');
 const pool = require('./db.include')
-    ;
-module.exports = {
-    initializeAuthentifications(app) {
 
+
+module.exports = {
+  
+  processPassport(app) {
         app.use(passport.initialize());
         app.use(passport.authenticate('session'));
+        app.use(passport.session());
 
-        console.log('Authentification initialized');
-        
+        passport.serializeUser((user, done) => {
+            console.log('Serialize User:', user);
+            done(null, user);
 
-        passport.serializeUser((user,  done) => {
-            process.nextTick(function() {
-                return done(null, user);
-            })
-        })
+        });
 
-        passport.deserializeUser(async (user, done) => {
-            console.log('deserializeUser', user);
-
-            process.nextTick(async function() {
-                return done(null, user);
-            })
-        })
+        passport.deserializeUser((user, done) => {
+            console.log('Deserialize User:', user);
+            done(null, user);
+        });
     },
 
-    /**
-     * function {
-     * recupere l'url fetcher (advisor-dashboard/3)
-     * regarder si le user est connecté, est bien un advisor et bien le advisor 3
-     * 
-     * si oui, next() renvoyer
-     * sinon renvoyer vers la page de login
-     * }
-     */
-    authorizeRequest() {
-        return function(req, res, next) {
-            // Check if user is authenticated
-            if(req.isAuthenticated()) {
-                console.log('User is authenticated');
-                let role = req.user.role;
-                let id = req.user.id;
-                let path = req.originalUrl;
-                next();
-            } else {
-                console.log('User is not authenticated');
-                next()
-            }
+    authorizeRequest(req, res, next) {
+        try {
+            console.log(req.isAuthenticated());
+        } catch(err) {
+            console.log("No Request Can Be Get")
         }
     },
 
-    async getValidCredentialsAndUserType(email, password, isAdvisor) {
+    async isCredentialsValide(email, password) {
+        let sql = `SELECT * FROM client WHERE client_email = ? AND client_password = ?`;
+        let [rows, field] = await pool.query(sql, [email, password]);
 
-        // TODO CRYPT PASSWORD
-        let sql = "";
-
-        if (isAdvisor) {
-            sql = 'SELECT * FROM advisor WHERE advisor_email = ? AND advisor_password = ?';
-        } else {
-            sql = 'SELECT * FROM client WHERE client_email = ? AND client_password = ?';
-        }
-
-        let [rows, fields] = await pool.query(sql, [email, password]);
-        if (rows.length === 1) {
+        if (rows.length > 0) {
             return true;
         } else {
             return false;
         }
     },
 
-    async getUserId(email, isAdvisor) {
-
-        let sql = "";
-        if (isAdvisor) {
-            sql = 'SELECT advisor_id FROM advisor WHERE advisor_email = ?';
-        } else {
-            sql = 'SELECT client_id FROM client WHERE client_email = ?';
+    async getUserObjectByClientEmail(email) {
+        let query = `SELECT * FROM client WHERE client_email = ?`;
+        let values = [email];
+        let [rows, field] = await pool.query(query, values);
+        
+        let client = {
+            id: rows[0].client_id,
+            email: rows[0].client_email,
+            role: 'client'
         }
 
-        let [rows, fields] = await pool.query(sql, [email]);
-        let role = isAdvisor ? 'advisor' : 'client';
-
-        return {id: rows[0][role + '_id'], role: role };
+        return client;
     }
 }

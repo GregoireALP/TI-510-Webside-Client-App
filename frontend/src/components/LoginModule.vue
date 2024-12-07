@@ -30,7 +30,6 @@
 
 import FooterModule from './FooterModule.vue'
 import NavbarModule from './NavbarModule.vue'
-import db from '../db.utils'
 
 export default {
   name: 'LoginModule',
@@ -44,23 +43,13 @@ export default {
       let password = document.getElementById('password').value
       let isAdvisor = document.getElementById('loginAsAdvisor').checked
 
-      await db.post('http://localhost:4000/api/auth/login', {
-        email: username,
+      let res = await this.$http.post('http://localhost:4000/api/auth/login', {
+        username: username,
         password: password,
         isAdvisor: isAdvisor
       })
-      .then(function (data) {
-        if(data.user) {
-            if(data.user.role === 'advisor') {
-                this.$router.push('/advisor-dashboard/' + data.user.id)
-            } else {
-                this.$router.push('/client/' + data.user.id)
-            }
-        } else {
-           // BAD
-          alert('Invalid login')
-        }
-      }.bind(this))
+
+      console.log(JSON.stringify(res.data))
     }
   }
 }

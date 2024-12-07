@@ -21,11 +21,10 @@ APP.use(SESSION({
 const CORS = require('cors');
 APP.use(CORS({ origin: 'http://localhost:8080', credentials: true, methods: ['GET', 'POST']} ));
 
-const auth = require('./utils/auth.includes');
-auth.initializeAuthentifications(APP);
+const authIncludes = require('./utils/auth.includes');
+authIncludes.processPassport(APP);
 
 // *** ROUTES/CONTROLLERS ***
-APP.use('*', auth.authorizeRequest());
 APP.use('/static', EXPRESS.static(__dirname + '/static'));
 APP.use('/api/advisors', require('./controllers/advisors.routes'));
 APP.use('/api/loans', require('./controllers/loans.routes'));
