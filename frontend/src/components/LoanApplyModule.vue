@@ -118,16 +118,19 @@ export default {
         label: label,
         interest: interest
       }
-      await db.post('http://localhost:4000/api/loans/initiate', data)
-        .then(function (data) {
-          if (data === 'Success') {
-            alert('Loan request submitted successfully.')
-            // Redirect to loan page
-            this.$router.push('/manage-loan/' + this.client_id)
-          } else {
-            alert('Error while processing your loan request. Please try again later.')
+      await this.$http.post('http://localhost:4000/api/loans/initiate', data, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/'
+        }
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            let toast = new bootstrap.Toast(document.getElementById('success_toast'))
+            toast.show()
           }
-        }.bind(this))
+        })
     }
   }
 }

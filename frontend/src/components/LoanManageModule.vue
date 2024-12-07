@@ -124,27 +124,33 @@ export default {
   },
   methods: {
     async getClientLoans () {
-      await fetch('http://localhost:4000/api/loans/get/client/' + this.client_id)
-        .then(res => res.json())
-        .then(function (data) {
-          this.loans = data
-        }.bind(this))
+      await this.$http.get('http://localhost:4000/api/loans/get/client/' + this.client_id, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/'
+        }
+      })
+        .then((response) => {
+          this.loans = response.data
+        })
     },
-    refundLoan () {
+    async refundLoan () {
       let loanId = document.getElementById('loanToRefund').value
       let amount = document.getElementById('moneyToRefund').value
       let data = {
         loan_id: loanId,
         amount: amount
       }
-      db.post('http://localhost:4000/api/loans/refund', data)
-        .then(function (data) {
-          if (data === 'Success') {
-            alert('Loan refunded successfully.')
-            location.reload()
-          } else {
-            alert('Error while refunding your loan. Please try again later.')
-          }
+      await this.$http.post('http://localhost:4000/api/loans/refund', data, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/'
+        }
+      })
+        .then((response) => {
+          console.log(response)
         })
     }
   },

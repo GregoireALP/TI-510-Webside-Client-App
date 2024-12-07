@@ -57,16 +57,26 @@ export default {
     async getAdvisor () {
       try {
         if (this.client_id === 'all') {
-          await fetch('http://localhost:4000/api/advisors/get/all')
-            .then(res => res.json())
-            .then(function (data) {
-              this.advisor = data
+          await this.$http.get('http://localhost:4000/api/advisors/get/all', {
+            withCredentials: true,
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': 'http://localhost:4000/',
+            }
+          })
+            .then(function (res) {
+              this.advisor = res.data
             }.bind(this))
         } else {
-          await fetch('http://localhost:4000/api/advisors/get/client/' + this.client_id)
-            .then(res => res.json())
-            .then(function (data) {
-              this.advisor = data
+          await this.$http.get('http://localhost:4000/api/advisors/get/client/' + this.client_id, {
+            withCredentials: true,
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': 'http://localhost:4000/',
+            }
+          })
+            .then(function (res) {
+              this.advisor = res.data
             }.bind(this))
         }
       } catch (error) {

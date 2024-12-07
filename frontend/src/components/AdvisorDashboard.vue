@@ -178,25 +178,43 @@ export default {
   },
   methods: {
     async getClients () {
-      await fetch('http://localhost:4000/api/clients/get/advisor/' + this.advisor_id)
-        .then(res => res.json())
-        .then(function (data) {
-          this.clients = data
+      await this.$http.get('http://localhost:4000/api/clients/get/advisor/' + this.advisor_id, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/'
+        }
+      })
+        .then(function (res) {
+          this.clients = res.data
         }.bind(this))
     },
     async getLoans () {
-      await fetch('http://localhost:4000/api/loans/get/advisor/' + this.advisor_id)
-        .then(res => res.json())
-        .then(function (data) {
-          this.loans = data
+      await this.$http.get('http://localhost:4000/api/loans/get/advisor/' + this.advisor_id, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/'
+        }
+      })
+        .then(function (res) {
+          this.loans = res.data
         }.bind(this))
     },
     async finishLoan (loanId, toRefund) {
       let confirmation = confirm('Are you sure you want to finish this loan?')
       if (confirmation) {
-        db.post('http://localhost:4000/api/loans/finish/' + loanId)
-          .then(function (data) {
-            if (data === 'Success') {
+        await this.$http.post('http://localhost:4000/api/loans/finish/' + loanId, {
+          toRefund: toRefund
+        }, {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:4000/'
+          }
+        })
+          .then(function (res) {
+            if (res.data === 'Success') {
               alert('Loan finished successfully.')
               location.reload()
             } else {
@@ -207,7 +225,13 @@ export default {
       }
     },
     async approveLoan (loanId) {
-      db.post('http://localhost:4000/api/loans/approve/' + loanId)
+      await this.$http.post('http://localhost:4000/api/loans/approve/' + loanId, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/'
+        }
+      })
         .then(function (data) {
           if (data === 'Success') {
             alert('Loan request accepted successfully.')
@@ -219,7 +243,13 @@ export default {
         })
     },
     async declineLoan (loanId) {
-      db.post('http://localhost:4000/api/loans/reject/' + loanId)
+      await this.$http.post('http://localhost:4000/api/loans/reject/' + loanId, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/'
+        }
+      })
         .then(function (data) {
           if (data === 'Success') {
             alert('Loan request declined successfully.')
@@ -230,11 +260,17 @@ export default {
           }
         })
     },
-    async processCreateAccount (clientId) {
-      db.post('http://localhost:4000/api/accounts/open/' + clientId)
+    async processCreateAccount () {
+      await this.$http.post('http://localhost:4000/api/accounts/open/' + this.selectedUser , {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/'
+        }
+      })
         .then(function (data) {
           if (data === 'Success') {
-            alert('Account created successfully')
+            alert('Account created successfully.')
             location.reload()
           } else {
             alert('Error while processing your loan request. Please try again later.')
@@ -245,16 +281,25 @@ export default {
     async processDeleteAccount () {
       let accountId = document.getElementById('accountToClose').value
 
-      db.post('http://localhost:4000/api/accounts/delete/' + accountId)
-        .then(function (data) {
-          if (data === 'Success') {
-            alert('Account deleted successfully')
-            location.reload()
-          } else {
-            alert('Error while processing your loan request. Please try again later.')
-            location.reload()
+      let confirmation = confirm('Are you sure you want to delete this account?')
+      if (confirmation) {
+        await this.$http.post('http://localhost:4000/api/accounts/delete/' + accountId, {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:4000/'
           }
         })
+          .then(function (data) {
+            if (data === 'Success') {
+              alert('Account deleted successfully.')
+              location.reload()
+            } else {
+              alert('Error while processing your loan request. Please try again later.')
+              location.reload()
+            }
+          })
+      }
     },
     async processCreateClient () {
       let firstname = document.getElementById('recipient-firstname').value
@@ -274,8 +319,15 @@ export default {
         client_birthday: birthday,
         client_password: password
       }
-      await db.post('http://localhost:4000/api/clients/create', data)
-        .then(function (data) {
+      
+      await this.$http.post('http://localhost:4000/api/clients/create', data, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/'
+        }
+      })
+      .then(async function (data) {
           if (data !== 'Something went wrong') {
             alert('Client created successfully.')
 
@@ -284,7 +336,13 @@ export default {
               client_id: newClientId
             }
 
-            db.post('http://localhost:4000/api/accounts/create', newAccountData)
+            await this.$http.post('http://localhost:4000/api/accounts/create', newAccountData, {
+              withCredentials: true,
+              headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'http://localhost:4000/'
+              }
+            })
               .then(function (data) {
                 if (data === 'Success') {
                   alert('Account created successfully.')
@@ -299,6 +357,7 @@ export default {
             location.reload()
           }
         })
+
     }
   },
   watch: {
@@ -307,10 +366,15 @@ export default {
       this.getLoans()
     },
     selectedUser: async function (pre, post) {
-      await fetch('http://localhost:4000/api/accounts/get/client/' + this.selectedUser)
-        .then(res => res.json())
-        .then(function (data) {
-          this.accounts = data
+      await this.$http.get('http://localhost:4000/api/accounts/get/client/' + this.selectedUser, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/'
+        }
+      })
+        .then(function (res) {
+          this.accounts = res.data
         }.bind(this))
     }
   },
