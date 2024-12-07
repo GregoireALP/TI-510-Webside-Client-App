@@ -71,7 +71,7 @@ export default {
 
     async getAccounts() {
       if (this.client_id === 'all') {
-        this.$http.get('http://localhost:4000/api/accounts/get/all', {
+        let res = await this.$http.get('http://localhost:4000/api/accounts/get/all', {
           withCredentials: true,
           headers: {
             'Content-Type': 'application/json',
@@ -80,11 +80,14 @@ export default {
         })
         this.accounts = res.data
       } else {
-        await fetch('http://localhost:4000/api/accounts/get/client/' + this.client_id)
-          .then(res => res.json())
-          .then(function (data) {
-            this.accounts = data
-          }.bind(this))
+        let res = await this.$http.get('http://localhost:4000/api/accounts/get/client/' + this.client_id,{
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:4000/',
+          },
+        })
+        this.accounts = res.data
       }
     }
   },

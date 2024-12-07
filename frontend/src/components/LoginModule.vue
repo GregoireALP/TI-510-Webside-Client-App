@@ -44,7 +44,7 @@ export default {
       let password = document.getElementById('password').value
       let isAdvisor = document.getElementById('loginAsAdvisor').checked
 
-      let res = await this.$http.post('http://localhost:4000/api/auth/login', {
+      let res = await this.$http.post('http://localhost:4000/login', {
         email: username,
         password: password,
         isAdvisor: isAdvisor
@@ -62,7 +62,7 @@ export default {
       }
     },
     async processLogout() {
-      let res = await this.$http.post('http://localhost:4000/api/auth/logout', {}, 
+      let res = await this.$http.post('http://localhost:4000/logout', {}, 
       {
         withCredentials: true,
         headers: {

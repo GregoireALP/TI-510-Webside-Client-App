@@ -58,13 +58,16 @@ passport.deserializeUser(async (user, done) => {
 });
 
 // *** ROUTES/CONTROLLERS ***
+const verifyUserAuth = authIncludes.verifyUserAuth;
+APP.use('/api', verifyUserAuth);
+
 APP.use('/static', EXPRESS.static(__dirname + '/static'));
 APP.use('/api/advisors', require('./controllers/advisors.routes'));
 APP.use('/api/loans', require('./controllers/loans.routes'));
 APP.use('/api/clients', require('./controllers/clients.routes'));
 APP.use('/api/payements', require('./controllers/payements.routes'));
 APP.use('/api/accounts', require('./controllers/accounts.routes'));
-APP.use('/api/auth', require('./controllers/auth.routes'));
+APP.use(require('./controllers/auth.routes'));
 
 
 APP.listen(process.env.WEB_PORT, () => {

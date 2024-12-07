@@ -1,10 +1,8 @@
 const EXPRESS = require('express');
 const ROUTER = EXPRESS.Router();
 const CLIENT = require('../utils/clients.repository');
-const auth = require('../utils/auth.includes')
-const passport = require('passport');
 
-ROUTER.get('/get/:client_id', auth.verifyUserAuth, getClientRoute);
+ROUTER.get('/get/:client_id', getClientRoute);
 ROUTER.get('/get/advisor/:advisor_id', getClientByAdvisorRoute);
 
 ROUTER.post('/create/', createClientRoute);
