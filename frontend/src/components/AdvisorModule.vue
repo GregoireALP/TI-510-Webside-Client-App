@@ -5,25 +5,34 @@
       <h1 class="title">Contact Advisor</h1>
       <div class="class_grid">
         <div class="card" v-for="a in advisor" v-bind:key="a.advisor_id">
-          <img :src='"https://ui-avatars.com/api/" + a.advisor_firstname + "+" + a.advisor_lastname' class="card_img" alt="Advisor image">
+          <img
+            :src="
+              'https://ui-avatars.com/api/' +
+              a.advisor_firstname +
+              '+' +
+              a.advisor_lastname
+            "
+            class="card_img"
+            alt="Advisor image"
+          />
           <div class="card-body" style="margin">
             <h5 class="card-title">{{ a.advisor_firstname }} {{ a.advisor_lastname }}</h5>
             <div class="card-text">
               <div class="id">
                 <i class="bi bi-hash"></i>
-                <strong> : </strong> {{ a.advisor_id }}<br>
+                <strong> : </strong> {{ a.advisor_id }}<br />
               </div>
               <div class="mail">
                 <i class="bi bi-envelope-fill"></i>
-                <strong> : </strong> {{ a.advisor_email }}<br>
+                <strong> : </strong> {{ a.advisor_email }}<br />
               </div>
               <div class="phone">
                 <i class="bi bi-telephone-fill"></i>
-                <strong> : </strong> {{ a.advisor_phone }}<br>
+                <strong> : </strong> {{ a.advisor_phone }}<br />
               </div>
               <div class="bank">
                 <i class="bi bi-bank2"></i>
-                <strong> : </strong> {{ a.advisor_address }}<br>
+                <strong> : </strong> {{ a.advisor_address }}<br />
               </div>
             </div>
           </div>
@@ -33,112 +42,117 @@
         </div>
       </div>
     </main>
-    <FooterModule/>
+    <FooterModule />
   </div>
 </template>
 
 <script>
-import NavbarModule from './NavbarModule.vue'
-import FooterModule from './FooterModule.vue'
+import NavbarModule from "./NavbarModule.vue";
+import FooterModule from "./FooterModule.vue";
 
 export default {
-  name: 'AdvisorModule',
-  props: ['client_id'],
+  name: "AdvisorModule",
+  props: ["client_id"],
   components: {
     NavbarModule,
-    FooterModule
+    FooterModule,
   },
-  data () {
+  data() {
     return {
-      advisor: []
-    }
+      advisor: [],
+    };
   },
   methods: {
-    async getAdvisor () {
+    async getAdvisor() {
       try {
-        if (this.client_id === 'all') {
-          await this.$http.get('http://localhost:4000/api/advisors/get/all', {
-            withCredentials: true,
-            headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': 'http://localhost:4000/',
-            }
-          })
-            .then(function (res) {
-              this.advisor = res.data
-            }.bind(this))
+        if (this.client_id === "all") {
+          await this.$http
+            .get("http://localhost:4000/api/advisors/get/all", {
+              withCredentials: true,
+              headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "http://localhost:4000/",
+              },
+            })
+            .then(
+              function (res) {
+                this.advisor = res.data;
+              }.bind(this)
+            );
         } else {
-          await this.$http.get('http://localhost:4000/api/advisors/get/client/' + this.client_id, {
-            withCredentials: true,
-            headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': 'http://localhost:4000/',
-            }
-          })
-            .then(function (res) {
-              this.advisor = res.data
-            }.bind(this))
+          await this.$http
+            .get("http://localhost:4000/api/advisors/get/client/" + this.client_id, {
+              withCredentials: true,
+              headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "http://localhost:4000/",
+              },
+            })
+            .then(
+              function (res) {
+                this.advisor = res.data;
+              }.bind(this)
+            );
         }
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-    }
+    },
   },
-  created () {
-    this.getAdvisor()
+  created() {
+    this.getAdvisor();
   },
   watch: {
     client_id: function (pre, post) {
-      this.getAdvisor()
-    }
-  }
-}
+      this.getAdvisor();
+    },
+  },
+};
 </script>
 
 <style scoped>
-
-.class_grid{
+.class_grid {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
   padding: 100px;
-  margin:10px;
+  margin: 10px;
 }
 
-.card{
+.card {
   width: 330px;
-  margin:20px;
-  border: 2px solid rgb(210,179,36);
+  margin: 20px;
+  border: 2px solid rgb(210, 179, 36);
   border-radius: 4%;
   background-color: black;
   color: white;
 }
-.card_img{
+.card_img {
   display: block;
   border-radius: 50%;
   margin: auto;
   margin-top: 10px;
-  margin-bottom:10px;
-  width:50%;
+  margin-bottom: 10px;
+  width: 50%;
   text-align: middle;
 }
 
-.card-body{
-  margin-left:15px;
-  margin-right:15px;
+.card-body {
+  margin-left: 15px;
+  margin-right: 15px;
   border: 2px solid rgb(200, 200, 200);
   border-radius: 5%;
   padding: 10px;
-  h5{
-    color:rgb(210,179,36);
+  h5 {
+    color: rgb(210, 179, 36);
   }
-  i{
-    color:rgb(210,179,36);
+  i {
+    color: rgb(210, 179, 36);
   }
 }
 
-.contact{
+.contact {
   margin-top: 10px;
   margin-left: 15px;
   margin-bottom: 20px;

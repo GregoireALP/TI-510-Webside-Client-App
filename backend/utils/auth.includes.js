@@ -29,10 +29,9 @@ module.exports = {
     verifyUserAuth(req, res, next) {
         if (req.isAuthenticated()) {
             console.log('Connected as:', req.user);
-            
             next()
         } else {
-            res.status(401).json({ message: 'Unauthorized' });
+            res.redirect('/login');
         }
     }
 }

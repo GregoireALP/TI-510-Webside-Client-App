@@ -4,89 +4,117 @@
     <h1 class="title">Clients</h1>
     <div class="container d-flex flex-row flex-wrap justify-content-evenly mt-5">
       <div class="card" v-for="c in clients" v-bind:key="c.client_id">
-
         <div class="top-container">
-
-          <img :src="'https://ui-avatars.com/api/?name=' + c.client_lastname + '+' + c.client_firstname"   class="img-fluid profile-image" width="70">
+          <img
+            :src="
+              'https://ui-avatars.com/api/?name=' +
+              c.client_lastname +
+              '+' +
+              c.client_firstname
+            "
+            class="img-fluid profile-image"
+            width="70"
+          />
 
           <div class="ml-3">
-            <h5 class="name">{{ c.client_firstname + " " + c.client_lastname}} </h5>
+            <h5 class="name">{{ c.client_firstname + " " + c.client_lastname }}</h5>
             <p class="mail">{{ c.client_email }}</p>
           </div>
         </div>
 
-        <br>
+        <br />
         <ul class="info-list">
-          <li class="info-list-item"><i class="bi bi-hash"></i> <b>ID</b>: {{ c.client_id  }}</li>
-          <li class="info-list-item"><i class="bi bi-house"></i> <b>Address</b>: {{ c.client_address  }}</li>
-          <li class="info-list-item"><i class="bi bi-telephone"></i> <b>Phone</b>: {{ c.client_phone  }}</li>
-          <li class="info-list-item"><i class="bi bi-calendar-date"></i> <b>Birthday</b>: {{ new Date(c.client_birthday).toDateString()  }}</li>
-          <li class="info-list-item"><i class="bi bi-gender-ambiguous"></i> <b>Gender</b>: {{ c.client_gender }}</li>
+          <li class="info-list-item">
+            <i class="bi bi-hash"></i> <b>ID</b>: {{ c.client_id }}
+          </li>
+          <li class="info-list-item">
+            <i class="bi bi-house"></i> <b>Address</b>: {{ c.client_address }}
+          </li>
+          <li class="info-list-item">
+            <i class="bi bi-telephone"></i> <b>Phone</b>: {{ c.client_phone }}
+          </li>
+          <li class="info-list-item">
+            <i class="bi bi-calendar-date"></i> <b>Birthday</b>:
+            {{ new Date(c.client_birthday).toDateString() }}
+          </li>
+          <li class="info-list-item">
+            <i class="bi bi-gender-ambiguous"></i> <b>Gender</b>: {{ c.client_gender }}
+          </li>
         </ul>
 
-        <hr class="golden-divider mx-auto">
+        <hr class="golden-divider mx-auto" />
 
         <div class="options-list">
-          <a :href='"/#/account/" + c.client_id' style="text-decoration: none;"><span class="option-list-item"><i class="bi bi-bank"></i> Manage my accounts</span></a>
+          <a :href="'/#/account/' + c.client_id" style="text-decoration: none"
+            ><span class="option-list-item"
+              ><i class="bi bi-bank"></i> Manage my accounts</span
+            ></a
+          >
         </div>
         <div class="options-list pt-2">
-          <a :href="'/#/manage-loan/' + c.client_id" style="text-decoration: none;"><span class="option-list-item"><i class="bi bi-paperclip"></i> Consult my loans</span></a>
+          <a :href="'/#/manage-loan/' + c.client_id" style="text-decoration: none"
+            ><span class="option-list-item"
+              ><i class="bi bi-paperclip"></i> Consult my loans</span
+            ></a
+          >
         </div>
         <div class="options-list pt-2">
-          <a :href='"/#/advisor/" + c.client_id' style="text-decoration: none;"><span class="option-list-item"><i class="bi bi-person-fill-gear"></i> Contact my advisor</span></a>
+          <a :href="'/#/advisor/' + c.client_id" style="text-decoration: none"
+            ><span class="option-list-item"
+              ><i class="bi bi-person-fill-gear"></i> Contact my advisor</span
+            ></a
+          >
         </div>
-
       </div>
     </div>
 
-    <FooterModule/>
+    <FooterModule />
   </div>
 </template>
 
 <script>
-import NavbarModule from './NavbarModule.vue'
-import FooterModule from './FooterModule.vue'
+import NavbarModule from "./NavbarModule.vue";
+import FooterModule from "./FooterModule.vue";
 
 export default {
-  name: 'ClientModule',
-  props: ['client_id'],
+  name: "ClientModule",
+  props: ["client_id"],
   components: {
     NavbarModule,
-    FooterModule
+    FooterModule,
   },
-  data () {
+  data() {
     return {
-      clients: []
-    }
+      clients: [],
+    };
   },
 
   methods: {
-    async getClients () {
-      let res = await this.$http.get('http://localhost:4000/api/clients/get/all', {
+    async getClients() {
+      let res = await this.$http.get("http://localhost:4000/api/clients/get/all", {
         withCredentials: true,
         headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': 'http://localhost:4000/',
-        }
-      })
-      this.clients = res.data
-    }
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "http://localhost:4000/",
+        },
+      });
+      this.clients = res.data;
+    },
   },
 
   watch: {
     client_id: function (pre, post) {
-      this.getClients()
-    }
+      this.getClients();
+    },
   },
 
-  created () {
-    this.getClients()
-  }
-}
+  created() {
+    this.getClients();
+  },
+};
 </script>
 
 <style scoped>
-
 .info-list {
   margin: 0%;
   padding: 0%;
@@ -103,7 +131,12 @@ export default {
   height: 4px !important;
   width: 100% !important;
   max-width: 100% !important;
-  background: linear-gradient(90deg, rgba(210, 179, 36, 1) 0%, rgba(255, 237, 26, 1) 50%, rgba(214, 185, 13, 1) 100%) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(210, 179, 36, 1) 0%,
+    rgba(255, 237, 26, 1) 50%,
+    rgba(214, 185, 13, 1) 100%
+  ) !important;
   border-radius: 10px !important;
 }
 
