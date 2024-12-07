@@ -18,6 +18,7 @@
                     <input type="submit" name="" value="Login" href="/#/client/all" @click="processLogin()">
                 </form>
             </div>
+            <button @click="processLogout">Logout</button>
         </main>
 
         <FooterModule />
@@ -44,12 +45,36 @@ export default {
       let isAdvisor = document.getElementById('loginAsAdvisor').checked
 
       let res = await this.$http.post('http://localhost:4000/api/auth/login', {
-        username: username,
+        email: username,
         password: password,
-        isAdvisor: isAdvisor
+      }, 
+      {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/',
+        }
       })
-
-      console.log(JSON.stringify(res.data))
+      if(res.data.message === 'Ok') {
+        alert('Login successful')
+      } else {
+        alert('Invalid login')
+      }
+    },
+    async processLogout() {
+      let res = await this.$http.post('http://localhost:4000/api/auth/logout', {}, 
+      {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4000/',
+        }
+      })
+      if(res.data.message === 'Ok') {
+        alert('Logout successful')
+      } else {
+        alert('Invalid logout')
+      }
     }
   }
 }

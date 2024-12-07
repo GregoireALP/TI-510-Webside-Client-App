@@ -3,33 +3,10 @@ const pool = require('./db.include')
 
 
 module.exports = {
-  
-  processPassport(app) {
-        app.use(passport.initialize());
-        app.use(passport.authenticate('session'));
-        app.use(passport.session());
-
-        passport.serializeUser((user, done) => {
-            console.log('Serialize User:', user);
-            done(null, user);
-
-        });
-
-        passport.deserializeUser((user, done) => {
-            console.log('Deserialize User:', user);
-            done(null, user);
-        });
-    },
-
-    authorizeRequest(req, res, next) {
-        try {
-            console.log(req.isAuthenticated());
-        } catch(err) {
-            console.log("No Request Can Be Get")
-        }
-    },
 
     async isCredentialsValide(email, password) {
+        console.log('isCredentialsValide:', email, password);
+        
         let sql = `SELECT * FROM client WHERE client_email = ? AND client_password = ?`;
         let [rows, field] = await pool.query(sql, [email, password]);
 
@@ -44,7 +21,7 @@ module.exports = {
         let query = `SELECT * FROM client WHERE client_email = ?`;
         let values = [email];
         let [rows, field] = await pool.query(query, values);
-        
+
         let client = {
             id: rows[0].client_id,
             email: rows[0].client_email,
@@ -52,5 +29,29 @@ module.exports = {
         }
 
         return client;
+    },
+
+    async getUserObjectByClientId(client_id) {
+        let query = `SELECT * FROM client WHERE client_id = ?`;
+        let values = [client_id];
+        let [rows, field] = await pool.query(query, values);
+
+        let client = {
+            id: rows[0].client_id,
+            email: rows[0].client_email,
+            role: 'client'
+        }
+
+        return client;
+    },
+
+    verifyUserAuth(req, res, next) {
+        if (req.isAuthenticated()) {
+            console.log('User is authenticated');
+            return next();
+        } else {
+            console.log('User is not authenticated');
+            res.status(401).json({ message: 'Unauthorized' });
+        }
     }
 }

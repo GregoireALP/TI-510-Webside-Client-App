@@ -2,9 +2,6 @@ const EXPRESS = require('express');
 const ROUTER = EXPRESS.Router();
 const ACCOUNTS = require('../utils/accounts.repository');
 
-const auth = require('../utils/auth.includes');
-auth.authorizeRequest();
-
 ROUTER.get('/get/:account_id', getAccountRoute);
 ROUTER.get('/get/client/:client_id', getAccountsByClientIdRoute);
 

@@ -2,15 +2,17 @@ const EXPRESS = require('express');
 const ROUTER = EXPRESS.Router();
 const CLIENT = require('../utils/clients.repository');
 const auth = require('../utils/auth.includes')
+const passport = require('passport');
 
-ROUTER.get('/get/:client_id',  auth.authorizeRequest, getClientRoute);
+ROUTER.get('/get/:client_id', auth.verifyUserAuth, getClientRoute);
 ROUTER.get('/get/advisor/:advisor_id', getClientByAdvisorRoute);
 
 ROUTER.post('/create/', createClientRoute);
 
 async function getClientRoute(req, res) {
-    let client_id = req.params.client_id;
-
+    let client_id = req.params.client_id;    
+    console.log(req.user);
+    
     if(client_id === "all") {
         let accounts = await CLIENT.getAllClientsController();
         res.status(200).json(accounts);
