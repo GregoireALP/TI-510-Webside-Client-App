@@ -318,7 +318,7 @@ export default {
             }
           )
           .then(function (res) {
-            if (res.data === 'Success') {
+            if (res.data === 'Ok') {
               alert('Loan finished successfully.');
               location.reload();
             } else {
@@ -337,8 +337,8 @@ export default {
             'Access-Control-Allow-Origin': 'http://localhost:4000/',
           },
         })
-        .then(function (data) {
-          if (data === 'Success') {
+        .then(function (res) {
+          if (res.data === 'Ok') {
             alert('Loan request accepted successfully.');
             location.reload();
           } else {
@@ -356,8 +356,8 @@ export default {
             'Access-Control-Allow-Origin': 'http://localhost:4000/',
           },
         })
-        .then(function (data) {
-          if (data === 'Success') {
+        .then(function (res) {
+          if (res.data === 'Ok') {
             alert('Loan request declined successfully.');
             location.reload();
           } else {
@@ -375,8 +375,8 @@ export default {
             'Access-Control-Allow-Origin': 'http://localhost:4000/',
           },
         })
-        .then(function (data) {
-          if (data === 'Success') {
+        .then(function (res) {
+          if (res.data === 'Ok') {
             alert('Account created successfully.');
             location.reload();
           } else {
@@ -398,8 +398,8 @@ export default {
               'Access-Control-Allow-Origin': 'http://localhost:4000/',
             },
           })
-          .then(function (data) {
-            if (data === 'Success') {
+          .then(function (res) {
+            if (res.data === 'Ok') {
               alert('Account deleted successfully.');
               location.reload();
             } else {
@@ -436,31 +436,9 @@ export default {
             'Access-Control-Allow-Origin': 'http://localhost:4000/',
           },
         })
-        .then(async function (data) {
-          if (data !== 'Something went wrong') {
+        .then(function (res) {
+          if (res.data === 'Ok') {
             alert('Client created successfully.');
-
-            let newClientId = data;
-            let newAccountData = {
-              client_id: newClientId,
-            };
-
-            await this.$http
-              .post('http://localhost:4000/api/accounts/create', newAccountData, {
-                withCredentials: true,
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Access-Control-Allow-Origin': 'http://localhost:4000/',
-                },
-              })
-              .then(function (data) {
-                if (data === 'Success') {
-                  alert('Account created successfully.');
-                } else {
-                  alert('Error while creating the account. Please try again later.');
-                }
-              });
-
             location.reload();
           } else {
             alert('Error while creating the client. Please try again later.');

@@ -49,7 +49,7 @@ export default {
       let password = document.getElementById("password").value;
       let isAdvisor = document.getElementById("loginAsAdvisor").checked;
 
-      let res = await this.$http.post(
+      await this.$http.post(
         "http://localhost:4000/login",
         {
           email: username,
@@ -62,15 +62,22 @@ export default {
             "Access-Control-Allow-Origin": "http://localhost:4000/",
           },
         }
-      );
-      if (res.data.message === "Ok") {
-        this.$router.push("/client/all");
-      } else {
-        alert("Invalid login");
-      }
+      )
+      .then((res) => {
+        if (res.data.message === "Ok") {
+          alert("Login successful");
+          this.$router.push("/#/client/all");
+        } else {
+          alert("Invalid login");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Invalid login or unauthorized access");
+      });
     },
     async processLogout() {
-      let res = await this.$http.post(
+      res = await this.$http.post(
         "http://localhost:4000/logout",
         {},
         {
@@ -80,12 +87,19 @@ export default {
             "Access-Control-Allow-Origin": "http://localhost:4000/",
           },
         }
-      );
-      if (res.data.message === "Ok") {
-        alert("Logout successful");
-      } else {
-        alert("Invalid logout");
-      }
+      )
+      .then((res) => {
+        if (res.data.message === "Ok") {
+          alert("Logout successful");
+          this.$router.push("/#/login");
+        } else {
+          alert("An error occured");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("An error occured");
+      });
     },
   },
 };

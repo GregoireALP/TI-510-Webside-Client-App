@@ -59,7 +59,7 @@ passport.deserializeUser(async (user, done) => {
 
 // *** ROUTES/CONTROLLERS ***
 const verifyUserAuth = authIncludes.verifyUserAuth;
-APP.use('/api', verifyUserAuth);
+// APP.use('/api', verifyUserAuth);
 
 APP.use('/static', EXPRESS.static(__dirname + '/static'));
 APP.use('/api/advisors', require('./controllers/advisors.routes'));

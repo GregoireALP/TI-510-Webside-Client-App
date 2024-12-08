@@ -145,7 +145,6 @@
 /* eslint-disable */
 import FooterModule from "./FooterModule.vue";
 import NavbarModule from "./NavbarModule.vue";
-import db from "../db.utils";
 
 export default {
   name: "LoanManageModule",
@@ -188,8 +187,12 @@ export default {
             "Access-Control-Allow-Origin": "http://localhost:4000/",
           },
         })
-        .then((response) => {
-          console.log(response);
+        .then((res) => {
+          if(res.data === 'Ok') {
+            location.reload();
+          } else {
+            alert('An error occured');
+          }
         });
     },
   },

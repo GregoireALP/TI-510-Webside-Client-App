@@ -25,16 +25,16 @@
         <div class='bank-account-body'>
           <h1 class='title'>Sended Payements History</h1>
           <PayementModule
-            :account_id='account.account_id.toString()'
-            :action='sended'
+            :account_id='account.account_id'
+            :action="'sended'"
           />
 
           <br />
 
           <h1 class='title'>Received Payements History</h1>
           <PayementModule
-            :account_id='account.account_id.toString()'
-            :action='received'
+            :account_id='account.account_id'
+            :action="'received'"
           />
         </div>
 
@@ -49,6 +49,9 @@
           <p class='account-interest'>
             <i class='bi bi-calculator'></i> Interest
             <b>{{ account.account_interest }} %</b>
+          </p>
+          <p class="account-id">
+            <i data-v-423cf2c7="" class="bi bi-hash"></i> ID <b>{{ account.account_id }}</b>
           </p>
         </div>
       </div>
@@ -81,16 +84,18 @@ export default {
   methods: {
     async getAccounts () {
       if (this.client_id === 'all') {
-        let res = await this.$http.get('http://localhost:4000/api/accounts/get/all', {
+        await this.$http.get('http://localhost:4000/api/accounts/get/all', {
           withCredentials: true,
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': 'http://localhost:4000/'
           }
         })
-        this.accounts = res.data
+        .then(res => {
+          this.accounts = res.data
+        })
       } else {
-        let res = await this.$http.get(
+        await this.$http.get(
           'http://localhost:4000/api/accounts/get/client/' + this.client_id,
           {
             withCredentials: true,
@@ -100,7 +105,9 @@ export default {
             }
           }
         )
-        this.accounts = res.data
+        .then(res => {
+          this.accounts = res.data
+        })
       }
     }
   },

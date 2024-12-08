@@ -22,7 +22,7 @@ async function getPayementRoute(req, res) {
 
 async function getPayementsBySenderIdRoute(req, res) {
     let sender_id = req.params.client_id;
-    let payements = await PAYEMENT.getPayementsBySenderId(sender_id);
+    let payements = await PAYEMENT.getPayementsBySenderId(sender_id);    
     res.status(200).json(payements);
 }
 

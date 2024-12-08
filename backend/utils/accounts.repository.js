@@ -69,7 +69,7 @@ module.exports = {
 
             let sql = "INSERT INTO account SET ?";
             const [rows, fields] = await pool.query(sql, account);
-            return "Success";
+            return "Ok";
         } catch (error) {
             console.log(error);
             return "Something went wrong";
@@ -82,7 +82,7 @@ module.exports = {
 
             let sql = "DELETE FROM account WHERE account_id = ?";
             const [rows, fields] = await pool.query(sql, [account_id]);
-            return rows;
+            return "Ok";
         } catch (error) {
             console.log(error);
             return "Something went wrong";

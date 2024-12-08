@@ -28,7 +28,6 @@ module.exports = {
 
     verifyUserAuth(req, res, next) {
         if (req.isAuthenticated()) {
-            console.log('Connected as:', req.user);
             next()
         } else {
             res.redirect('/login');

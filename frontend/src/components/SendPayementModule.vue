@@ -153,20 +153,22 @@ export default {
         payement_label: payementLabel,
       };
 
-      await db.post("http://localhost:4000/api/payements/send", data).then((res) => {
-        switch (res) {
-          case "Something went wrong":
-            alert("Something went wrong");
-            break;
-          case "Payement sent successfully":
+      await this.$http
+        .post("http://localhost:4000/api/payements/send", data, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "http://localhost:4000/",
+          },
+        })
+        .then((res) => {
+          if (res.data === "Ok") {
             alert("Payement sent successfully");
-            this.$router.push("/#/account/all");
-            break;
-          case "Not enough money":
-            alert("Not enough money");
-            break;
-        }
-      });
+            location.reload();
+          } else {
+            alert("An error occured");
+          }
+        });
     },
   },
   watch: {

@@ -91,7 +91,7 @@ module.exports = {
             let sql3 = "UPDATE account SET account_balance = account_balance + ? WHERE account_id = ?";
             const [rows3, fields3] = await pool.query(sql3, [amount, account_receiver_id]);
 
-            return "Payement sent successfully";
+            return "Ok";
 
         } catch (error) {
             console.log(error);

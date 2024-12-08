@@ -156,7 +156,6 @@
 /* eslint-disable */
 import FooterModule from "./FooterModule.vue";
 import NavbarModule from "./NavbarModule.vue";
-import db from "../db.utils";
 
 export default {
   name: "LoanApplyModule",
@@ -185,10 +184,12 @@ export default {
             "Access-Control-Allow-Origin": "http://localhost:4000/",
           },
         })
-        .then((response) => {
-          if (response.status === 200) {
-            let toast = new bootstrap.Toast(document.getElementById("success_toast"));
-            toast.show();
+        .then((res) => {
+          if (res.data === 'Ok') {
+            alert('Loan request sent successfully');
+            location.reload();
+          } else {
+            alert('Failed to send loan request');
           }
         });
     },
