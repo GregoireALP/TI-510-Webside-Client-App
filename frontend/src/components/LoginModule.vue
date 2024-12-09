@@ -66,7 +66,11 @@ export default {
       .then((res) => {
         if (res.data.message === "Ok") {
           alert("Login successful");
-          this.$router.push("/#/client/all");
+          if(isAdvisor) {
+            this.$router.push("/advisor-dashboard/2");
+          } else {
+            this.$router.push("/client/all");
+          }
         } else {
           alert("Invalid login");
         }

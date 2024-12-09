@@ -67,6 +67,10 @@ APP.use('/api/loans', require('./controllers/loans.routes'));
 APP.use('/api/clients', require('./controllers/clients.routes'));
 APP.use('/api/payements', require('./controllers/payements.routes'));
 APP.use('/api/accounts', require('./controllers/accounts.routes'));
+
+APP.use('/unauthorized', (req, res) => {
+    res.render('unauthorized');
+});
 APP.use(require('./controllers/auth.routes'));
 
 

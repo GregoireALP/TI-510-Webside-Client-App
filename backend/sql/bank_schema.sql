@@ -37,11 +37,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_project`.`client` (
   `client_id` INT NOT NULL AUTO_INCREMENT,
+  `client_creation_date` DATE,
   `client_gender` INT NULL,
   `client_firstname` VARCHAR(45) NULL,
   `client_lastname` VARCHAR(45) NULL,
   `client_email` VARCHAR(45) NULL,
-  `client_password` VARCHAR(45) NULL,
+  `client_password` LONGTEXT NULL,
   `client_phone` VARCHAR(45) NULL,
   `client_birthday` DATE,
   `client_address` VARCHAR(45) NULL,

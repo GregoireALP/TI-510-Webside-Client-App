@@ -1,5 +1,3 @@
-const { get } = require("../controllers/accounts.routes");
-
 const pool = require(__dirname + "//db.include.js");
 
 
@@ -59,12 +57,12 @@ module.exports = {
         }
     },
 
-    async createClientController(firstname, lastname, advisor, email, phone, address, password) {
+    async createClientController(firstname, lastname, advisor, email, phone, address, password, birthday) {
 
         try {
 
-            let sql = "INSERT INTO client (client_gender, client_firstname, client_lastname, client_advisor_id, client_email, client_phone, client_address, client_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            const [rows, fields] = await pool.query(sql, [1, firstname, lastname, advisor, email, phone, address, password]);
+            let sql = "INSERT INTO client (client_gender, client_creation_date, client_firstname, client_lastname, client_advisor_id, client_email, client_phone, client_address, client_password, client_birthday) VALUES (?, now(), ?, ?, ?, ?, ?, ?, sha2(concat(now(), ?), 224), ?)";
+            const [rows, fields] = await pool.query(sql, [1, firstname, lastname, advisor, email, phone, address, password, birthday]);
             
             return "Ok"
         } catch (error) {

@@ -28,9 +28,20 @@ module.exports = {
 
     verifyUserAuth(req, res, next) {
         if (req.isAuthenticated()) {
+            let role = req.user.role;
+            let url = req.originalUrl;
+
+            console.log(role, url);
+            
+            if(url.includes('advisor-dashboard') && role !== 'advisor') {
+                console.log("User is not an advisor");
+                res.redirect('/unauthorized')
+            }
+            
             next()
         } else {
-            res.redirect('/login');
+            console.log("User is not authenticated");
+            res.redirect('/unauthorized')
         }
     }
 }

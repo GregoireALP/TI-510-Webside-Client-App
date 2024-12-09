@@ -34,8 +34,9 @@ async function createClientRoute(req, res) {
     let phone = req.body.client_phone;
     let address = req.body.client_address;
     let password = req.body.client_password;
+    let birthday = req.body.client_birthday;
 
-    let result = await CLIENT.createClientController(firstname, lastname, advisor, email, phone, address, password);
+    let result = await CLIENT.createClientController(firstname, lastname, advisor, email, phone, address, password, birthday);
     res.status(200).json(result);
 }
 
