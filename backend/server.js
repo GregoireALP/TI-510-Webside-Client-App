@@ -22,6 +22,10 @@ APP.use(SESSION({
 const CORS = require('cors');
 APP.use(CORS({ origin: 'http://localhost:8080', credentials: true }));
 
+                /**********************************************************************************************************/
+                /*                                      AUTHENTICATION                                                    */
+                /**********************************************************************************************************/
+
 const authIncludes = require('./utils/auth.includes');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -57,9 +61,12 @@ passport.deserializeUser(async (user, done) => {
     }
 });
 
+
 // *** ROUTES/CONTROLLERS ***
 const verifyUserAuth = authIncludes.verifyUserAuth;
 // APP.use('/api', verifyUserAuth);
+
+// *** ROUTES/CONTROLLERS ***
 
 APP.use('/static', EXPRESS.static(__dirname + '/static'));
 APP.use('/api/advisors', require('./controllers/advisors.routes'));

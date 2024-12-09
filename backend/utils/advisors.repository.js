@@ -49,5 +49,18 @@ module.exports = {
             console.log(error);
             return "Something went wrong";
         }
+    },
+
+    async generateAdvisorController() {
+
+        try {
+
+            let sql = "INSERT INTO advisor (advisor_firstname, advisor_gender, advisor_lastname, advisor_email, advisor_phone, advisor_address, advisor_birthday, advisor_password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            const [rows, fields] = await pool.query(sql, ['Advisor', 1, 'Bank', 'magnis.dis@yahoo.com', '0000000000', '1 Bank Street', '2021-01-01', 'test']);
+            return 'Ok';
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
     }
 }

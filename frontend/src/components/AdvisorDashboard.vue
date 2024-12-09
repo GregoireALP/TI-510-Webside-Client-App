@@ -33,27 +33,16 @@
               <td>{{ c.client_phone }}</td>
               <td>
                 <a class='btn btn-success' :href="'/#/account/' + c.client_id">Connect</a>
-                <button
-                  @click='selectedUser = c.client_id'
-                  type='button'
-                  class='btn btn-danger'
-                  data-bs-toggle='modal'
-                  data-bs-target='#deleteModal'
-                  data-bs-whatever='@getbootstrap'
-                >
+                <button @click='selectedUser = c.client_id' type='button' class='btn btn-danger' data-bs-toggle='modal'
+                  data-bs-target='#deleteModal' data-bs-whatever='@getbootstrap'>
                   Manage Accounts
                 </button>
               </td>
             </tr>
             <tr>
               <td colspan='6'>
-                <button
-                  type='button'
-                  class='btn btn-primary'
-                  data-bs-toggle='modal'
-                  data-bs-target='#exampleModal'
-                  data-bs-whatever='@mdo'
-                >
+                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal'
+                  data-bs-whatever='@mdo'>
                   Add a client
                 </button>
               </td>
@@ -64,81 +53,60 @@
         <h1>Loan requests</h1>
         <table>
           <thead>
-            <th>#</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Loan ID</th>
-            <th>Loan Amount</th>
-            <th>Loan to Reunf</th>
-            <th>Loan Label</th>
-            <th>Actions</th>
-            <th>Status</th>
+            <tr class='text-uppercase text-warning'>
+              <th>#</th>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Email</th>
+              <th>Loan ID</th>
+              <th>Loan Amount</th>
+              <th>Loan to Refund</th>
+              <th>Loan Type</th>
+              <th>Loan Label</th>
+              <th>Actions</th>
+              <th>Status</th>
+            </tr>
           </thead>
-          <tr v-for='l in loans' v-bind:key='l.client_id'>
-            <td>{{ l.client_id }}</td>
-            <td>{{ l.client_firstname }}</td>
-            <td>{{ l.client_lastname }}</td>
-            <td>{{ l.client_email }}</td>
-            <td>{{ l.loan_id }}</td>
-            <td>{{ l.loan_amount }}</td>
-            <td>{{ l.loan_to_refund }}</td>
-            <td>{{ l.loan_label }}</td>
-            <td>
-              <a
-                v-if='l.loan_status === 0'
-                class='btn btn-success'
-                @click='approveLoan(l.loan_id)'
-                >Accepted</a
-              >
-              <a
-                v-if='l.loan_status === 0'
-                class='btn btn-danger'
-                @click='declineLoan(l.loan_id)'
-                >Declined</a
-              >
-              <a
-                v-if='l.loan_status === 1'
-                class='btn btn-primary'
-                @click='finishLoan(l.loan_id, l.loan_to_refund)'
-                >Finished</a
-              >
-            </td>
-            <td v-if='l.loan_status === 0' class='loan-status-pending'>Pending...</td>
-            <td v-if='l.loan_status === 1' class='loan-status-accepted'>Accepted</td>
-            <td v-if='l.loan_status === 2' class='loan-status-declined'>Declined</td>
-            <td v-if='l.loan_status === 3' class='loan-status-finished'>Finished</td>
-          </tr>
+          <tbody>
+            <tr v-for='l in loans' v-bind:key='l.client_id'>
+              <td>{{ l.client_id }}</td>
+              <td>{{ l.client_firstname }}</td>
+              <td>{{ l.client_lastname }}</td>
+              <td>{{ l.client_email }}</td>
+              <td>{{ l.loan_id }}</td>
+              <td>{{ l.loan_amount }}</td>
+              <td>{{ l.loan_to_refund }}</td>
+              <td>{{ l.loan_type }}</td>
+              <td>{{ l.loan_label }}</td>
+              <td>
+                <a v-if='l.loan_status === 0' class='btn btn-success' @click='approveLoan(l.loan_id)'>Accepted</a>
+                <a v-if='l.loan_status === 0' class='btn btn-danger' @click='declineLoan(l.loan_id)'>Declined</a>
+                <a v-if='l.loan_status === 1' class='btn btn-primary'
+                  @click='finishLoan(l.loan_id, l.loan_to_refund)'>Finished</a>
+              </td>
+              <td v-if='l.loan_status === 0' class='loan-status-pending'>Pending...</td>
+              <td v-if='l.loan_status === 1' class='loan-status-accepted'>Accepted</td>
+              <td v-if='l.loan_status === 2' class='loan-status-declined'>Declined</td>
+              <td v-if='l.loan_status === 3' class='loan-status-finished'>Finished</td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
       <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-      <div
-        class='modal fade'
-        id='exampleModal'
-        tabindex='-1'
-        aria-labelledby='exampleModalLabel'
-        aria-hidden='true'
-      >
+      <div class='modal fade' id='exampleModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
         <div class='modal-dialog'>
           <div class='modal-content'>
             <div class='modal-header'>
               <h1 class='modal-title fs-5' style='color: black' id='exampleModalLabel'>
                 Add a client
               </h1>
-              <button
-                type='button'
-                class='btn-close'
-                data-bs-dismiss='modal'
-                aria-label='Close'
-              ></button>
+              <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
             </div>
             <div class='modal-body'>
               <form>
                 <div class='mb-3'>
-                  <label for='recipient-firstname' class='col-form-label'
-                    >Firstname:</label
-                  >
+                  <label for='recipient-firstname' class='col-form-label'>Firstname:</label>
                   <input type='text' class='form-control' id='recipient-firstname' />
                 </div>
                 <div class='mb-3'>
@@ -162,9 +130,7 @@
                   <input type='date' class='form-control' id='recipient-birthday' />
                 </div>
                 <div class='mb-3'>
-                  <label for='recipient-password' class='col-form-label'
-                    >Generate Password</label
-                  >
+                  <label for='recipient-password' class='col-form-label'>Generate Password</label>
                   <input type='text' class='form-control' id='recipient-password' />
                 </div>
               </form>
@@ -173,11 +139,7 @@
               <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>
                 Close
               </button>
-              <button
-                type='button'
-                class='btn btn-primary'
-                @click='processCreateClient()'
-              >
+              <button type='button' class='btn btn-primary' @click='processCreateClient()'>
                 Create client
               </button>
             </div>
@@ -186,25 +148,14 @@
       </div>
       <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
       <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-      <div
-        class='modal fade'
-        id='deleteModal'
-        tabindex='-1'
-        aria-labelledby='deleteModal'
-        aria-hidden='true'
-      >
+      <div class='modal fade' id='deleteModal' tabindex='-1' aria-labelledby='deleteModal' aria-hidden='true'>
         <div class='modal-dialog'>
           <div class='modal-content'>
             <div class='modal-header'>
               <h1 class='modal-title fs-5' id='deleteModal' style='color: black'>
                 Manage Accounts
               </h1>
-              <button
-                type='button'
-                class='btn-close'
-                data-bs-dismiss='modal'
-                aria-label='Close'
-              ></button>
+              <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
             </div>
             <div class='modal-body'>
               <form>
@@ -212,24 +163,16 @@
                   <label for=''>Delete an account</label><br />
                   <select id='accountToClose'>
                     <option default disabled>Chose an account to close</option>
-                    <option
-                      v-for='a in accounts'
-                      :key='a.account_id'
-                      :value='a.account_id'
-                    >
+                    <option v-for='a in accounts' :key='a.account_id' :value='a.account_id'>
                       {{ a.account_label + ' - ' + a.account_iban }}
-                    </option></select
-                  ><br />
+                    </option>
+                  </select><br />
                 </div>
               </form>
             </div>
             <h1 class='title' style='color: black'>OR</h1>
-            <button
-              type='button'
-              class='btn btn-success'
-              style='margin: 2rem'
-              @click='processCreateAccount(selectedUser)'
-            >
+            <button type='button' class='btn btn-success' style='margin: 2rem'
+              @click='processCreateAccount(selectedUser)'>
               Create a new account
             </button>
             <div class='modal-footer'>
@@ -477,7 +420,7 @@ export default {
 
 <style scoped>
 table {
-  width: 75%;
+  width: 90%;
   margin: auto;
 
   text-align: center;
@@ -488,11 +431,13 @@ table {
 
   border-collapse: separate;
   border-spacing: 0;
-  border-radius: 10px; /* Adjust the value as needed */
-  overflow: hidden; /* Ensures the border-radius is applied correctly */
+  border-radius: 10px;
+  /* Adjust the value as needed */
+  overflow: hidden;
+  /* Ensures the border-radius is applied correctly */
 }
 
-thead > tr {
+thead>tr {
   background-color: #191b1f !important;
 }
 

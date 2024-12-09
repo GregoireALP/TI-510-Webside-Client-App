@@ -11,10 +11,10 @@
               <label id="label_type" class="form-label">Type</label>
               <select class="form-control" id="select_label" required>
                 <option disabled selected>Choose a Loan Type</option>
-                <option value="1" required>Student Loan</option>
-                <option value="2" required>Consumption Loan</option>
-                <option value="3" required>House Loan</option>
-                <option value="4" required>Other</option>
+                <option value="STUDENT" required>Student Loan</option>
+                <option value="CONSUMPTION" required>Consumption Loan</option>
+                <option value="HOUSE" required>House Loan</option>
+                <option value="OTHER" required>Other</option>
               </select>
             </div>
             <div class="container mt-4">
@@ -169,11 +169,13 @@ export default {
       let amount = document.getElementById("amount_input").value;
       let label = document.getElementById("message_input").value;
       let interest = document.getElementById("interest_input").value;
+      let type = document.getElementById("select_label").value;
 
       let data = {
         client_id: this.client_id,
         amount: amount,
         label: label,
+        type: type,
         interest: interest,
       };
       await this.$http
