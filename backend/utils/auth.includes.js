@@ -5,8 +5,11 @@ const pool = require('./db.include')
 module.exports = {
 
     async isCredentialsValide(email, password, isAdvisor) {   
+
+
         let query = `SELECT * FROM ${isAdvisor ? 'advisor' : 'client'} WHERE ${isAdvisor ? 'advisor_email' : 'client_email'} = ? AND ${isAdvisor ? 'advisor_password' : 'client_password'} = ?`;
         let values = [email, password];
+        
         let [rows, field] = await pool.query(query, values);
 
         return rows.length > 0;

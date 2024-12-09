@@ -40,9 +40,10 @@ async function initiateLoanRoute(req, res) {
     let amount = req.body.amount;
     let label = req.body.label;
     let client = req.body.client_id;
-    let interest = req.body.interest
+    let interest = req.body.interest;
+    let type = req.body.type;
 
-    let result = await LOAN.initiateLoanController(amount, label, client, interest);
+    let result = await LOAN.initiateLoanController(amount, label, client, interest, type);
     res.status(200).json(result);
 }
 

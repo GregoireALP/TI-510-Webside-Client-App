@@ -62,10 +62,10 @@ module.exports = {
         }
     },
 
-    async initiateLoanController(amount, label, client_id , interest) {
+    async initiateLoanController(amount, label, client_id , interest, type) {
         try {
-            let sql = "INSERT INTO loan (loan_amount, loan_label, loan_to_refund, loan_start_date, loan_end_date, loan_client_id, loan_status, loan_interest) VALUES (?, ?, ?, NOW(), DATE_ADD(NOW(), INTERVAL 1 MONTH), ?, ?, ?)"
-            const [rows, fields] = await pool.query(sql, [amount, label, amount, client_id, 0, interest]);
+            let sql = "INSERT INTO loan (loan_amount, loan_label, loan_to_refund, loan_start_date, loan_end_date, loan_client_id, loan_status, loan_interest, loan_type) VALUES (?, ?, ?, NOW(), DATE_ADD(NOW(), INTERVAL 1 MONTH), ?, ?, ?, ?)"
+            const [rows, fields] = await pool.query(sql, [amount, label, amount, client_id, 0, interest, type]);
             return "Ok";
         } catch (error) {
             console.log(error);
