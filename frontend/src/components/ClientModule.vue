@@ -92,14 +92,10 @@ export default {
 
   methods: {
     async getClients() {
-      let res = await this.$http.get("http://localhost:4000/api/clients/get/all", {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "http://localhost:4000/",
-        },
+      await this.$http.get("http://localhost:4000/api/clients/get/all")
+      .then((res) => {
+        this.client = res.data
       });
-      this.clients = res.data;
     },
   },
 

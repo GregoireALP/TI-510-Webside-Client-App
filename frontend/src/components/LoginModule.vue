@@ -49,20 +49,13 @@ export default {
       let password = document.getElementById("password").value;
       let isAdvisor = document.getElementById("loginAsAdvisor").checked;
 
-      await this.$http.post(
-        "http://localhost:4000/login",
-        {
-          email: username,
-          password: password,
-          isAdvisor: isAdvisor,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "http://localhost:4000/",
-          },
-        }
-      )
+      let data = {
+        email: username,
+        password: password,
+        isAdvisor: isAdvisor,
+      }
+
+      await this.$http.post("http://localhost:4000/login",data)
       .then((res) => {
         if (res.data.message === "Ok") {
           alert("Login successful");
@@ -79,32 +72,7 @@ export default {
         console.error(error);
         alert("Invalid login or unauthorized access");
       });
-    },
-    async processLogout() {
-      res = await this.$http.post(
-        "http://localhost:4000/logout",
-        {},
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "http://localhost:4000/",
-          },
-        }
-      )
-      .then((res) => {
-        if (res.data.message === "Ok") {
-          alert("Logout successful");
-          this.$router.push("/#/login");
-        } else {
-          alert("An error occured");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("An error occured");
-      });
-    },
+    }
   },
 };
 </script>

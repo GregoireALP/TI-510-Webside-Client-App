@@ -161,13 +161,7 @@ export default {
   methods: {
     async getClientLoans() {
       await this.$http
-        .get("http://localhost:4000/api/loans/get/client/" + this.client_id, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "http://localhost:4000/",
-          },
-        })
+        .get("http://localhost:4000/api/loans/get/client/" + this.client_id)
         .then((response) => {
           this.loans = response.data;
         });
@@ -180,13 +174,7 @@ export default {
         amount: amount,
       };
       await this.$http
-        .post("http://localhost:4000/api/loans/refund", data, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "http://localhost:4000/",
-          },
-        })
+        .post("http://localhost:4000/api/loans/refund", data)
         .then((res) => {
           if(res.data === 'Ok') {
             location.reload();

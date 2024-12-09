@@ -10,6 +10,10 @@ Vue.config.productionTip = false
 
 /* Axios config */
 axios.defaults.withCredentials = true
+axios.defaults.headers = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': 'http://localhost:4000/',
+}
 Vue.prototype.$http = axios
 
 /* eslint-disable no-new */

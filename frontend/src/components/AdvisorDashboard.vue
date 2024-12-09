@@ -2,47 +2,58 @@
   <div>
     <NavbarModule />
     <main>
-      <div class='container'>
-        <div class='row'>
-          <div class='col-md-12'>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
             <h1>Advisor Dashboard</h1>
-            <p style='color: whitesmoke; text-align: center'>
+            <p style="color: whitesmoke; text-align: center">
               Welcome to the advisor dashboard. Here you can view all your clients and
               their accounts.
             </p>
           </div>
         </div>
-        <h1 class='title'>Your clients</h1>
+        <h1 class="title">Your clients</h1>
         <table>
           <thead>
-            <tr class='text-uppercase text-warning'>
-              <th scope='col'>#</th>
-              <th scope='col'>Firstname</th>
-              <th scope='col'>Lastname</th>
-              <th scope='col'>Email</th>
-              <th scope='col'>Phone</th>
-              <th scope='col'>Actions</th>
+            <tr class="text-uppercase text-warning">
+              <th scope="col">#</th>
+              <th scope="col">Firstname</th>
+              <th scope="col">Lastname</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for='c in clients' v-bind:key='c.client_id'>
+            <tr v-for="c in clients" v-bind:key="c.client_id">
               <td>{{ c.client_id }}</td>
               <td>{{ c.client_firstname }}</td>
               <td>{{ c.client_lastname }}</td>
               <td>{{ c.client_email }}</td>
               <td>{{ c.client_phone }}</td>
               <td>
-                <a class='btn btn-success' :href="'/#/account/' + c.client_id">Connect</a>
-                <button @click='selectedUser = c.client_id' type='button' class='btn btn-danger' data-bs-toggle='modal'
-                  data-bs-target='#deleteModal' data-bs-whatever='@getbootstrap'>
+                <a class="btn btn-success" :href="'/#/account/' + c.client_id">Connect</a>
+                <button
+                  @click="selectedUser = c.client_id"
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-toggle="modal"
+                  data-bs-target="#deleteModal"
+                  data-bs-whatever="@getbootstrap"
+                >
                   Manage Accounts
                 </button>
               </td>
             </tr>
             <tr>
-              <td colspan='6'>
-                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal'
-                  data-bs-whatever='@mdo'>
+              <td colspan="6">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  data-bs-whatever="@mdo"
+                >
                   Add a client
                 </button>
               </td>
@@ -53,7 +64,7 @@
         <h1>Loan requests</h1>
         <table>
           <thead>
-            <tr class='text-uppercase text-warning'>
+            <tr class="text-uppercase text-warning">
               <th>#</th>
               <th>Firstname</th>
               <th>Lastname</th>
@@ -68,7 +79,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for='l in loans' v-bind:key='l.client_id'>
+            <tr v-for="l in loans" v-bind:key="l.client_id">
               <td>{{ l.client_id }}</td>
               <td>{{ l.client_firstname }}</td>
               <td>{{ l.client_lastname }}</td>
@@ -79,67 +90,100 @@
               <td>{{ l.loan_type }}</td>
               <td>{{ l.loan_label }}</td>
               <td>
-                <a v-if='l.loan_status === 0' class='btn btn-success' @click='approveLoan(l.loan_id)'>Accepted</a>
-                <a v-if='l.loan_status === 0' class='btn btn-danger' @click='declineLoan(l.loan_id)'>Declined</a>
-                <a v-if='l.loan_status === 1' class='btn btn-primary'
-                  @click='finishLoan(l.loan_id, l.loan_to_refund)'>Finished</a>
+                <a
+                  v-if="l.loan_status === 0"
+                  class="btn btn-success"
+                  @click="approveLoan(l.loan_id)"
+                  >Accepted</a
+                >
+                <a
+                  v-if="l.loan_status === 0"
+                  class="btn btn-danger"
+                  @click="declineLoan(l.loan_id)"
+                  >Declined</a
+                >
+                <a
+                  v-if="l.loan_status === 1"
+                  class="btn btn-primary"
+                  @click="finishLoan(l.loan_id, l.loan_to_refund)"
+                  >Finished</a
+                >
               </td>
-              <td v-if='l.loan_status === 0' class='loan-status-pending'>Pending...</td>
-              <td v-if='l.loan_status === 1' class='loan-status-accepted'>Accepted</td>
-              <td v-if='l.loan_status === 2' class='loan-status-declined'>Declined</td>
-              <td v-if='l.loan_status === 3' class='loan-status-finished'>Finished</td>
+              <td v-if="l.loan_status === 0" class="loan-status-pending">Pending...</td>
+              <td v-if="l.loan_status === 1" class="loan-status-accepted">Accepted</td>
+              <td v-if="l.loan_status === 2" class="loan-status-declined">Declined</td>
+              <td v-if="l.loan_status === 3" class="loan-status-finished">Finished</td>
             </tr>
           </tbody>
         </table>
       </div>
       <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
       <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-      <div class='modal fade' id='exampleModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-        <div class='modal-dialog'>
-          <div class='modal-content'>
-            <div class='modal-header'>
-              <h1 class='modal-title fs-5' style='color: black' id='exampleModalLabel'>
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" style="color: black" id="exampleModalLabel">
                 Add a client
               </h1>
-              <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
-            <div class='modal-body'>
+            <div class="modal-body">
               <form>
-                <div class='mb-3'>
-                  <label for='recipient-firstname' class='col-form-label'>Firstname:</label>
-                  <input type='text' class='form-control' id='recipient-firstname' />
+                <div class="mb-3">
+                  <label for="recipient-firstname" class="col-form-label"
+                    >Firstname:</label
+                  >
+                  <input type="text" class="form-control" id="recipient-firstname" />
                 </div>
-                <div class='mb-3'>
-                  <label for='recipient-lastname' class='col-form-label'>Lastname:</label>
-                  <input type='text' class='form-control' id='recipient-lastname' />
+                <div class="mb-3">
+                  <label for="recipient-lastname" class="col-form-label">Lastname:</label>
+                  <input type="text" class="form-control" id="recipient-lastname" />
                 </div>
-                <div class='mb-3'>
-                  <label for='recipient-email' class='col-form-label'>Email:</label>
-                  <input type='email' class='form-control' id='recipient-email' />
+                <div class="mb-3">
+                  <label for="recipient-email" class="col-form-label">Email:</label>
+                  <input type="email" class="form-control" id="recipient-email" />
                 </div>
-                <div class='mb-3'>
-                  <label for='recipient-phone' class='col-form-label'>Phone:</label>
-                  <input type='text' class='form-control' id='recipient-phone' />
+                <div class="mb-3">
+                  <label for="recipient-phone" class="col-form-label">Phone:</label>
+                  <input type="text" class="form-control" id="recipient-phone" />
                 </div>
                 <div>
-                  <label for='recipient-address' class='col-form-label'>Address: </label>
-                  <input type='text' class='form-control' id='recipient-address' />
+                  <label for="recipient-address" class="col-form-label">Address: </label>
+                  <input type="text" class="form-control" id="recipient-address" />
                 </div>
-                <div class='mb-3'>
-                  <label for='recipient-birthday' class='col-form-label'>Birthday</label>
-                  <input type='date' class='form-control' id='recipient-birthday' />
+                <div class="mb-3">
+                  <label for="recipient-birthday" class="col-form-label">Birthday</label>
+                  <input type="date" class="form-control" id="recipient-birthday" />
                 </div>
-                <div class='mb-3'>
-                  <label for='recipient-password' class='col-form-label'>Generate Password</label>
-                  <input type='text' class='form-control' id='recipient-password' />
+                <div class="mb-3">
+                  <label for="recipient-password" class="col-form-label"
+                    >Generate Password</label
+                  >
+                  <input type="text" class="form-control" id="recipient-password" />
                 </div>
               </form>
             </div>
-            <div class='modal-footer'>
-              <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                 Close
               </button>
-              <button type='button' class='btn btn-primary' @click='processCreateClient()'>
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="processCreateClient()"
+              >
                 Create client
               </button>
             </div>
@@ -148,38 +192,57 @@
       </div>
       <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
       <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-      <div class='modal fade' id='deleteModal' tabindex='-1' aria-labelledby='deleteModal' aria-hidden='true'>
-        <div class='modal-dialog'>
-          <div class='modal-content'>
-            <div class='modal-header'>
-              <h1 class='modal-title fs-5' id='deleteModal' style='color: black'>
+      <div
+        class="modal fade"
+        id="deleteModal"
+        tabindex="-1"
+        aria-labelledby="deleteModal"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="deleteModal" style="color: black">
                 Manage Accounts
               </h1>
-              <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
-            <div class='modal-body'>
+            <div class="modal-body">
               <form>
-                <div class='mb-3'>
-                  <label for=''>Delete an account</label><br />
-                  <select id='accountToClose'>
+                <div class="mb-3">
+                  <label for="">Delete an account</label><br />
+                  <select id="accountToClose">
                     <option default disabled>Chose an account to close</option>
-                    <option v-for='a in accounts' :key='a.account_id' :value='a.account_id'>
-                      {{ a.account_label + ' - ' + a.account_iban }}
-                    </option>
-                  </select><br />
+                    <option
+                      v-for="a in accounts"
+                      :key="a.account_id"
+                      :value="a.account_id"
+                    >
+                      {{ a.account_label + " - " + a.account_iban }}
+                    </option></select
+                  ><br />
                 </div>
               </form>
             </div>
-            <h1 class='title' style='color: black'>OR</h1>
-            <button type='button' class='btn btn-success' style='margin: 2rem'
-              @click='processCreateAccount(selectedUser)'>
+            <h1 class="title" style="color: black">OR</h1>
+            <button
+              type="button"
+              class="btn btn-success"
+              style="margin: 2rem"
+              @click="processCreateAccount(selectedUser)"
+            >
               Create a new account
             </button>
-            <div class='modal-footer'>
-              <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                 Close
               </button>
-              <button type='button' class='btn btn-danger' @click='processDeleteAccount'>
+              <button type="button" class="btn btn-danger" @click="processDeleteAccount">
                 Execute
               </button>
             </div>
@@ -193,13 +256,13 @@
 
 <script>
 /* eslint-disable */
-import NavbarModule from './NavbarModule.vue';
-import FooterModule from './FooterModule.vue';
-import db from '../db.utils.js';
+import NavbarModule from "./NavbarModule.vue";
+import FooterModule from "./FooterModule.vue";
+import db from "../db.utils.js";
 
 export default {
-  name: 'AdvisorDashboard',
-  props: ['advisor_id'],
+  name: "AdvisorDashboard",
+  props: ["advisor_id"],
   components: {
     NavbarModule,
     FooterModule,
@@ -214,14 +277,7 @@ export default {
   },
   methods: {
     async getClients() {
-      await this.$http
-        .get('http://localhost:4000/api/clients/get/advisor/' + this.advisor_id, {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:4000/',
-          },
-        })
+      await this.$http.get("http://localhost:4000/api/clients/get/advisor/" + this.advisor_id)
         .then(
           function (res) {
             this.clients = res.data;
@@ -229,14 +285,7 @@ export default {
         );
     },
     async getLoans() {
-      await this.$http
-        .get('http://localhost:4000/api/loans/get/advisor/' + this.advisor_id, {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:4000/',
-          },
-        })
+      await this.$http.get("http://localhost:4000/api/loans/get/advisor/" + this.advisor_id)
         .then(
           function (res) {
             this.loans = res.data;
@@ -244,28 +293,19 @@ export default {
         );
     },
     async finishLoan(loanId, toRefund) {
-      let confirmation = confirm('Are you sure you want to finish this loan?');
+      let confirmation = confirm("Are you sure you want to finish this loan?");
       if (confirmation) {
+        let data = {
+          toRefund: toRefund,
+        };
         await this.$http
-          .post(
-            'http://localhost:4000/api/loans/finish/' + loanId,
-            {
-              toRefund: toRefund,
-            },
-            {
-              withCredentials: true,
-              headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'http://localhost:4000/',
-              },
-            }
-          )
+          .post("http://localhost:4000/api/loans/finish/" + loanId, data)
           .then(function (res) {
-            if (res.data === 'Ok') {
-              alert('Loan finished successfully.');
+            if (res.data === "Ok") {
+              alert("Loan finished successfully.");
               location.reload();
             } else {
-              alert('Error while processing your loan request. Please try again later.');
+              alert("Error while processing your loan request. Please try again later.");
               location.reload();
             }
           });
@@ -273,93 +313,69 @@ export default {
     },
     async approveLoan(loanId) {
       await this.$http
-        .post('http://localhost:4000/api/loans/approve/' + loanId, {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:4000/',
-          },
-        })
+        .post("http://localhost:4000/api/loans/approve/" + loanId)
         .then(function (res) {
-          if (res.data === 'Ok') {
-            alert('Loan request accepted successfully.');
+          if (res.data === "Ok") {
+            alert("Loan request accepted successfully.");
             location.reload();
           } else {
-            alert('Error while processing your loan request. Please try again later.');
+            alert("Error while processing your loan request. Please try again later.");
             location.reload();
           }
         });
     },
     async declineLoan(loanId) {
       await this.$http
-        .post('http://localhost:4000/api/loans/reject/' + loanId, {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:4000/',
-          },
-        })
+        .post("http://localhost:4000/api/loans/reject/" + loanId)
         .then(function (res) {
-          if (res.data === 'Ok') {
-            alert('Loan request declined successfully.');
+          if (res.data === "Ok") {
+            alert("Loan request declined successfully.");
             location.reload();
           } else {
-            alert('Error while processing your loan request. Please try again later.');
+            alert("Error while processing your loan request. Please try again later.");
             location.reload();
           }
         });
     },
     async processCreateAccount() {
       await this.$http
-        .post('http://localhost:4000/api/accounts/open/' + this.selectedUser, {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:4000/',
-          },
-        })
+        .post("http://localhost:4000/api/accounts/open/" + this.selectedUser)
         .then(function (res) {
-          if (res.data === 'Ok') {
-            alert('Account created successfully.');
+          if (res.data === "Ok") {
+            alert("Account created successfully.");
             location.reload();
           } else {
-            alert('Error while processing your loan request. Please try again later.');
+            alert("Error while processing your loan request. Please try again later.");
             location.reload();
           }
         });
     },
     async processDeleteAccount() {
-      let accountId = document.getElementById('accountToClose').value;
+      let accountId = document.getElementById("accountToClose").value;
 
-      let confirmation = confirm('Are you sure you want to delete this account?');
+      let confirmation = confirm("Are you sure you want to delete this account?");
       if (confirmation) {
         await this.$http
-          .post('http://localhost:4000/api/accounts/delete/' + accountId, {
-            withCredentials: true,
-            headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': 'http://localhost:4000/',
-            },
-          })
+          .post("http://localhost:4000/api/accounts/delete/" + accountId)
           .then(function (res) {
-            if (res.data === 'Ok') {
-              alert('Account deleted successfully.');
+            if (res.data === "Ok") {
+              alert("Account deleted successfully.");
               location.reload();
             } else {
-              alert('Error while processing your loan request. Please try again later.');
+              alert("Error while processing your loan request. Please try again later.");
               location.reload();
             }
           });
       }
     },
     async processCreateClient() {
-      let firstname = document.getElementById('recipient-firstname').value;
-      let lastname = document.getElementById('recipient-lastname').value;
-      let email = document.getElementById('recipient-email').value;
-      let phone = document.getElementById('recipient-phone').value;
-      let birthday = document.getElementById('recipient-birthday').value;
-      let password = document.getElementById('recipient-password').value;
-      let address = document.getElementById('recipient-address').value;
+      let firstname = document.getElementById("recipient-firstname").value;
+      let lastname = document.getElementById("recipient-lastname").value;
+      let email = document.getElementById("recipient-email").value;
+      let phone = document.getElementById("recipient-phone").value;
+      let birthday = document.getElementById("recipient-birthday").value;
+      let password = document.getElementById("recipient-password").value;
+      let address = document.getElementById("recipient-address").value;
       let data = {
         advisor_id: this.advisor_id,
         client_firstname: firstname,
@@ -372,19 +388,13 @@ export default {
       };
 
       await this.$http
-        .post('http://localhost:4000/api/clients/create', data, {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:4000/',
-          },
-        })
+        .post("http://localhost:4000/api/clients/create", data)
         .then(function (res) {
-          if (res.data === 'Ok') {
-            alert('Client created successfully.');
+          if (res.data === "Ok") {
+            alert("Client created successfully.");
             location.reload();
           } else {
-            alert('Error while creating the client. Please try again later.');
+            alert("Error while creating the client. Please try again later.");
             location.reload();
           }
         });
@@ -397,13 +407,7 @@ export default {
     },
     selectedUser: async function (pre, post) {
       await this.$http
-        .get('http://localhost:4000/api/accounts/get/client/' + this.selectedUser, {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:4000/',
-          },
-        })
+        .get("http://localhost:4000/api/accounts/get/client/" + this.selectedUser)
         .then(
           function (res) {
             this.accounts = res.data;
@@ -437,7 +441,7 @@ table {
   /* Ensures the border-radius is applied correctly */
 }
 
-thead>tr {
+thead > tr {
   background-color: #191b1f !important;
 }
 

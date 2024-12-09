@@ -52,14 +52,7 @@ export default {
   },
   methods: {
     async getPaymentDetails() {
-      await this.$http
-        .get("http://localhost:4000/api/payements/get/" + this.payement_id, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "http://localhost:4000/",
-          },
-        })
+      await this.$http.get("http://localhost:4000/api/payements/get/" + this.payement_id)
         .then((res) => {
           this.payement = res.data[0];
         });

@@ -77,7 +77,6 @@ module.exports = {
         try {
             let sql = "UPDATE loan SET loan_status = 1 WHERE loan_id = ?";
             const [rows, fields] = await pool.query(sql, [loan_id]);
-
             // Add the amount to the client account
             let sql2 = "SELECT loan_amount FROM loan WHERE loan_id = ?";
             const [rows2, fields2] = await pool.query(sql2, [loan_id]);

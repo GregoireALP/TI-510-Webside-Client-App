@@ -31,6 +31,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 APP.use(passport.initialize());
 APP.use(passport.session());
+
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',

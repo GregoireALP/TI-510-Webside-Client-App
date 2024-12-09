@@ -46,14 +46,7 @@ export default {
   },
   methods: {
     async IsAuth() {
-      await this.$http
-        .get("http://localhost:4000/is-auth", {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "http://localhost:4000/",
-          },
-        })
+      await this.$http.get("http://localhost:4000/is-auth")
         .then((response) => {
           if (response.data.res) {
             this.isAuth = true;
@@ -61,18 +54,7 @@ export default {
         });
     },
     async processLogout() {
-      await this.$http
-        .post(
-          "http://localhost:4000/logout",
-          {},
-          {
-            withCredentials: true,
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "http://localhost:4000/",
-            },
-          }
-        )
+      await this.$http.post("http://localhost:4000/logout")
         .then((response) => {
           if (response.data.message === "Ok") {
             this.isAuth = false;

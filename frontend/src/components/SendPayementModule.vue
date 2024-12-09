@@ -153,14 +153,7 @@ export default {
         payement_label: payementLabel,
       };
 
-      await this.$http
-        .post("http://localhost:4000/api/payements/send", data, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "http://localhost:4000/",
-          },
-        })
+      await this.$http.post("http://localhost:4000/api/payements/send", data)
         .then((res) => {
           if (res.data === "Ok") {
             alert("Payement sent successfully");

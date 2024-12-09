@@ -60,25 +60,13 @@ export default {
   },
   methods: {
     async getPayementsSended () {
-      await this.$http.get('http://localhost:4000/api/payements/get/sender/' + this.account_id, {
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': 'http://localhost:4000/'
-        }
-      })
+      await this.$http.get('http://localhost:4000/api/payements/get/sender/' + this.account_id)
       .then(res => {
         this.payements = res.data
       })
     },
     async getPayementsRecieved () {
-      await this.$http.get('http://localhost:4000/api/payements/get/receiver/' + this.account_id, {
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': 'http://localhost:4000/'
-        }
-      })
+      await this.$http.get('http://localhost:4000/api/payements/get/receiver/' + this.account_id)
       .then(res => {
         this.payements = res.data
       })

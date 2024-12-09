@@ -179,13 +179,7 @@ export default {
         interest: interest,
       };
       await this.$http
-        .post("http://localhost:4000/api/loans/initiate", data, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "http://localhost:4000/",
-          },
-        })
+        .post("http://localhost:4000/api/loans/initiate", data)
         .then((res) => {
           if (res.data === 'Ok') {
             alert('Loan request sent successfully');
