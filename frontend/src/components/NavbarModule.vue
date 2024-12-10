@@ -46,7 +46,7 @@ export default {
     };
   },
   methods: {
-    async IsAuth() {
+    async checkAuth() {
       await this.$http.get("http://localhost:4000/is-auth")
         .then((response) => {
           let url = this.$route.path;
@@ -89,13 +89,13 @@ export default {
     },
   },
   created() {
-    this.IsAuth();
+    this.checkAuth();
   },
   watch: {
     $route(to, from) {
       // Exclude for about-us login and home page
       if (to.path !== '/about-us' && to.path !== '/login' && to.path !== '/') {
-        this.IsAuth();
+        this.checkAuth();
       }
     },
   },
