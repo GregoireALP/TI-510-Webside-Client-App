@@ -9,7 +9,7 @@ router.post('/login', (req, res, next) => {
         if (!user) return res.status(401).json({ error: 'Invalid credentials' });
         req.logIn(user, (err) => {
             if (err) return next(err);
-            res.json({ message: 'Ok' });
+            res.json({ message: 'Ok', id: user.id, role: user.role });
         });
     })(req, res, next);
 });

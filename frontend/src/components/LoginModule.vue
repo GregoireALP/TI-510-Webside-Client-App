@@ -60,9 +60,9 @@ export default {
         if (res.data.message === "Ok") {
           alert("Login successful");
           if(isAdvisor) {
-            this.$router.push("/advisor-dashboard/2");
+            this.$router.push("/advisor-dashboard/" + res.data.id);
           } else {
-            this.$router.push("/client/all");
+            this.$router.push("/client/" + res.data.id);
           }
         } else {
           alert("Invalid login");

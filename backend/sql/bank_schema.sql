@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `bank_project`.`advisor` (
   `advisor_password` VARCHAR(45) NULL,
   `advisor_phone` VARCHAR(45) NULL,
   `advisor_address` VARCHAR(45) NULL,
-  `advisor_birthday` VARCHAR(45) NULL,
+  `advisor_birthday` DATE NULL,
   PRIMARY KEY (`advisor_id`))
 ENGINE = InnoDB;
 

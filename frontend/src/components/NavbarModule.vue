@@ -58,7 +58,7 @@ export default {
         .then((response) => {
           if (response.data.message === "Ok") {
             this.isAuth = false;
-            location.reload();
+            this.$router.push('/login')
           }
         });
     },

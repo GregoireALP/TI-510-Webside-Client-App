@@ -71,4 +71,17 @@ module.exports = {
         }
     },
 
+    async updateClientController(id, firstname, lastname, email, phone, address, password) {
+
+        try {
+
+            let sql = "UPDATE client SET client_firstname = ?, client_lastname = ?, client_email = ?, client_phone = ?, client_address = ?, client_password = sha2(concat(now(), ?), 224) WHERE client_id = ?";
+            const [rows, fields] = await pool.query(sql, [firstname, lastname, email, phone, address, password, id]);
+            return "Ok"
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
+    }
+
 }

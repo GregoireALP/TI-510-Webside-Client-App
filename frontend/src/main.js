@@ -12,7 +12,7 @@ Vue.config.productionTip = false
 axios.defaults.withCredentials = true
 axios.defaults.headers = {
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': 'http://localhost:4000/',
+  'Access-Control-Allow-Origin': 'http://localhost:4000/'
 }
 axios.defaults.baseURL = 'http://localhost:4000/'
 axios.defaults.credentials = 'include'
