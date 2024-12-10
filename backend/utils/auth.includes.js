@@ -25,31 +25,4 @@ module.exports = {
 
         return user;
     },
-
-    verifyUserAuth(auth) {
-        /**
-         * {
-         * role: '',
-         * id: ''
-         * }
-         */
-        return (req, res, next) => {
-            next();
-        }
-    },
-
-    sendSessionObjectToFrontend(req, res, next) {
-
-        try {
-            if (req.isAuthenticated()) {
-                console.log('here');
-                res.setHeader('Authorization', JSON.stringify(req.user));
-            }
-
-        } catch(err) {
-            // Do nothing
-        } finally {
-            next();
-        }
-    }
 }

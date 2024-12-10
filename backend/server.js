@@ -20,7 +20,7 @@ APP.use(SESSION({
 }))
 
 const CORS = require('cors');
-APP.use(CORS({ origin: 'http://localhost:8080', credentials: true, allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'access-control-allow-origin'] }));
+APP.use(CORS({ origin: 'http://localhost:8080', credentials: true }));
 
 /**********************************************************************************************************/
 /*                                      AUTHENTICATION                                                    */
@@ -64,16 +64,6 @@ passport.deserializeUser(async (user, done) => {
 
 
 // *** ROUTES/CONTROLLERS ***
-
-APP.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:8080"); // Autorise le domaine
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    res.header("Access-Control-Expose-Headers", "Authorization"); // Expose le header Authorization
-    next();
-});
-
-// *** ROUTES/CONTROLLERS ***
-
 APP.use('/static', EXPRESS.static(__dirname + '/static'));
 APP.use('/api/advisors', require('./controllers/advisors.routes'));
 APP.use('/api/loans', require('./controllers/loans.routes'));

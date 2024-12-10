@@ -21,7 +21,7 @@ router.post('/logout', (req, res) => {
 
 router.get('/is-auth', (req, res) => {
     if (req.isAuthenticated()) {
-        res.json({ res: true });
+        res.json({ isAuth: true, id: req.user.id, role: req.user.role });
     } else {
         res.json({ res: false });
     }

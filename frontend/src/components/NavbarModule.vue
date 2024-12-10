@@ -13,10 +13,10 @@
           Actions
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li><a class="dropdown-item" href="/#/account/all">Manage my account</a></li>
-          <li><a class="dropdown-item" href="/#/send-payement/2">Transfer money</a></li>
-          <li><a class="dropdown-item" href="/#/advisor/2">Contact my advisor</a></li>
-          <li><a class="dropdown-item" href="/#/">Logout</a></li>
+          <li><a class="dropdown-item" :href="'/#/account/' + clientId">Manage my account</a></li>
+          <li><a class="dropdown-item" :href="'/#/send-payement/' + clientId">Transfer money</a></li>
+          <li><a class="dropdown-item" :href="'/#/advisor/' + clientId">Contact my advisor</a></li>
+          <li><a class="dropdown-item" @click="processLogout()">Logout</a></li>
         </ul>
       </div>
     </div>
@@ -41,15 +41,40 @@ export default {
   name: "Navbar",
   data() {
     return {
-      isAuth: false
+      isAuth: false,
+      clientId: null,
     };
   },
   methods: {
     async IsAuth() {
       await this.$http.get("http://localhost:4000/is-auth")
         .then((response) => {
-          if (response.data.res) {
+          let url = this.$route.path;
+
+          if (response.data.isAuth) {
             this.isAuth = true;
+            this.clientId = response.data.id;
+
+            let regex = /[^/]+$/;
+            let id_path = url.match(regex);
+            
+            switch(response.data.role) {
+
+              case 'client':
+                if (parseInt(id_path[0]) !== response.data.id || url.includes('advisor-dashboard')) {
+                  this.$router.push('/client/' + response.data.id);
+                }
+                break;
+
+              default:
+                this.$router.push('/login');
+                break;
+            }
+
+          } else {
+            if(url !== '/login' && url !== '/about-us' && url !== '/') {
+              this.$router.push('/login');
+            }
           }
         });
     },
@@ -65,6 +90,14 @@ export default {
   },
   created() {
     this.IsAuth();
+  },
+  watch: {
+    $route(to, from) {
+      // Exclude for about-us login and home page
+      if (to.path !== '/about-us' && to.path !== '/login' && to.path !== '/') {
+        this.IsAuth();
+      }
+    },
   },
 };
 </script>
