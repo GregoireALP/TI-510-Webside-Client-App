@@ -20,17 +20,16 @@ USE `bank_project` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_project`.`advisor` (
   `advisor_id` INT NOT NULL AUTO_INCREMENT,
+  `advisor_birthday` DATETIME,
   `advisor_gender` INT NULL,
   `advisor_firstname` VARCHAR(45) NULL,
   `advisor_lastname` VARCHAR(45) NULL,
   `advisor_email` VARCHAR(45) NULL,
-  `advisor_password` VARCHAR(45) NULL,
+  `advisor_password` TEXT NULL,
   `advisor_phone` VARCHAR(45) NULL,
   `advisor_address` VARCHAR(45) NULL,
-  `advisor_birthday` DATE NULL,
   PRIMARY KEY (`advisor_id`))
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `bank_project`.`client`
