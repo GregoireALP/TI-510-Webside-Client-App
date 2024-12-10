@@ -92,9 +92,9 @@ export default {
 
   methods: {
     async getClients() {
-      await this.$http.get("http://localhost:4000/api/clients/get/all")
+      await this.$http.get("http://localhost:4000/api/clients/get/" + this.client_id)
       .then((res) => {
-        this.client = res.data
+        this.clients = res.data
       });
     },
   },

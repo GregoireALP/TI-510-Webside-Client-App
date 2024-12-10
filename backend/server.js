@@ -20,11 +20,11 @@ APP.use(SESSION({
 }))
 
 const CORS = require('cors');
-APP.use(CORS({ origin: 'http://localhost:8080', credentials: true }));
+APP.use(CORS({ origin: 'http://localhost:8080', credentials: true, allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'access-control-allow-origin'] }));
 
-                /**********************************************************************************************************/
-                /*                                      AUTHENTICATION                                                    */
-                /**********************************************************************************************************/
+/**********************************************************************************************************/
+/*                                      AUTHENTICATION                                                    */
+/**********************************************************************************************************/
 
 const authIncludes = require('./utils/auth.includes');
 const passport = require('passport');
@@ -38,9 +38,9 @@ passport.use(new LocalStrategy({
     passReqToCallback: true,
     session: true
 }, async (req, email, password, done) => {
-    
+
     let isCredentialsValide = await authIncludes.isCredentialsValide(email, password, req.body.isAdvisor);
-    
+
     if (isCredentialsValide) {
         let user = await authIncludes.getUserObjectByEmailAndRole(email, req.body.isAdvisor);
         return done(null, user);
@@ -65,7 +65,16 @@ passport.deserializeUser(async (user, done) => {
 
 // *** ROUTES/CONTROLLERS ***
 const verifyUserAuth = authIncludes.verifyUserAuth;
-// APP.use('/api', verifyUserAuth);
+const sendSessionObjectToFrontend = authIncludes.sendSessionObjectToFrontend;
+
+APP.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:8080"); // Autorise le domaine
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header("Access-Control-Expose-Headers", "Authorization"); // Expose le header Authorization
+    next();
+});
+APP.use('/api', verifyUserAuth)
+APP.use('/api', sendSessionObjectToFrontend);
 
 // *** ROUTES/CONTROLLERS ***
 

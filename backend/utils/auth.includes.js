@@ -1,19 +1,17 @@
-const passport = require('passport');
 const pool = require('./db.include')
-
 
 module.exports = {
 
-    async isCredentialsValide(email, password, isAdvisor) {   
+    async isCredentialsValide(email, password, isAdvisor) {
 
         let query;
 
-        if(isAdvisor) {        
+        if (isAdvisor) {
             // Advisor password is not hash in the db      
             query = `SELECT * FROM advisor WHERE advisor_email = ? AND advisor_password = ?`;
         } else {
             // Client password is hash in the db
-            query = "SELECT * FROM client WHERE client_email = ? AND client_password COLLATE utf8mb4_general_ci  = sha2(concat(client_creation_date, ?), 224) COLLATE utf8mb4_general_ci "; 
+            query = "SELECT * FROM client WHERE client_email = ? AND client_password COLLATE utf8mb4_general_ci  = sha2(concat(client_creation_date, ?), 224) COLLATE utf8mb4_general_ci ";
         }
 
         console.log(query)
@@ -40,20 +38,30 @@ module.exports = {
 
     verifyUserAuth(req, res, next) {
         if (req.isAuthenticated()) {
-            let role = req.user.role;
-            let url = req.originalUrl;
 
-            console.log(role, url);
-            
-            if(url.includes('advisor-dashboard') && role !== 'advisor') {
-                console.log("User is not an advisor");
-                res.redirect('/unauthorized')
+            let user = req.user;
+            if(user.role === 'client') {
+                // Check if the url param is equal to his id
             }
-            
             next()
         } else {
             console.log("User is not authenticated");
             res.redirect('/unauthorized')
+        }
+    },
+
+    sendSessionObjectToFrontend(req, res, next) {
+
+        try {
+            if (req.isAuthenticated()) {
+                console.log('here');
+                res.setHeader('Authorization', JSON.stringify(req.user));
+            }
+
+        } catch(err) {
+            // Do nothing
+        } finally {
+            next();
         }
     }
 }
