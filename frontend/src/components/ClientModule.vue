@@ -156,7 +156,7 @@ export default {
         client_password: password,
       }
 
-      await this.$http.put("http://localhost:4000/api/clients/update/" + this.selectedClient.client_id, data)
+      await this.$http.post("http://localhost:4000/api/clients/update/" + this.selectedClient.client_id, data)
         .then((res) => {
           if (res.data.message === "Ok") {
             alert("Client informations updated");

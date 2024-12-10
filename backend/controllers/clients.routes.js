@@ -43,6 +43,9 @@ async function createClientRoute(req, res) {
 
 async function updateClientRoute(req, res) {
 
+    console.log('here');
+    
+
     let client_id = req.body.client_id;
     let client_firstname = req.body.client_firstname;
     let client_lastname = req.body.client_lastname;
@@ -51,7 +54,7 @@ async function updateClientRoute(req, res) {
     let client_address = req.body.client_address;
     let client_password = req.body.client_password;
 
-    let result = await CLIENT.updateClientController(client_client_id, client_firstname, client_lastname, client_email, client_phone, client_address, client_password);
+    let result = await CLIENT.updateClientController(client_id, client_firstname, client_lastname, client_email, client_phone, client_address, client_password);
     res.status(200).json(result);
 }
 
