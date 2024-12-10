@@ -36,17 +36,15 @@ module.exports = {
         return user;
     },
 
-    verifyUserAuth(req, res, next) {
-        if (req.isAuthenticated()) {
-
-            let user = req.user;
-            if(user.role === 'client') {
-                // Check if the url param is equal to his id
-            }
-            next()
-        } else {
-            console.log("User is not authenticated");
-            res.redirect('/unauthorized')
+    verifyUserAuth(auth) {
+        /**
+         * {
+         * role: '',
+         * id: ''
+         * }
+         */
+        return (req, res, next) => {
+            next();
         }
     },
 

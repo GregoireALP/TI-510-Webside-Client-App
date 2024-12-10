@@ -118,27 +118,16 @@ export default {
   },
   methods: {
     async getOptions() {
-      let res = await this.$http.get("http://localhost:4000/api/accounts/get/all", {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "http://localhost:4000/",
-        },
-      });
-      this.options = res.data;
+      await this.$http.get("http://localhost:4000/api/accounts/get/all")
+        .then((res) => {
+          this.options = res.data;
+        });
     },
     async getAccountsInfos() {
-      let res = await this.$http.get(
-        "http://localhost:4000/api/accounts/get/client/" + this.client_id,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "http://localhost:4000/",
-          },
-        }
-      );
-      this.accounts = res.data;
+      await this.$http.get("http://localhost:4000/api/accounts/get/client/" + this.client_id)
+        .then((res) => {
+          this.accounts = res.data;
+        });
     },
     async proceedToPayment() {
       let amount = document.getElementById("payementAmount").value;

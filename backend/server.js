@@ -64,8 +64,6 @@ passport.deserializeUser(async (user, done) => {
 
 
 // *** ROUTES/CONTROLLERS ***
-const verifyUserAuth = authIncludes.verifyUserAuth;
-const sendSessionObjectToFrontend = authIncludes.sendSessionObjectToFrontend;
 
 APP.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:8080"); // Autorise le domaine
@@ -73,8 +71,6 @@ APP.use(function (req, res, next) {
     res.header("Access-Control-Expose-Headers", "Authorization"); // Expose le header Authorization
     next();
 });
-APP.use('/api', verifyUserAuth)
-APP.use('/api', sendSessionObjectToFrontend);
 
 // *** ROUTES/CONTROLLERS ***
 
