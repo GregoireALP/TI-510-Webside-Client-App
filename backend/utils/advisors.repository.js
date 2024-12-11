@@ -1,5 +1,5 @@
 const pool = require(__dirname + "//db.include.js");
-
+const bcrypt = require('bcrypt');
 
 module.exports = {
 
@@ -55,8 +55,9 @@ module.exports = {
 
         try {
 
-            let sql = "INSERT INTO advisor (advisor_firstname, advisor_gender, advisor_lastname, advisor_email, advisor_phone, advisor_address, advisor_birthday, advisor_password) VALUES (?, ?, ?, ?, ?, ?, now(), sha2(concat(now(), ?), 224))";
-            const [rows, fields] = await pool.query(sql, ['Advisor', 1, 'Bank', email, '0000000000', '1 Bank Street', password]);
+            const salt = bcrypt.genSaltSync(10);
+            let sql = "INSERT INTO advisor (advisor_firstname, advisor_gender, advisor_lastname, advisor_email, advisor_phone, advisor_address, advisor_birthday, advisor_password) VALUES (?, ?, ?, ?, ?, ?, now(), ?)";
+            const [rows, fields] = await pool.query(sql, ['Advisor', 1, 'Bank', email, '0000000000', '1 Bank Street', bcrypt.hashSync(password, salt)]);
             return 'Ok';
         } catch (error) {
             console.log(error);

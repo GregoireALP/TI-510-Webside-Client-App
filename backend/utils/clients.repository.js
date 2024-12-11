@@ -1,5 +1,5 @@
 const pool = require(__dirname + "//db.include.js");
-
+const bcrypt = require('bcrypt');
 
 module.exports = {
 
@@ -60,9 +60,9 @@ module.exports = {
     async createClientController(firstname, lastname, advisor, email, phone, address, password, birthday) {
 
         try {
-
-            let sql = "INSERT INTO client (client_gender, client_creation_date, client_firstname, client_lastname, client_advisor_id, client_email, client_phone, client_address, client_password, client_birthday) VALUES (?, now(), ?, ?, ?, ?, ?, ?, sha2(concat(now(), ?), 224), ?)";
-            const [rows, fields] = await pool.query(sql, [1, firstname, lastname, advisor, email, phone, address, password, birthday]);
+            const salt = bcrypt.genSaltSync(10);
+            let sql = "INSERT INTO client (client_gender, client_creation_date, client_firstname, client_lastname, client_advisor_id, client_email, client_phone, client_address, client_password, client_birthday) VALUES (?, now(), ?, ?, ?, ?, ?, ?, ?, ?)";
+            const [rows, fields] = await pool.query(sql, [1, firstname, lastname, advisor, email, phone, address, bcrypt.hashSync(password, salt), birthday]);
             
             return "Ok"
         } catch (error) {
@@ -75,9 +75,16 @@ module.exports = {
 
         try {
 
-            let sql = "UPDATE client SET client_firstname = ?, client_lastname = ?, client_email = ?, client_phone = ?, client_address = ?, client_password = sha2(concat(now(), ?), 224) WHERE client_id = ?";
-            const [rows, fields] = await pool.query(sql, [firstname, lastname, email, phone, address, password, id]);
-            return "Ok"
+            if(password == "") {
+                let sql = "UPDATE client SET client_firstname = ?, client_lastname = ?, client_email = ?, client_phone = ?, client_address = ? WHERE client_id = ?";
+                const [rows, fields] = await pool.query(sql, [firstname, lastname, email, phone, address, id]);
+                return "Ok"
+            } else {
+                const salt = bcrypt.genSaltSync(10);
+                let sql = "UPDATE client SET client_firstname = ?, client_lastname = ?, client_email = ?, client_phone = ?, client_address = ?, client_password = ? WHERE client_id = ?";
+                const [rows, fields] = await pool.query(sql, [firstname, lastname, email, phone, address, bcrypt.hashSync(password, salt), id]);
+                return "Ok"
+            }
         } catch (error) {
             console.log(error);
             return "Something went wrong";

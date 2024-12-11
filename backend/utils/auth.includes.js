@@ -1,15 +1,18 @@
 const pool = require('./db.include')
-
+const bcrypt = require('bcrypt');
 module.exports = {
 
     async isCredentialsValide(email, password, isAdvisor) {
 
-        let query = `SELECT * FROM ${isAdvisor ? 'advisor' : 'client'} WHERE ${isAdvisor ? 'advisor_email' : 'client_email'} = ? AND ${isAdvisor ? 'advisor_password' : 'client_password'} = sha2(concat(${isAdvisor ? 'advisor_birthday' : 'client_creation_date'}, ?), 224)`;
+        let query = `SELECT * FROM ${isAdvisor ? 'advisor' : 'client'} WHERE ${isAdvisor ? 'advisor_email' : 'client_email'} = ?;`;
 
-        let values = [email, password];
+        let values = [email];
         let [rows, field] = await pool.query(query, values);
 
-        return rows.length > 0;
+        // check with bcrypt if the password is correct
+        if (rows.length > 0) {
+            return bcrypt.compareSync(password, rows[0][isAdvisor ? 'advisor_password' : 'client_password']);
+        }
     },
 
     async getUserObjectByEmailAndRole(email, role) {
