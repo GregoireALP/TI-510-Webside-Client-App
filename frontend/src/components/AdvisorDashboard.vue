@@ -292,14 +292,11 @@ export default {
           }.bind(this)
         );
     },
-    async finishLoan(loanId, toRefund) {
+    async finishLoan(loanId) {
       let confirmation = confirm("Are you sure you want to finish this loan?");
       if (confirmation) {
-        let data = {
-          toRefund: toRefund,
-        };
         await this.$http
-          .post("http://localhost:4000/api/loans/finish/" + loanId, data)
+          .post("http://localhost:4000/api/loans/finish/" + loanId)
           .then(function (res) {
             if (res.data === "Ok") {
               alert("Loan finished successfully.");

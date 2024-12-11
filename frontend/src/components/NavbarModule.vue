@@ -66,8 +66,10 @@ export default {
                 }
                 break;
 
-              default:
-                this.$router.push('/login');
+              case 'advisor':
+                if(url.includes('advisor-dashboard') && parseInt(id_path[0]) !== response.data.id) {
+                  this.$router.push('/advisor-dashboard/' + response.data.id);
+                }
                 break;
             }
 
