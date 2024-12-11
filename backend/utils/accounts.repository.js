@@ -56,6 +56,15 @@ module.exports = {
 
     async openAccountController(client_id) {
 
+        let accountLabel = [
+            'Compte courant',
+            'Compte épargne',
+            'Compte joint',
+            'Compte entreprise',
+            'Compte étudiant',
+            'Compte jeune',
+        ]
+
         try {
 
             let account = this.getAccountTemplate();
@@ -65,7 +74,7 @@ module.exports = {
             account.account_interest = 0.02;
             account.account_max_amount = 1000;
             account.account_iban = "FR" + Math.floor(Math.random() * 100000000000000000);
-            account.account_label = "Compte de " + client_id;
+            account.account_label = accountLabel[Math.floor(Math.random() * accountLabel.length)]  + ' de ' + client_id;
 
             let sql = "INSERT INTO account SET ?";
             const [rows, fields] = await pool.query(sql, account);
@@ -82,6 +91,19 @@ module.exports = {
 
             let sql = "DELETE FROM account WHERE account_id = ?";
             const [rows, fields] = await pool.query(sql, [account_id]);
+            return "Ok";
+        } catch (error) {
+            console.log(error);
+            return "Something went wrong";
+        }
+    },
+
+    async addBalanceController(account_id, amount) {
+
+        try {
+
+            let sql = "UPDATE account SET account_balance = account_balance + ? WHERE account_id = ?";
+            const [rows, fields] = await pool.query(sql, [amount, account_id]);
             return "Ok";
         } catch (error) {
             console.log(error);

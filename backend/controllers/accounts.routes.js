@@ -8,6 +8,8 @@ ROUTER.get('/get/client/:client_id', getAccountsByClientIdRoute);
 ROUTER.post('/open/:client_id', openAccountRoute);
 ROUTER.post('/delete/:account_id', deleteAccountRoute);
 
+ROUTER.post('/add-balance/:account_id', addBalanceRoute);
+
 async function deleteAccountRoute(req, res) {
     let account_id = req.params.account_id;
     let account = await ACCOUNTS.deleteAccountController(account_id);
@@ -35,6 +37,13 @@ async function getAccountsByClientIdRoute(req, res) {
 async function openAccountRoute(req, res) {
     let client_id = req.params.client_id;
     let account = await ACCOUNTS.openAccountController(client_id);
+    res.status(200).json(account);
+}
+
+async function addBalanceRoute(req, res) {
+    let account_id = req.params.account_id;
+    let amount = req.body.amount;
+    let account = await ACCOUNTS.addBalanceController(account_id, amount);
     res.status(200).json(account);
 }
 
