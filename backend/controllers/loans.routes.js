@@ -1,15 +1,16 @@
 const EXPRESS = require('express');
 const ROUTER = EXPRESS.Router();
 const LOAN = require('../utils/loans.repository');
+const auth = require('../utils/auth.includes')
 
 ROUTER.get('/get/:loan_id', getLoanRoute);
 ROUTER.get('/get/client/:client_id', getLoanByClientRoute);
 ROUTER.get('/get/advisor/:advisor_id', getLoanByAdvisorRoute);
 
 ROUTER.post('/initiate/', initiateLoanRoute);
-ROUTER.post('/approve/:loan_id', approveLoanRoute);
-ROUTER.post('/reject/:loan_id', rejectLoanRoute);
-ROUTER.post('/finish/:loan_id', finishLoanRoute);
+ROUTER.post('/approve/:loan_id', auth.protectedRouteMiddleware, approveLoanRoute);
+ROUTER.post('/reject/:loan_id', auth.protectedRouteMiddleware, rejectLoanRoute);
+ROUTER.post('/finish/:loan_id', auth.protectedRouteMiddleware, finishLoanRoute);
 ROUTER.post('/refund/', refundLoanRoute);
 
 async function getLoanRoute(req, res) {

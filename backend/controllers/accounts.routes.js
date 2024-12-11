@@ -1,6 +1,7 @@
 const EXPRESS = require('express');
 const ROUTER = EXPRESS.Router();
 const ACCOUNTS = require('../utils/accounts.repository');
+const auth = require('../utils/auth.includes')
 
 ROUTER.get('/get/:account_id', getAccountRoute);
 ROUTER.get('/get/client/:client_id', getAccountsByClientIdRoute);
@@ -8,7 +9,7 @@ ROUTER.get('/get/client/:client_id', getAccountsByClientIdRoute);
 ROUTER.post('/open/:client_id', openAccountRoute);
 ROUTER.post('/delete/:account_id', deleteAccountRoute);
 
-ROUTER.post('/add-balance/:account_id', addBalanceRoute);
+ROUTER.post('/add-balance/:account_id', auth.protectedRouteMiddleware, addBalanceRoute);
 
 async function deleteAccountRoute(req, res) {
     let account_id = req.params.account_id;

@@ -28,4 +28,18 @@ module.exports = {
 
         return user;
     },
+
+    protectedRouteMiddleware(req, res, next) {
+        try {
+            if(req.isAuthenticated()) {
+                if(req.user.role === 'advisor') {
+                    next();
+                } else {
+                    res.json({message: "Unauthorized"});
+                }
+            }
+        } catch (error) {
+            res.json({message: "Unauthorized"});
+        }
+    }
 }

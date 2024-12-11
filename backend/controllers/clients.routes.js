@@ -1,11 +1,12 @@
 const EXPRESS = require('express');
 const ROUTER = EXPRESS.Router();
 const CLIENT = require('../utils/clients.repository');
+const auth = require('../utils/auth.includes')
 
 ROUTER.get('/get/:client_id', getClientRoute);
 ROUTER.get('/get/advisor/:advisor_id', getClientByAdvisorRoute);
 
-ROUTER.post('/create/', createClientRoute);
+ROUTER.post('/create/', auth.protectedRouteMiddleware, createClientRoute);
 ROUTER.post('/update/', updateClientRoute);
 
 async function getClientRoute(req, res) {
@@ -52,7 +53,7 @@ async function updateClientRoute(req, res) {
     let client_password = req.body.client_password;
 
     let result = await CLIENT.updateClientController(client_id, client_firstname, client_lastname, client_email, client_phone, client_address, client_password);
-    res.status(200).json("Ok");
+    res.status(200).json({ message: 'Ok' });
 }
 
 
