@@ -67,6 +67,10 @@ module.exports = {
 
         try {
 
+            let getNameRequest = "SELECT client_firstname, client_lastname FROM client WHERE client_id = ?";
+            const [nameRows, nameFields] = await pool.query(getNameRequest, [client_id]);
+            let clientName = nameRows[0].client_firstname + ' ' + nameRows[0].client_lastname;
+
             let account = this.getAccountTemplate();
             account.account_client_id = client_id;
             account.account_creation_date = new Date().toISOString().slice(0, 19).replace('T', ' ');
@@ -74,7 +78,7 @@ module.exports = {
             account.account_interest = 0.02;
             account.account_max_amount = 1000;
             account.account_iban = "FR" + Math.floor(Math.random() * 100000000000000000);
-            account.account_label = accountLabel[Math.floor(Math.random() * accountLabel.length)]  + ' de ' + client_id;
+            account.account_label = accountLabel[Math.floor(Math.random() * accountLabel.length)]  + ' de ' + clientName;
 
             let sql = "INSERT INTO account SET ?";
             const [rows, fields] = await pool.query(sql, account);

@@ -24,7 +24,7 @@
     <a href="/"><img src="../assets/logo.png" alt="Bab Bank Logo" id="brand-logo" /></a>
 
     <div id="navbar-items-right">
-      <a v-if="isAuth" href="/#/client/all" class="navbar-item">My Profile</a>
+      <a v-if="isAuth" :href="'/#/client/' + clientId" class="navbar-item">My Profile</a>
       <a v-if="isAuth" @click="processLogout"
         ><button type="button" class="btn btn-danger">Logout</button></a
       >
