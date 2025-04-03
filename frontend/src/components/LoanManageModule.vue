@@ -33,13 +33,8 @@
                 <td v-if="l.loan_status === 2" class="loan-status-declined">Declined</td>
                 <td v-if="l.loan_status === 3" class="loan-status-finished">Finished</td>
                 <td v-if="l.loan_status === 1">
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                    data-bs-whatever="@getbootstrap"
-                  >
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    data-bs-whatever="@getbootstrap">
                     Refund
                   </button>
                 </td>
@@ -48,8 +43,19 @@
           </table>
         </section>
       </section>
-
       <br />
+
+      <hr class="golden-divider mx-auto mb-5 mb-xl-9" />
+      <div style="border: solid gold 1px; width: 70%; margin: auto; padding: 15px; border-radius: 15px;">
+        <h1 class="title">Search for a loan</h1>
+        <form style="text-align: center;">
+          <label for="name" style="color: whitesmoke; font-size: large;">Loan name</label><br>
+          <input type="text" id="name" name="name" placeholder="Type a loan name" />
+          <br><br>
+          <button class="btn btn-success" @click="processSomething()">Search a loan</button>
+        </form>
+      </div>
+      <br>
       <hr class="golden-divider mx-auto mb-5 mb-xl-9" />
 
       <h1 class="text-center text-warning">Apply for a loan</h1>
@@ -66,9 +72,7 @@
               <div class="card-body">
                 <h5 class="card-title">Contact your advisor</h5>
                 <p class="card-text">Please contact your advisor to apply for a loan</p>
-                <a :href="'/#/advisor/' + this.client_id" class="btn btn-primary"
-                  >Contact my advisor</a
-                >
+                <a :href="'/#/advisor/' + this.client_id" class="btn btn-primary">Contact my advisor</a>
               </div>
             </div>
           </div>
@@ -79,34 +83,21 @@
                 <p class="card-text">
                   Before asking for a loan, please check that you can afford it
                 </p>
-                <a :href="'/#/account/' + this.client_id" class="btn btn-primary"
-                  >Check my accounts</a
-                >
+                <a :href="'/#/account/' + this.client_id" class="btn btn-primary">Check my accounts</a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black">
                 Refund loan
               </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form>
@@ -116,11 +107,9 @@
                     <option default disabled>Chose a loan</option>
                     <option v-for="l in loans" :key="l.loan_id" :value="l.loan_id">
                       {{ l.loan_label }}
-                    </option></select
-                  ><br />
-                  <label for="recipient-name" class="col-form-label"
-                    >Money to refund:</label
-                  >
+                    </option>
+                  </select><br />
+                  <label for="recipient-name" class="col-form-label">Money to refund:</label>
                   <input type="number" class="form-control" id="moneyToRefund" />
                 </div>
               </form>
@@ -176,13 +165,16 @@ export default {
       await this.$http
         .post("http://localhost:4000/api/loans/refund", data)
         .then((res) => {
-          if(res.data === 'Ok') {
+          if (res.data === 'Ok') {
             location.reload();
           } else {
             alert('An error occured');
           }
         });
     },
+    processSomething() {
+      alert('Hello world !')
+    }
   },
   created() {
     this.getClientLoans();
@@ -214,7 +206,7 @@ export default {
   /* Ensures the border-radius is applied correctly */
 }
 
-thead > tr {
+thead>tr {
   background-color: #191b1f !important;
 }
 
@@ -235,12 +227,10 @@ td {
   height: 4px !important;
   width: 50% !important;
   max-width: 100% !important;
-  background: linear-gradient(
-    90deg,
-    rgba(210, 179, 36, 1) 0%,
-    rgba(255, 237, 26, 1) 50%,
-    rgba(214, 185, 13, 1) 100%
-  ) !important;
+  background: linear-gradient(90deg,
+      rgba(210, 179, 36, 1) 0%,
+      rgba(255, 237, 26, 1) 50%,
+      rgba(214, 185, 13, 1) 100%) !important;
   border-radius: 10px !important;
 }
 

@@ -25,6 +25,7 @@ async function getAdvisorByClientRoute(req, res) {
 }
 
 async function generateAdvisorsRoute(req, res) {
+
     let email = req.body.email;
     let password = req.body.password;
     let result = await ADVISORS.generateAdvisorController(email,password);
